@@ -1,0 +1,11 @@
+{
+  "packageManager": "pnpm@7.26.3",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "docs"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
