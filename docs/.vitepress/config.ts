@@ -1,28 +1,21 @@
 import { defineConfig } from 'vitepress'
+import {sidebar} from './config/sidebar'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "@komi-ui/docs",
-  description: "A VitePress Site",
+  title: "komi-ui",
+  description: "A Component Library for Vue 3",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '指南', link: '/en-US/guide/installation' },
+      { text: '组件', link: '/en-US/components/button' }
     ],
 
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
+    sidebar,
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/kamikore/komi-ui' }
     ]
   }
 })

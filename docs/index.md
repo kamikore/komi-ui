@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "@komi-ui/docs"
-  text: "A VitePress Site"
+  name: "komi-ui"
+  text: "A Component Library for Vue 3"
   tagline: My great project tagline
   actions:
     - theme: brand
