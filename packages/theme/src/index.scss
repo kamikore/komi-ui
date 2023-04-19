@@ -1,0 +1,4 @@
+// base styles 包括基本的样式变量，例如primary color等
+@use './base.scss';
+// component styles
+@use './button.scss';

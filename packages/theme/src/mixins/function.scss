@@ -1,0 +1,24 @@
+@use 'config';    // 引入组件命名空间，命名分隔符
+
+
+// 拼接变量名
+// joinVarName(('button', 'text-color')) => '--ki-button-text-color'
+@function joinVarName($list) {
+    $name: '--' + config.$namespace;
+    @each $item in $list {
+      @if $item != '' {
+        $name: $name + $common-separator + $item;
+      }
+    }
+    @return $name;
+}
+  
+// getCssVarName('button', 'text-color') => '--ki-button-text-color'
+@function getCssVarName($args...) {
+    @return joinVarName($args);
+}
+
+// getCssVar('button', 'text-color') => var(--ki-button-text-color)
+@function getCssVar($args...) {
+    @return var(#{joinVarName($args)});
+}

@@ -1,0 +1,16 @@
+@use 'sass:map';
+
+@use 'mixins/var';
+
+
+@include b(button) {
+    // 设置组件变量，sass var 转 css var的操作
+    @include set-component-css-var('button', $button);
+  }
+
+
+@include b(button) {
+    cursor: pointer;
+    text-align: center;
+}
+

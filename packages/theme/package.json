@@ -1,0 +1,16 @@
+{
+  "name": "@komi-ui/theme",
+  "version": "0.0.0",
+  "description": "komi-ui component theme ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue-components",
+    "komi-ui",
+    "theme"
+  ],
+  "author": "",
+  "license": "MIT"
+}

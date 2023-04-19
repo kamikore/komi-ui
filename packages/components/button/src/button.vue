@@ -1,5 +1,5 @@
 <template>
-   <component :is="tag">
+   <component :is="tag" class="ki-button">
     <!-- 按钮icon -->
 
     <!-- 按钮文本，如果传入了内容，插槽默认为default -->
