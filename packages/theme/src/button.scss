@@ -1,7 +1,10 @@
 @use 'sass:map';
 
-@use 'mixins/var';
 
+@use 'mixins/function' as *;    // 为甚么没引入也可以使用 function
+@use 'common/var' as *;
+@use 'mixins/var' as *;
+@use 'mixins/mixins' as *;
 
 @include b(button) {
     // 设置组件变量，sass var 转 css var的操作
@@ -12,5 +15,10 @@
 @include b(button) {
     cursor: pointer;
     text-align: center;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: getCssVar('button','font-weight');
+    border-color: getCssVar('button','border-color');
+
 }
 

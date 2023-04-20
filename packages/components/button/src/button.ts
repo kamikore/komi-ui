@@ -1,4 +1,5 @@
 import type { Component, PropType } from 'vue'
+import '@komi-ui/theme/dist/index.css'
 
 export const buttonProps = {
     tag: {
