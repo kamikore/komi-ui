@@ -2,7 +2,8 @@
   "name": "@komi-ui/theme",
   "version": "0.0.0",
   "description": "komi-ui component theme ",
-  "main": "index.js",
+  "main": "dist/index.css",
+  "style": "dist/index.css",
   "scripts": {
     "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
