@@ -4,10 +4,10 @@
      :class= "[
         ns.b(),
         // primary, success, warning, error
-        ns.m(props.type),
-        ns.is('disabled',props.disabled),
-        ns.is('round',props.round),
-        ns.is('circle',props.circle)
+        ns.m(type),
+        ns.is('disabled',disabled),
+        ns.is('round',round),
+        ns.is('circle',circle)
      ]"
     >
     <!-- 按钮icon -->

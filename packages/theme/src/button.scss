@@ -3,6 +3,7 @@
 
 @use 'common/var' as *;
 // @use 'mixins/var' as *;
+@use 'mixins/button' as *;
 @use 'mixins/mixins' as *;
 
 
@@ -36,13 +37,44 @@
   border: getCssVar('border');
   border-color: getCssVar('button', 'border-color');
   border-radius: getCssVar('border-radius','base');
+  font-size: getCssVar('font-size', 'base');
 
   // border 类型
   @include when(round) {
     border-radius: getCssVar('border-radius', 'round');
   }
+
   @include when(circle) {
     border-radius: 50%;
   }
+
+
+  @include when(active) {
+    color: getCssVar('button', 'active', 'text-color');
+    border-color: getCssVar('button', 'active', 'border-color');
+    background-color: getCssVar('button', 'active', 'bg-color');
+    outline: none;
+  }
+
+  @include when(disabled) {
+    &,
+    &:hover,
+    &:focus {
+      color: getCssVar('button', 'disabled', 'text-color');
+      cursor: not-allowed;
+      background-image: none;
+      background-color: getCssVar('button', 'disabled', 'bg-color');
+      border-color: getCssVar('button', 'disabled', 'border-color');
+    }
+  }
+  
+
+  // 由root var配置组件变量
+  @each $type in (primary, success, warning, danger, info) {
+    @include m($type) {
+      @include button-variant($type);
+    }
+  }
+
 }
 

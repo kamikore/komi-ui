@@ -65,6 +65,8 @@ export const useNamespace = (
       (name: string, state: boolean | undefined): string
       (name: string): string
     } = (name: string, ...args: [boolean | undefined] | []) => {
+      console.log(args);
+      
       // 属性多于一个默认以true处理
       const state = args.length >= 1 ? args[0] : true
       return name && state ? `${statePrefix}${name}` : ''

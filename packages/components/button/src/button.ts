@@ -11,6 +11,11 @@ export const buttonProps = {
         value:['large','default','small'],
         default: 'default'
     },
+    type: {
+        type: String,
+        value: ['default','primary','success','warning','error'],
+        default: 'default'
+    },
     disabled: Boolean,      // disabled 传入为true
     icon: {
         type: String,
