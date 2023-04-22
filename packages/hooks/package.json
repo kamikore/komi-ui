@@ -1,14 +1,15 @@
 {
-  "name": "@komi-ui/components",
+  "name": "@komi-ui/hooks",
   "version": "0.0.0",
-  "description": "all components are settled here",
+  "description": "komi-ui Composables",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": ["hooks","composable"],
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-      "vue": "^3.2.47"
+    "vue": "^3.2.47"
   }
 }

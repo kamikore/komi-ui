@@ -1,24 +1,48 @@
 @use 'sass:map';
 
 
-@use 'mixins/function' as *;    // 为甚么没引入也可以使用 function
 @use 'common/var' as *;
-@use 'mixins/var' as *;
+// @use 'mixins/var' as *;
 @use 'mixins/mixins' as *;
 
+
+// 配置组件变量，sass var 转 css var的操作 => --ki-button-bg-color
 @include b(button) {
-    // 设置组件变量，sass var 转 css var的操作
     @include set-component-css-var('button', $button);
   }
 
 
+// 组件应用样式，.ki-button
 @include b(button) {
-    cursor: pointer;
-    text-align: center;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-weight: getCssVar('button','font-weight');
-    border-color: getCssVar('button','border-color');
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
+  line-height: 1;
+  // min-height will expand when in flex
+  height: map.get($input-height, 'default');
+  white-space: nowrap;
+  cursor: pointer;
+  color: getCssVar('button', 'text-color');
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.1s;
+  font-weight: getCssVar('button', 'font-weight');
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: getCssVar('button', 'bg-color');
+  border: getCssVar('border');
+  border-color: getCssVar('button', 'border-color');
+  border-radius: getCssVar('border-radius','base');
+
+  // border 类型
+  @include when(round) {
+    border-radius: getCssVar('border-radius', 'round');
+  }
+  @include when(circle) {
+    border-radius: 50%;
+  }
 }
 

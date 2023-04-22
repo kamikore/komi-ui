@@ -17,6 +17,7 @@ export const buttonProps = {
         value:['default','primary'],
         default: 'loading'
     },
+    round: Boolean,
     circle: Boolean,            // 为true时，按钮为圆形仅显示icon
     loading: Boolean,
     color: String,

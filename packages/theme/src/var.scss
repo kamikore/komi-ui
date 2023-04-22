@@ -1,6 +1,60 @@
 
-// common
+
+@use 'common/var' as *;
+@use 'mixins/var' as *;
+@use 'mixins/mixins' as *;
+
+// for better performance do not dynamically change the root variable if you really
+// do not need that, since this could introduce recalculation overhead for rendering.
+
+// common 公共
 :root {
-    --bg-color: white;
-    --text-color: pink;
+    @include set-css-var-value('color-white', $color-white);
+    @include set-css-var-value('color-black', $color-black);
+  
+    // get rgb
+    @each $type in (primary, success, warning, danger, error, info) {
+      @include set-css-color-rgb($type);
+    }
+  
+    // Typography
+    @include set-component-css-var('font-size', $font-size);
+    @include set-component-css-var('font-family', $font-family);
+  
+    @include set-css-var-value('font-weight-primary', 500);
+    @include set-css-var-value('font-line-height-primary', 24px);
+  
+    // z-index --el-index-#{$type}, normal, top, popper
+    @include set-component-css-var('index', $z-index);
+
+
+    // --el-border-radius-#{$type}, base, small, round, circle
+    @include set-component-css-var('border-radius', $border-radius);
+
+}
+
+// for light
+:root {
+  // 系统颜色
+  color-scheme: light;
+
+  // 组件类型颜色 --el-color-#{$type}
+  @each $type in (primary, success, warning, danger, error, info) {
+    @include set-css-color-type($colors, $type);
+  }
+
+  @include set-component-css-var('border-color', $border-color);
+
+
+
+  // Border
+  @include set-css-var-value('border-width', $border-width);
+  @include set-css-var-value('border-style', $border-style);
+  @include set-css-var-value('border-color-hover', $border-color-hover);
+  @include set-css-var-value(
+    'border',
+    getCssVar('border-width') getCssVar('border-style')
+      getCssVar('border-color')
+  );
+
 }

@@ -1,5 +1,8 @@
 
-@use 'function' as *;
+// forward mixins 同时
+@forward 'config';
+@forward 'function';
+@forward '_var';
 @use 'config' as *;
 
 
@@ -10,5 +13,14 @@
     .#{$B} {
       @content;
     }
-  }
+}
   
+
+@mixin when($state) {
+  @at-root {
+    // 父元素.is-$state
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}

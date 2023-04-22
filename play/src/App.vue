@@ -1,7 +1,7 @@
 <template>
   <div>
       <h1>App component !</h1>
-      <KiButton disabled>this is button</KiButton>
+      <KiButton circle round disabled>this is button</KiButton>
   </div>
 </template>
 
