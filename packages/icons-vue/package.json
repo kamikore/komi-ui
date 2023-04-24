@@ -1,0 +1,17 @@
+{
+  "name": "@komi-ui/icons-vue",
+  "version": "0.0.0",
+  "description": "Vue components of Komi-ui Icons collection",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "icon",
+    "svg",
+    "vue",
+    "komi-ui"
+  ],
+  "author": "",
+  "license": "MIT"
+}
