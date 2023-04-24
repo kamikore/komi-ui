@@ -41,7 +41,10 @@ importers:
     specifiers: {}
 
   packages/komi-ui:
-    specifiers: {}
+    specifiers:
+      '@element-plus/icons-vue': ^2.1.0
+    dependencies:
+      '@element-plus/icons-vue': registry.npmmirror.com/@element-plus/icons-vue/2.1.0
 
   packages/theme:
     specifiers:
@@ -303,6 +306,14 @@ packages:
     transitivePeerDependencies:
       - '@algolia/client-search'
     dev: true
+
+  registry.npmmirror.com/@element-plus/icons-vue/2.1.0:
+    resolution: {integrity: sha512-PSBn3elNoanENc1vnCfh+3WA9fimRC7n+fWkf3rE5jvv+aBohNHABC/KAR5KWPecxWxDTVT1ERpRbOMRcOV/vA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.1.0.tgz}
+    name: '@element-plus/icons-vue'
+    version: 2.1.0
+    peerDependencies:
+      vue: ^3.2.0
+    dev: false
 
   registry.npmmirror.com/@esbuild/android-arm/0.17.16:
     resolution: {integrity: sha512-baLqRpLe4JnKrUXLJChoTN0iXZH7El/mu58GE3WIA6/H834k0XWvLRmGLG8y8arTRS9hJJibPnF0tiGhmWeZgw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@esbuild/android-arm/-/android-arm-0.17.16.tgz}
