@@ -40,11 +40,12 @@
   // 系统颜色
   color-scheme: light;
 
-  // 组件类型颜色 --el-color-#{$type}
+  // 设置不同场景的主颜色 --el-color-#{$type} 以调色板系列颜色 --el-color-primary-light-3
   @each $type in (primary, success, warning, danger, error, info) {
     @include set-css-color-type($colors, $type);
   }
 
+  // color-scheme
   // --el-text-color-#{$type}
   @include set-component-css-var('text-color', $text-color);
   // --el-border-color-#{$type}

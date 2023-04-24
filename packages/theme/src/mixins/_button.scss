@@ -1,8 +1,10 @@
 @use 'sass:map';
 
+
 @use '../mixins/var' as *;
 @use '../mixins/function' as *;
 @use '../common/var' as *;
+
 
 @mixin button-plain($type) {
   $button-color-types: (
@@ -62,6 +64,7 @@
   }
 }
 
+// 设置不同types的color样式
 @mixin button-variant($type) {
   $button-color-types: (
     '': (
@@ -139,8 +142,12 @@
     ),
   );
 
+  // 覆盖了参数的$type: '', hover, active, disabled
   @each $type, $typeMap in $button-color-types {
+    // $typeColor: text-color, bg-color, border-color
     @each $typeColor, $list in $typeMap {
+      // --el-button-bg-color: --el-color-primary
+      // --el-button-hover-bg-color: -el-color-primary-light-3
       @include css-var-from-global(('button', $type, $typeColor), $list);
     }
   }

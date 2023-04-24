@@ -13,11 +13,24 @@
 }
   
 
-
+// 设置root的color var 
 @mixin set-css-color-type($colors, $type) {
+  // 设置不同场景的主颜色
   @include set-css-var-value(('color', $type), map.get($colors, $type, 'base'));
-}
 
+  // 根据主颜色设置一系列调色板颜色
+  @each $i in (3, 5, 7, 8, 9) {
+    @include set-css-var-value(
+      ('color', $type, 'light', $i),
+      map.get($colors, $type, 'light-#{$i}')
+    );
+  }
+
+  @include set-css-var-value(
+    ('color', $type, 'dark-2'),
+    map.get($colors, $type, 'dark-2')
+  );
+}
 
 
 // 遍历变量属性命名为组件变量 text-color ==> .el-button-text-color
@@ -35,8 +48,10 @@
 @mixin set-css-color-rgb($type) {
   $color: map.get($colors, $type, 'base');
   @include set-css-var-value(
+    // key: --el-color-${type}
     ('color', $type, 'rgb'),
-    #{red($color),
+    // value: 255 255 255
+    #{red($color),  
     green($color),
     blue($color)}
   );
