@@ -1,6 +1,8 @@
 <template>
+    <!-- 支持自定义标签，按钮不一定是button标签 -->
    <component 
      :is="tag" 
+     v-bind="$props"
      :class= "[
         ns.b(),
         // primary, success, warning, error
@@ -11,7 +13,7 @@
      ]"
     >
     <!-- 按钮icon -->
-
+    
     <!-- 按钮文本，如果传入了内容，插槽默认为default -->
     <span v-if="$slots.default">     
         <slot/>
@@ -30,6 +32,8 @@ defineOptions({
 
 const props = defineProps(buttonProps)
 const ns = useNamespace('button')
+
+const _props = 
 
 console.log("button props:",props);
 

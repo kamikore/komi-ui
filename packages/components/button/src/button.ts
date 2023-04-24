@@ -1,5 +1,4 @@
 import type { Component, PropType } from 'vue'
-import '@komi-ui/theme/dist/index.css'
 
 export const buttonProps = {
     tag: {
@@ -16,7 +15,6 @@ export const buttonProps = {
         value: ['default','primary','success','warning','error'],
         default: 'default'
     },
-    disabled: Boolean,      // disabled 传入为true
     icon: {
         type: String,
         value:['default','primary'],
@@ -26,5 +24,8 @@ export const buttonProps = {
     circle: Boolean,            // 为true时，按钮为圆形仅显示icon
     loading: Boolean,
     color: String,
-    dark: Boolean
+    dark: Boolean,
+    // 原生属性
+    disabled: Boolean,      // disabled 传入为true
+    autofocus: Boolean,
 }
