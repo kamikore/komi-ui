@@ -1,5 +1,11 @@
-import {KiButton} from '@komi-ui/components/button'
+import {
+    KiButton,
+    KiInput,
+    KiDropMenu,
+} from '@komi-ui/components'
 import { Plugin } from '@vue/runtime-core'
 export default [
-    KiButton
+    KiButton,
+    KiInput,
+    KiDropMenu,
 ] as Plugin

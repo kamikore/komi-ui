@@ -8,7 +8,7 @@
         <KiButton @click="handleClick"  round disabled>this is button</KiButton>
       </div>
       <div>
-        <kiButton @click="handleClick" type="primary">primary</kiButton>
+        <ki-button @click="handleClick" type="primary">primary</ki-button>
       </div>
       <div>
         <button disabled @click="handleClick" >click me</button>
@@ -16,6 +16,11 @@
       <div>
         <button autofocus>autofocus button</button>
       </div>
+      <hr>
+      <ki-input placeholder="is default"></ki-input>
+      <ki-input type="password" placeholder="is password"></ki-input>
+      <hr>
+      <ki-dropMenu></ki-dropMenu>
   </div>
 </template>
 
