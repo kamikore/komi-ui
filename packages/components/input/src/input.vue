@@ -3,7 +3,6 @@
         <input 
             :class="[ns.e('inner')]"
             v-bind="$props"
-            v-model="textValue" 
             :type="type"
         >
     </div>
@@ -20,7 +19,6 @@ defineOptions({
 
 const props = defineProps(inputProps)
 const ns = useNamespace('input')
-const textValue = ref('')
 
 console.log('input props:',props)
 

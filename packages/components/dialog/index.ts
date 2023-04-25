@@ -1,5 +1,5 @@
 import { withInstall } from '@komi-ui/utils'
-import Dialog from './src/dialog'
+import Dialog from './src/dialog.vue'
 
-const KiDialog = withInstall(Dialog)
+export const KiDialog = withInstall(Dialog)
 export default KiDialog

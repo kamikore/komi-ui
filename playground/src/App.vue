@@ -20,7 +20,7 @@
       <ki-input placeholder="is default"></ki-input>
       <ki-input type="password" placeholder="is password"></ki-input>
       <hr>
-      <ki-dropMenu></ki-dropMenu>
+      <ki-dropdown></ki-dropdown>
   </div>
 </template>
 

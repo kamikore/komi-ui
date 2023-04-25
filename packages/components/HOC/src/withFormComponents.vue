@@ -1,6 +1,7 @@
 <template>
-    <div>
-
+    <div :class="[ns.b()]">
+        <label for=""></label>
+        <slot/>
     </div>
 </template>
 
@@ -9,10 +10,11 @@ import {defineProps} from 'vue'
 import {useNamespace} from '@komi-ui/hooks'
 
 defineOptions({
-    name: 'KiDialog'
+    name: 'withFormComponents'
 })
 
-const ns = useNamespace('dialog')
+const ns = useNamespace('withFormComponents')
+
 
 </script>
 

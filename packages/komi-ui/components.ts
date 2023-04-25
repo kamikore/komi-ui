@@ -1,13 +1,13 @@
 import {
     KiButton,
     KiInput,
-    KiDropMenu,
+    KiDropdown,
     KiDialog,
 } from '@komi-ui/components'
 import { Plugin } from '@vue/runtime-core'
 export default [
     KiButton,
     KiInput,
-    KiDropMenu,
+    KiDropdown,
     KiDialog,
 ] as Plugin
