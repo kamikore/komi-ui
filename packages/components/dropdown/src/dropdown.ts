@@ -1,13 +1,5 @@
 
 export const dropdownProps = {
-    label: {
-        type: String,
-        default: 'Menu'  
-    },
-    icon: {
-        type: String,
-        default: undefined
-    },
     items: {
         type: Array,
         default: undefined,
@@ -17,6 +9,12 @@ export const dropdownProps = {
         type: String,
         value: ['hover','click'],
         default: 'click'
+    },
+    // 菜单弹出位置
+    placement: {
+        type: String,
+        value: ['bottom,bottomLeft,bottomRight'],
+        default: 'bottom'
     }
 
 }

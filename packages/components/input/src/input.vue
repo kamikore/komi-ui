@@ -23,8 +23,3 @@ const ns = useNamespace('input')
 console.log('input props:',props)
 
 </script>
-
-<style lang="scss" scoped>
-
-    
-</style>

@@ -17,10 +17,14 @@
         <button autofocus>autofocus button</button>
       </div>
       <hr>
+
+      <hr>
+      <ki-dropdown>
+        <span>as a dropdown</span>
+      </ki-dropdown>
+      <hr>
       <ki-input placeholder="is default"></ki-input>
       <ki-input type="password" placeholder="is password"></ki-input>
-      <hr>
-      <ki-dropdown></ki-dropdown>
   </div>
 </template>
 
