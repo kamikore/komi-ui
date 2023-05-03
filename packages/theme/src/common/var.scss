@@ -326,8 +326,6 @@ $input-padding-horizontal: map.merge(
 $button: () !default;
 $button: map.merge(
   (
-    // 'font-weight': bold,
-    // 'border-color': orange,
     'font-weight': getCssVar('font-weight-primary'),
     'border-color': getCssVar('border-color'),
     'bg-color': getCssVar('fill-color', 'blank'),

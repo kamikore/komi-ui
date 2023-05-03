@@ -13,7 +13,7 @@
   }
 
 
-// 组件应用样式，.ki-button
+// 组件应用样式，.ki-button {...}
 @include b(button) {
   // display inline content flex
   display: inline-flex;

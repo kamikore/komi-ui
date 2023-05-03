@@ -6,6 +6,7 @@
   "style": "dist/index.css",
   "scripts": {
     "build": "gulp",
+    "watch": "gulp watchBuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
