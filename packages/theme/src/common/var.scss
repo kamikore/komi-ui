@@ -214,15 +214,16 @@ $font-size: map.merge(
 );
 
 
-// zIndex
-$z-index: () !default;
-$z-index: map.merge(
+// z-index
+$zIndex: () !default;
+$zIndex: map.merge(
   (
     'normal': 1,
+    'bottom': -1,
     'top': 1000,
     'popper': 2000,
   ),
-  $z-index
+  $zIndex
 );
 
 // Disable default

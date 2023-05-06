@@ -1,45 +1,45 @@
 <template>
   <div>
       <h1>App component !</h1>
-      <div>
-        <kiButton>123</kiButton>
-      </div>
-      <div>
-        <KiButton @click="handleClick"  round disabled>this is button</KiButton>
-      </div>
-      <div>
-        <ki-button @click="handleClick" type="primary">primary</ki-button>
-      </div>
-      <div>
-        <button disabled @click="handleClick" >click me</button>
-      </div>
-      <div>
-        <button autofocus>autofocus button</button>
-      </div>
       <hr>
-
-      <hr>
-      <ki-dropdown 
-        :showArrow="true"
-        trigger="click"
-      >
-        <button>as a dropdown</button>
-      </ki-dropdown>
-      <hr>
-      <ki-input placeholder="is default"></ki-input>
-      <ki-input type="password" placeholder="is password"></ki-input>
+      <div class="btn-group">
+        <button @click="handleClick(Button)">button</button>
+        <button @click="handleClick(Input)">input</button>
+        <button @click="handleClick(Popover)">popover</button>
+        <button @click="handleClick(Dropdown)">dropdown</button>
+      </div>
+      <div class="example">
+        <component :is="componentId"></component>
+      </div>
   </div>
 </template>
 
-<script setup>
-import {ref} from 'vue'
+<script lang="ts" setup>
+import {shallowRef} from 'vue'
+import Button from './button.vue'
+import Input from './input.vue'
+import Dropdown from './dropdown.vue'
+import Popover from './popover.vue'
+const componentId = shallowRef(Popover)
 
-
-function handleClick() {
-  console.log("123")
+function handleClick(component) {
+  componentId.value = component
 }
 </script>
 
-<style lang="scss" scoped>
 
+<style lang="scss" scoped>
+  .btn-group {
+    margin: 10px;
+
+    button {
+      margin: 4px;
+    }
+  }
+
+  .example {
+    // margin: 60px;
+    padding: 20px;
+    border: 2px solid #f0f0f0;
+  }
 </style>

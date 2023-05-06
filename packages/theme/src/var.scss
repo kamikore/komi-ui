@@ -10,6 +10,9 @@
 
 // common 公共
 :root {
+    // min-width
+    
+
     @include set-css-var-value('color-white', $color-white);
     @include set-css-var-value('color-black', $color-black);
   
@@ -25,8 +28,8 @@
     @include set-css-var-value('font-weight-primary', 500);
     @include set-css-var-value('font-line-height-primary', 24px);
   
-    // z-index --el-index-#{$type}, normal, top, popper
-    @include set-component-css-var('index', $z-index);
+    // z-index --ki-index-#{$type}, normal, top, popper
+    @include set-component-css-var('index', $zIndex);
 
 
     // --el-border-radius-#{$type}, base, small, round, circle
@@ -69,6 +72,5 @@
 
    // Disable base
    @include set-component-css-var('disabled', $disabled);
-
 
 }

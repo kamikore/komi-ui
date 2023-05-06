@@ -97,10 +97,30 @@ export function getPopStyle(elm:HTMLElement, placement:String, showArrow:Boolean
     }
 }
 
-
 export function calcPopWidth(elm:HTMLElement):String {
     const {offsetWidth} = elm
     return `${offsetWidth*(4/3)}px`
+}
+
+
+export function togglePlacement(placement:string):string {
+    const toggleMap = new Map<string,string>([
+        ['top', 'bottom'],
+        ['top-start', 'bottom-start'],
+        ['top-end', 'bottom-end'],
+        ['bottom', 'top'],
+        ['bottom-start', 'top-start'],
+        ['bottom-end', 'top-end'],
+        ['left', 'right'],
+        ['left-start', 'right-start'],
+        ['left-end', 'right-end'],
+        ['right', 'left'],
+        ['right-start', 'left-start'],
+        ['right-end', 'left-end'],
+    ]);
+
+    if(toggleMap.has(placement)) return toggleMap.get(placement)
+    return placement
 }
 
 
