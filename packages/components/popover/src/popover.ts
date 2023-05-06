@@ -3,7 +3,6 @@
 export const popoverProps = {
     trigger: {
         type: String,
-        value: ['hover','click'],
         default: 'hover'
     },
     showArrow: {
@@ -12,20 +11,6 @@ export const popoverProps = {
     },
     placement: {
         type: String,
-        value:[
-            'bottom',
-            'bottom-start',
-            'bottom-end',
-            'top',
-            'top-start',
-            'top-end',
-            'left',
-            'left-start',
-            'left-end',
-            'right',
-            'right-start',
-            'right-end'
-        ],
         default: 'bottom'
     }
 }

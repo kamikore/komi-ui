@@ -1,5 +1,4 @@
 <template>
-
     <div ref="triggerRef">
         <slot/>
     </div>
@@ -11,6 +10,8 @@
             ref="popoverRef"
             v-show="isShow"
         >
+            <!-- 默认弹出内容 -->
+            <span v-if="!$slots.content">Content</span>
             <slot name="content"/>
             <span 
                 v-if="showArrow"
@@ -25,19 +26,22 @@
 import {ref, nextTick, defineProps, onMounted, onUnmounted} from 'vue'
 import {popoverProps} from './popover'
 import {useNamespace} from '@komi-ui/hooks'
-import {calcPopXY,calcPopWidth, arrowTransform} from '@komi-ui/utils'
+import {calcPopWidth, arrowTransform, getPopStyle} from '@komi-ui/utils'
 
 defineOptions({
     name: 'KiPopover'
 })
 
 const props = defineProps(popoverProps)
+console.log("popover props:",props)
+
 const ns = useNamespace('popover')
 const triggerRef = ref<HTMLElement>()
 const popoverRef = ref<HTMLElement>()
 
-const popoverStyle = ref(undefined)
-const arrowStyle = ref(undefined)
+const popoverStyle = ref<any>(undefined)
+const arrowStyle = ref<any>(undefined)
+
 // 显示元素，为了获取宽高
 const isShow = ref(true)
 popoverStyle.value = {
@@ -45,13 +49,12 @@ popoverStyle.value = {
 }
 
 // 缩放监听
-let resizeObserver
+let resizeObserver:ResizeObserver
 
 onMounted(() => {
-    
-    const triggerElm:HTMLElement = triggerRef.value?.firstElementChild
+    console.log("triggerRef",triggerRef)
+    const triggerElm = triggerRef.value?.firstElementChild
     const bodyElm = document.querySelector('body');
-    
 
     if(props.showArrow) {
         arrowStyle.value = {
@@ -62,15 +65,10 @@ onMounted(() => {
     isShow.value = false
 
     resizeObserver = new ResizeObserver((entries) => {
-        const {top,left} = calcPopXY(triggerElm,props.placement)
-        popoverStyle.value = {
-            position: 'absolute',
-            inset: `${props.showArrow?top + 4:top}px auto auto ${left}px`
-        }
+        popoverStyle.value = getPopStyle(triggerElm,props.placement,props.showArrow)
     })
 
     resizeObserver.observe(bodyElm)
-
 
     if(props.trigger === 'hover') {
         triggerElm.addEventListener('mouseenter', (event) => isShow.value = true)
@@ -78,11 +76,8 @@ onMounted(() => {
     } else {
         triggerElm.addEventListener('click', (event) => {
             isShow.value = !isShow.value
-            console.log(popoverRef)
         })
     }
-
-
 })
 
 
@@ -90,13 +85,4 @@ onUnmounted(() => {
     resizeObserver.disconnect()
 })
 
-
-
 </script>
-
-
-<style lang="scss" scoped>
-ul li {
-    list-style: none;
-}
-</style>

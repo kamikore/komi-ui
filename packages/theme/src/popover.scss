@@ -4,12 +4,14 @@
 
 @include b(popover) {
     position: absolute;
-    transform: translateX(-50%);
     z-index: 200;
     background-color: black;
     text-align: center;
     border-radius: getCssVar('border-radius','base');
     color: #fff;
+
+    // min
+    min-width: 50px;
 
     // .el-popover__arrow
     @include e(arrow) {
@@ -22,7 +24,8 @@
           position: absolute;
           width: 10px;
           height: 10px;
-          transform: rotate(45deg) translateX(-50%);
+          // 注意转换顺序
+          transform: translate(-50%,-50%) rotate(45deg) ;
           background: black;
           box-sizing: border-box;
         }

@@ -21,7 +21,7 @@
    </component>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { defineProps} from 'vue'
 import {buttonProps} from './button'
 import {useNamespace} from '@komi-ui/hooks'

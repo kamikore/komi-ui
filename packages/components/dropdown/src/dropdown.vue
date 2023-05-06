@@ -3,6 +3,7 @@
         <ki-popover 
             :showArrow="showArrow"
             :trigger="trigger"
+            :placement="placement"
         >
             <template #default>
                 <slot/>
@@ -19,7 +20,7 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref, defineProps} from 'vue'
 import {useNamespace} from '@komi-ui/hooks'
 import {dropdownProps} from './dropdown'
@@ -33,9 +34,5 @@ const props = defineProps(dropdownProps)
 const ns = useNamespace('dropdown')
 const isShow = ref(false)
 
-
-
-
-console.log("dropdown props:",props);
 
 </script>

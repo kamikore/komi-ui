@@ -7,17 +7,14 @@ export const buttonProps = {
     },
     size: {
         type: String,
-        value:['large','default','small'],
         default: 'default'
     },
     type: {
         type: String,
-        value: ['default','primary','success','warning','error'],
         default: 'default'
     },
     icon: {
         type: String,
-        value:['default','primary'],
         default: 'loading'
     },
     round: Boolean,
