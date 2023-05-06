@@ -19,8 +19,11 @@
       <hr>
 
       <hr>
-      <ki-dropdown>
-        <span>as a dropdown</span>
+      <ki-dropdown 
+        :showArrow="true"
+        trigger="click"
+      >
+        <button>as a dropdown</button>
       </ki-dropdown>
       <hr>
       <ki-input placeholder="is default"></ki-input>
@@ -29,6 +32,9 @@
 </template>
 
 <script setup>
+import {ref} from 'vue'
+
+
 function handleClick() {
   console.log("123")
 }

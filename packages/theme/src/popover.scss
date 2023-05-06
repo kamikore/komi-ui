@@ -3,10 +3,28 @@
 
 
 @include b(popover) {
-    
+    position: absolute;
     transform: translateX(-50%);
     z-index: 200;
-    background-color: #f0f0f0;
+    background-color: black;
     text-align: center;
-    border-radius: getCssVar('border-radius');
+    border-radius: getCssVar('border-radius','base');
+    color: #fff;
+
+    // .el-popover__arrow
+    @include e(arrow) {
+        position: absolute;
+        inset: 50% auto auto 50%;
+
+        // 方便定位不采用三角形,而是正方形四个角都能用
+        &::before {
+          content: ' ';
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          transform: rotate(45deg) translateX(-50%);
+          background: black;
+          box-sizing: border-box;
+        }
+      }
 }

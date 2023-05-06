@@ -1,6 +1,9 @@
 <template>
     <div :class="[ns.b()]">
-        <ki-popover>
+        <ki-popover 
+            :showArrow="showArrow"
+            :trigger="trigger"
+        >
             <template #default>
                 <slot/>
             </template>

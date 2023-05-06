@@ -62,6 +62,11 @@
       getCssVar('border-color')
   );
 
+  // Border-radius
+  // --ki-border-radius-#{$type}
+  @include set-component-css-var('border-radius', $border-radius);
+
+
    // Disable base
    @include set-component-css-var('disabled', $disabled);
 
