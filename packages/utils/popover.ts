@@ -1,4 +1,4 @@
-import {getBounding} from './DOM/getBounding'
+import { getBounding } from "./DOM"
 
 interface POPSTYLE {
     position: string,
@@ -60,8 +60,6 @@ export function calcPopWidth(elm:HTMLElement):string {
 export function popIsOverflow(triggerElm:Element,popWidth:number, popHeight:number,placement:string):boolean {
     const pos = placement.split('-')[0]
     const bounding = getBounding(triggerElm)
-    console.log(bounding, popHeight, popWidth);
-    
 
     switch(pos) {
         case 'top':

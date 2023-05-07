@@ -26,7 +26,7 @@
 import {ref, nextTick, defineProps, onMounted, onUnmounted} from 'vue'
 import {popoverProps} from './popover'
 import {useNamespace} from '@komi-ui/hooks'
-import {popIsOverflow,togglePlacement, arrowTransform, getPopStyle} from '@komi-ui/utils'
+import {popIsOverflow,togglePlacement, arrowTransform, getPopStyle,debounce} from '@komi-ui/utils'
 
 defineOptions({
     name: 'KiPopover'
@@ -43,6 +43,7 @@ const arrowStyle = ref<any>(undefined)
 
 const pop_placement = ref(props.placement)
 
+
 // 显示元素，为了获取宽高
 const isShow = ref(true)
 popoverStyle.value = {
@@ -53,35 +54,27 @@ popoverStyle.value = {
 let resizeObserver:ResizeObserver
 
 onMounted(() => {
-    const triggerElm = triggerRef.value?.firstElementChild
-    const bodyElm = document.querySelector('body');
+    // 判断triggerElm是否存在
+    // 。。。
 
-    // 缓存popover clientWidth, clientHeight
-    const {clientWidth, clientHeight} = popoverRef.value
+    const triggerElm = triggerRef.value?.firstElementChild
+    const htmlElm = document.querySelector('html') as Element;
+
+    // 缓存popover offsetWidth, offsetHeight
+    const {offsetWidth, offsetHeight} = popoverRef.value as HTMLElement
     
    
     resizeObserver = new ResizeObserver((entries) => {
-         // 判断是否溢出
-        if(popIsOverflow(triggerElm,clientWidth,clientHeight,props.placement)) {
-            console.log("溢出了",props.placement);
-            pop_placement.value = togglePlacement(props.placement)
-        }
 
-        if(props.showArrow) {
-            arrowStyle.value = {
-                transform: arrowTransform(clientWidth, clientHeight, pop_placement.value )
-            }
-        }
-
-        popoverStyle.value = getPopStyle(triggerElm,pop_placement.value,props.showArrow)
+        updatePopover(triggerElm,offsetWidth,offsetHeight)
     })
-    // 监听body缩放
-    resizeObserver.observe(bodyElm)
+    // 监听视窗缩放，body存在问题
+    resizeObserver.observe(htmlElm)
 
-
-     // 获取宽高后，隐藏元素
-     isShow.value = false
-
+    // 监听视窗滚动
+    window.addEventListener('scroll', debounce(() => {
+        updatePopover(triggerElm,offsetWidth,offsetHeight)
+    }))
    
     if(props.trigger === 'hover') {
         triggerElm.addEventListener('mouseenter', (event) => isShow.value = true)
@@ -91,11 +84,38 @@ onMounted(() => {
             isShow.value = !isShow.value
         })
     }
+
+    // 获取宽高后，隐藏元素
+    isShow.value = false
+
 })
 
 
 onUnmounted(() => {
     resizeObserver.disconnect()
 })
+
+
+
+function updatePopover(triggerElm:Element, popWidth:number, popHeight:number) {
+    
+    // 判断是否溢出
+    if(popIsOverflow(triggerElm,popWidth,popHeight,props.placement)) {
+        pop_placement.value = togglePlacement(props.placement)
+    } else {
+        // 不溢出判断placement是否已切换
+        pop_placement.value !== props.placement?pop_placement.value = props.placement:''
+    }
+
+
+    if(props.showArrow) {
+        arrowStyle.value = {
+            transform: arrowTransform(popWidth, popHeight, pop_placement.value )
+        }
+    }
+
+    popoverStyle.value = getPopStyle(triggerElm,pop_placement.value,props.showArrow)
+}
+
 
 </script>

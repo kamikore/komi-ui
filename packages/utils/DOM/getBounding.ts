@@ -9,13 +9,14 @@ interface BOUNDING {
 export function getBounding(elm:Element):BOUNDING{
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
+    
     const rect:DOMRect = elm.getBoundingClientRect()
 
     const top = rect.top 
     const left = rect.left
     
     const bottom = viewportHeight - rect.bottom
-    const right = viewportWidth - rect.left
+    const right = viewportWidth - rect.right
     return {
         top,
         bottom,
