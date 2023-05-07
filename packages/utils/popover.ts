@@ -7,88 +7,41 @@ interface POPSTYLE {
 // 计算组件在浏览器窗口中的位置
 export function getPopStyle(elm:HTMLElement, placement:String, showArrow:Boolean):POPSTYLE{
     const {offsetLeft, offsetTop, offsetWidth, offsetHeight} = elm
+    // bottom-start, bottom-end
+    const [pos, subPos] = placement.split('-')
     // popover与triggerElm之间的间隔
     const gap = showArrow?8:4
+    // normal 偏移比例
+    const normalRate = 1/2
     // start 偏移比例
     const startRate =  1/3
     // end 偏移比例
     const endRate = 2/3
+    const offsetRate = subPos?(subPos === 'start'?startRate:endRate) : normalRate 
     let top:number = 0,left:number = 0, transform:string = ''
     
-    switch(placement) {
+    switch(pos) {
         case 'bottom': 
-        case 'bottom-start':
-        case 'bottom-end':
             transform = 'translateX(-50%)'
+            top = offsetTop + offsetHeight + gap
+            left = offsetLeft + offsetWidth * offsetRate
             break
         case 'top':
-        case 'top-start':
-        case 'top-end':
             transform = 'translate(-50%,-100%)'
+            top = offsetTop - gap
+            left = offsetLeft + offsetWidth * offsetRate
             break
         case 'right':
-        case 'right-start':
-        case 'right-end':
             transform = 'translateY(-50%)'
+            top = offsetTop + offsetHeight * offsetRate
+            left = offsetLeft + offsetWidth + gap
             break
         case 'left':
-        case 'left-start':
-        case 'left-end':
             transform = 'translate(-100%,-50%)'
-            break
-    }
-
-    switch(placement) {
-        case 'bottom': 
-            top = offsetTop + offsetHeight + gap
-            left = offsetLeft + offsetWidth/2
-            break
-        case 'bottom-start':
-            top = offsetTop + offsetHeight + gap
-            left = offsetLeft + offsetWidth * startRate
-            break
-        case 'bottom-end':
-            top = offsetTop + offsetHeight + gap
-            left = offsetLeft + offsetWidth * endRate
-            break
-        case 'top':
-            top = offsetTop - gap
-            left = offsetLeft + offsetWidth/2
-            break
-        case 'top-start':
-            top = offsetTop - gap
-            left = offsetLeft + offsetWidth * startRate
-            break
-        case 'top-end':
-            top = offsetTop - gap
-            left = offsetLeft + offsetWidth * endRate
-            break
-        case 'right':
-            top = offsetTop + offsetHeight/2
-            left = offsetLeft + offsetWidth + gap
-            break
-        case 'right-start':
-            top = offsetTop + offsetHeight * startRate
-            left = offsetLeft + offsetWidth + gap
-            break
-        case 'right-end':
-            top = offsetTop + offsetHeight * endRate
-            left = offsetLeft + offsetWidth + gap
-            break
-        case 'left':
-            top = offsetTop + offsetHeight/2
-            left = offsetLeft - gap
-            break
-        case 'left-start':
-            top = offsetTop + offsetHeight * startRate
-            left = offsetLeft - gap
-            break
-        case 'left-end':
-            top = offsetTop + offsetHeight * endRate
+            top = offsetTop + offsetHeight * offsetRate
             left = offsetLeft - gap
             break
     }
-
     
     return {
         position: 'absolute',
@@ -102,24 +55,20 @@ export function calcPopWidth(elm:HTMLElement):String {
     return `${offsetWidth*(4/3)}px`
 }
 
+export function popIsOverflow(elm:Element,placement:String):Boolean {
+    console.log(elm.getBoundingClientRect())
+    console.log(placement.split('-'))
+}
 
-export function togglePlacement(placement:string):string {
+export function togglePlacement(placement:String):String {
     const toggleMap = new Map<string,string>([
         ['top', 'bottom'],
-        ['top-start', 'bottom-start'],
-        ['top-end', 'bottom-end'],
         ['bottom', 'top'],
-        ['bottom-start', 'top-start'],
-        ['bottom-end', 'top-end'],
         ['left', 'right'],
-        ['left-start', 'right-start'],
-        ['left-end', 'right-end'],
         ['right', 'left'],
-        ['right-start', 'left-start'],
-        ['right-end', 'left-end'],
     ]);
-
-    if(toggleMap.has(placement)) return toggleMap.get(placement)
+    const [pos, subPos] = placement.split('-')
+    if(toggleMap.has(pos)) return subPos?`${toggleMap.get(pos)}-${subPos}`:toggleMap.get(placement)
     return placement
 }
 
