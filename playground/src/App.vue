@@ -29,6 +29,7 @@ function handleClick(component) {
 
 
 <style lang="scss" scoped>
+
   .btn-group {
     margin: 10px;
 

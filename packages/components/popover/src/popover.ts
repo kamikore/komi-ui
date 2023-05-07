@@ -7,7 +7,7 @@ export const popoverProps = {
     },
     showArrow: {
         type: Boolean,
-        default: false
+        default: true
     },
     placement: {
         type: String,

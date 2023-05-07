@@ -1,12 +1,14 @@
+import {getBounding} from './DOM/getBounding'
+
 interface POPSTYLE {
-    position: String,
-    inset: String,
-    transform: String
+    position: string,
+    inset: string,
+    transform: string
 }
 
 // 计算组件在浏览器窗口中的位置
-export function getPopStyle(elm:HTMLElement, placement:String, showArrow:Boolean):POPSTYLE{
-    const {offsetLeft, offsetTop, offsetWidth, offsetHeight} = elm
+export function getPopStyle(triggerElm:HTMLElement, placement:string, showArrow:boolean):POPSTYLE{
+    const {offsetLeft, offsetTop, offsetWidth, offsetHeight} = triggerElm
     // bottom-start, bottom-end
     const [pos, subPos] = placement.split('-')
     // popover与triggerElm之间的间隔
@@ -50,17 +52,32 @@ export function getPopStyle(elm:HTMLElement, placement:String, showArrow:Boolean
     }
 }
 
-export function calcPopWidth(elm:HTMLElement):String {
+export function calcPopWidth(elm:HTMLElement):string {
     const {offsetWidth} = elm
     return `${offsetWidth*(4/3)}px`
 }
 
-export function popIsOverflow(elm:Element,placement:String):Boolean {
-    console.log(elm.getBoundingClientRect())
-    console.log(placement.split('-'))
+export function popIsOverflow(triggerElm:Element,popWidth:number, popHeight:number,placement:string):boolean {
+    const pos = placement.split('-')[0]
+    const bounding = getBounding(triggerElm)
+    console.log(bounding, popHeight, popWidth);
+    
+
+    switch(pos) {
+        case 'top':
+        case 'bottom':
+            if(bounding[pos] < popHeight) return true
+            break
+        case 'left':
+        case 'right':
+            if(bounding[pos] < popWidth) return true
+            break
+        default:
+            return false
+    }
 }
 
-export function togglePlacement(placement:String):String {
+export function togglePlacement(placement:string):string {
     const toggleMap = new Map<string,string>([
         ['top', 'bottom'],
         ['bottom', 'top'],
@@ -73,29 +90,28 @@ export function togglePlacement(placement:String):String {
 }
 
 
-export function arrowTransform(elm:HTMLElement, placement:String):String {
-    const { offsetWidth, offsetHeight} = elm
+export function arrowTransform(popWidth:number,popHeight:number, placement:string):string {
     let transform = ''
     switch(placement) {
         case 'bottom': 
         case 'bottom-start':
         case 'bottom-end':
-            transform = `translateY(${-offsetHeight/2}px)`
+            transform = `translateY(${-popHeight/2}px)`
             break
         case 'top':
         case 'top-start':
         case 'top-end':
-            transform = `translateY(${offsetHeight/2}px)`
+            transform = `translateY(${popHeight/2}px)`
             break
         case 'right':
         case 'right-start':
         case 'right-end':
-            transform = `translateX(${-offsetWidth/2}px)`
+            transform = `translateX(${-popWidth/2}px)`
             break
         case 'left':
         case 'left-start':
         case 'left-end':
-            transform = `translateX(${offsetWidth/2}px)`
+            transform = `translateX(${popWidth/2}px)`
             break
     }
 
