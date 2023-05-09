@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, nextTick, defineProps, onMounted, onUnmounted} from 'vue'
+import {ref, defineProps, onMounted, onUnmounted} from 'vue'
 import {popoverProps} from './popover'
 import {useNamespace} from '@komi-ui/hooks'
 import {popIsOverflow,togglePlacement, arrowTransform, getPopStyle,debounce} from '@komi-ui/utils'
@@ -58,18 +58,17 @@ onMounted(() => {
     // 。。。
 
     const triggerElm = triggerRef.value?.firstElementChild
-    const htmlElm = document.querySelector('html') as Element;
+    const documentElm = document.documentElement
 
     // 缓存popover offsetWidth, offsetHeight
     const {offsetWidth, offsetHeight} = popoverRef.value as HTMLElement
     
    
-    resizeObserver = new ResizeObserver((entries) => {
-
+    resizeObserver = new ResizeObserver(debounce(() => {
         updatePopover(triggerElm,offsetWidth,offsetHeight)
-    })
+    }))
     // 监听视窗缩放，body存在问题
-    resizeObserver.observe(htmlElm)
+    resizeObserver.observe(documentElm)
 
     // 监听视窗滚动
     window.addEventListener('scroll', debounce(() => {
@@ -100,7 +99,7 @@ onUnmounted(() => {
 function updatePopover(triggerElm:Element, popWidth:number, popHeight:number) {
     
     // 判断是否溢出
-    if(popIsOverflow(triggerElm,popWidth,popHeight,props.placement)) {
+    if(popIsOverflow(triggerElm,popWidth,popHeight,props.placement,props.showArrow)) {
         pop_placement.value = togglePlacement(props.placement)
     } else {
         // 不溢出判断placement是否已切换

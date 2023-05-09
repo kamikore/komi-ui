@@ -6,42 +6,44 @@ interface POPSTYLE {
     transform: string
 }
 
+// popover与triggerElm之间的间隔
+const gap = {normal:4, large: 8}
+// normal 偏移比例
+const normalRate = 1/2
+// start 偏移比例
+const startRate =  1/3
+// end 偏移比例
+const endRate = 2/3
+
 // 计算组件在浏览器窗口中的位置
 export function getPopStyle(triggerElm:HTMLElement, placement:string, showArrow:boolean):POPSTYLE{
     const {offsetLeft, offsetTop, offsetWidth, offsetHeight} = triggerElm
     // bottom-start, bottom-end
     const [pos, subPos] = placement.split('-')
-    // popover与triggerElm之间的间隔
-    const gap = showArrow?8:4
-    // normal 偏移比例
-    const normalRate = 1/2
-    // start 偏移比例
-    const startRate =  1/3
-    // end 偏移比例
-    const endRate = 2/3
+    const popGap = showArrow?gap.large:gap.normal
     const offsetRate = subPos?(subPos === 'start'?startRate:endRate) : normalRate 
     let top:number = 0,left:number = 0, transform:string = ''
     
     switch(pos) {
         case 'bottom': 
             transform = 'translateX(-50%)'
-            top = offsetTop + offsetHeight + gap
+            top = offsetTop + offsetHeight + popGap
             left = offsetLeft + offsetWidth * offsetRate
             break
         case 'top':
             transform = 'translate(-50%,-100%)'
-            top = offsetTop - gap
+            top = offsetTop - popGap
             left = offsetLeft + offsetWidth * offsetRate
             break
         case 'right':
             transform = 'translateY(-50%)'
             top = offsetTop + offsetHeight * offsetRate
-            left = offsetLeft + offsetWidth + gap
+            left = offsetLeft + offsetWidth + popGap
             break
         case 'left':
             transform = 'translate(-100%,-50%)'
             top = offsetTop + offsetHeight * offsetRate
-            left = offsetLeft - gap
+            left = offsetLeft - popGap
             break
     }
     
@@ -57,18 +59,19 @@ export function calcPopWidth(elm:HTMLElement):string {
     return `${offsetWidth*(4/3)}px`
 }
 
-export function popIsOverflow(triggerElm:Element,popWidth:number, popHeight:number,placement:string):boolean {
+export function popIsOverflow(triggerElm:Element,popWidth:number, popHeight:number,placement:string,showArrow:boolean):boolean {
     const pos = placement.split('-')[0]
     const bounding = getBounding(triggerElm)
+    const popGap = showArrow?gap.large:gap.normal
 
     switch(pos) {
         case 'top':
         case 'bottom':
-            if(bounding[pos] < popHeight) return true
+            if(bounding[pos] < popHeight + popGap) return true
             break
         case 'left':
         case 'right':
-            if(bounding[pos] < popWidth) return true
+            if(bounding[pos] < popWidth + popGap) return true
             break
         default:
             return false

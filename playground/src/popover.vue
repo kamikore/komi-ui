@@ -33,13 +33,13 @@
         </ki-popover>
     </div>
     <div class="right">
-        <ki-popover placement="right-start">
+        <ki-popover trigger="click" placement="right-start">
             <button>right-start</button>
         </ki-popover>
         <ki-popover placement="right">
             <button>right</button>
         </ki-popover>
-        <ki-popover placement="right-end">
+        <ki-popover trigger="click" placement="right-end">
             <button>right-end</button>
         </ki-popover>
     </div>
