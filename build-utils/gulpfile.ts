@@ -1,7 +1,7 @@
 import { dest, parallel, series, src } from 'gulp'
 import {join} from 'node:path'
 import {copyFile} from 'node:fs/promises';
-import {pkgRoot,buildOutput,kiOutput,kiPackage} from '@komi-ui/build-utils'
+import {pkgRoot,buildOutput,kiOutput,kiPackage} from '@'
 import ts from 'gulp-typescript'
  
 
@@ -12,7 +12,6 @@ export const copyFiles = () =>
   ])
 
 
-
 export const buildPkg = () => {
     return src(join(pkgRoot,'**','*.ts'))
         .pipe(ts())
@@ -21,6 +20,6 @@ export const buildPkg = () => {
 
 
 
-export const build = parallel(copyFiles)
+export const build = parallel()
 
 export default build

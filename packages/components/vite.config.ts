@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
+import { kiOutput } from '@komi-ui/build-utils'
+import {join} from 'node:path'
 
 export default defineConfig({
   build: {
@@ -17,20 +18,20 @@ export default defineConfig({
           entryFileNames: '[name].js',
           preserveModules: true,
           // 配置打包根目录
-          dir: 'dist/es',
+          dir: join(kiOutput,'es'),
           preserveModulesRoot: 'src'
         },
         {
           format: 'cjs',
           entryFileNames: '[name].js',
           preserveModules: true,
-          dir: '../../dist/lib',
+          dir: join(kiOutput,'lib'),
           preserveModulesRoot: 'src'
         }
       ]
     },
     lib: {
-      entry: './index.js',
+      entry: 'index.ts',
       formats: ['es', 'cjs']
     }
   },

@@ -1,24 +1,42 @@
 import { dest, src, watch } from 'gulp'
+import { themeOutput } from '@komi-ui/build-utils';
+import {resolve} from 'node:path'
+// import {copyFile} from 'node:fs/promise'
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
+// 选择编译器
 const sass = gulpSass(dartSass);
 
+
+// export const copyFullStyle = async () => {
+//     await mkdir(path.resolve(kiOutput, 'dist'), { recursive: true })
+//     await copyFile(
+//         path.resolve(kiOutput, 'theme/index.css'),
+//         path.resolve(kiOutput, 'dist/index.css')
+//     )
+// }
+
+
+
 // 编译sass
-function build() {
-    return src('./src/*.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(dest('./dist'));
+const buildStyles = () => {
+    return src(resolve(__dirname,'src/*.scss'))
+        .pipe(sass({
+            outputStyle: 'compressed'
+        }).on('error', sass.logError))
+        // .pipe(sourcemaps.write())
+        .pipe(dest(themeOutput));
 }
 
 
-export function watchBuild() {
-    watch('src/**/*.scss', function() {
-        build()
+export const watchBuild = () => {
+    watch(resolve(__dirname,'src/*.scss'), () => {
+        buildStyles()
         return Promise.resolve()
     });
 }
 
 
 // gulp命令默认执行default任务
-export default build
+export default buildStyles
 
