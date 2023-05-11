@@ -1,6 +1,6 @@
 import { getBounding } from "./DOM"
 
-interface POPSTYLE {
+interface PopStyle {
     position: string,
     inset: string,
     transform: string
@@ -16,7 +16,7 @@ const startRate =  1/3
 const endRate = 2/3
 
 // 计算组件在浏览器窗口中的位置
-export function getPopStyle(triggerElm:HTMLElement, placement:string, showArrow:boolean):POPSTYLE{
+export function getPopStyle(triggerElm:HTMLElement, placement:string, showArrow:boolean): PopStyle {
     const {offsetLeft, offsetTop, offsetWidth, offsetHeight} = triggerElm
     // bottom-start, bottom-end
     const [pos, subPos] = placement.split('-')

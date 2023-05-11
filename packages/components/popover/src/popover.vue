@@ -9,6 +9,7 @@
             :style="popoverStyle"
             ref="popoverRef"
             v-show="isShow"
+            v-clickoutside="handleClickOutside"
         >
             <!-- 默认弹出内容 -->
             <span v-if="!$slots.content">Content</span>
@@ -26,7 +27,9 @@
 import {ref, defineProps, onMounted, onUnmounted} from 'vue'
 import {popoverProps} from './popover'
 import {useNamespace} from '@komi-ui/hooks'
+import { vClickoutside } from '@komi-ui/directives'
 import {popIsOverflow,togglePlacement, arrowTransform, getPopStyle,debounce} from '@komi-ui/utils'
+
 
 defineOptions({
     name: 'KiPopover'
@@ -35,11 +38,11 @@ defineOptions({
 const props = defineProps(popoverProps)
 
 const ns = useNamespace('popover')
-const triggerRef = ref<HTMLElement>()
-const popoverRef = ref<HTMLElement>()
+const triggerRef = ref<HTMLElement | null>(null)
+const popoverRef = ref<HTMLElement | null>(null)
 
-const popoverStyle = ref<any>(undefined)
-const arrowStyle = ref<any>(undefined)
+const popoverStyle = ref<any>()
+const arrowStyle = ref<any>()
 
 const pop_placement = ref(props.placement)
 
@@ -114,6 +117,10 @@ function updatePopover(triggerElm:Element, popWidth:number, popHeight:number) {
     }
 
     popoverStyle.value = getPopStyle(triggerElm,pop_placement.value,props.showArrow)
+}
+
+function handleClickOutside() {
+    isShow.value = false
 }
 
 

@@ -1,6 +1,6 @@
 <template>
     <div class="top">
-        <ki-popover placement="top-start">
+        <ki-popover trigger="click" placement="top-start">
             <button>top-start</button>
         </ki-popover>
         <ki-popover trigger="click" placement="top">

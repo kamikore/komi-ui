@@ -1,0 +1,6 @@
+{
+    "name": "@komi-ui/directives",
+    "version": "0.0.0",
+    "description": "Komi-ui custom directives",
+    "main": "index.ts"
+}

@@ -8,6 +8,7 @@ importers:
       '@komi-ui/build': workspace:^0.0.0
       '@komi-ui/build-utils': workspace:^0.0.0
       '@komi-ui/components': workspace:^0.0.0
+      '@komi-ui/directives': workspace:^0.0.0
       '@komi-ui/hooks': workspace:^0.0.0
       '@komi-ui/theme': workspace:^0.0.0
       '@komi-ui/utils': workspace:^0.0.0
@@ -22,6 +23,7 @@ importers:
       vue: ^3.2.47
     dependencies:
       '@komi-ui/components': link:packages/components
+      '@komi-ui/directives': link:packages/directives
       '@komi-ui/hooks': link:packages/hooks
       '@komi-ui/theme': link:packages/theme
       '@komi-ui/utils': link:packages/utils

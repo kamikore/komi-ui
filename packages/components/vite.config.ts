@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { kiOutput } from '@komi-ui/build-utils'
+import {kiOutput} from '@komi-ui/build-utils'
 import {join} from 'node:path'
 
 export default defineConfig({
