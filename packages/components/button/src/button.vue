@@ -33,10 +33,9 @@ defineOptions({
 const props = defineProps(buttonProps)
 const ns = useNamespace('button')
 
-const _props = 
-
 console.log("button props:",props);
 
+console.log("console.log test")
 
 </script>
 

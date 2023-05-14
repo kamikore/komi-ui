@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <kiButton>123</kiButton>
+            <KiButton>123</KiButton>
         </div>
         <div>
             <KiButton @click="handleClick"  round disabled>this is button</KiButton>
@@ -19,9 +19,13 @@
 </template>
 
 <script lang="ts" setup>
-
+function handleClick() {
+    console.log("123");
+    
+}
 </script>
 
 <style lang="scss" scoped>
+
 
 </style>

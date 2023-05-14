@@ -1,16 +1,17 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+// ！！设置组件 option
+import DefineOptions from 'unplugin-vue-define-options/vite'
 import {kiOutput,kiRoot} from '@komi-ui/build-utils'
 import {resolve} from 'node:path'
 
 export default defineConfig({
   build: {
     target: 'modules',
-    // 压缩
     minify: true,
     rollupOptions: {
       external: ['vue'],
-      input: resolve(kiRoot,'index.ts'),
+      input: [resolve(kiRoot,'index.ts')],
       output: [
         {
           format: 'es',
@@ -18,23 +19,30 @@ export default defineConfig({
           preserveModules: true,
           // 配置打包根目录
           dir: resolve(kiOutput,'es'),
-          preserveModulesRoot: 'src'
+          preserveModulesRoot: 'src',
+          globals: {
+            vue: 'Vue'
+          },
         },
         {
           format: 'cjs',
           entryFileNames: '[name].js',
           preserveModules: true,
           dir: resolve(kiOutput,'lib'),
-          preserveModulesRoot: 'src'
+          preserveModulesRoot: 'src',
+          globals: {
+            vue: 'Vue'
+          },
         }
       ]
     },
     lib: {
-      entry: 'index.ts',
+      entry: resolve(kiOutput,'lib','index.js'),
       formats: ['es', 'cjs']
     }
   },
   plugins: [
-    vue()
+    vue(),
+    DefineOptions()
   ]
 })

@@ -14,11 +14,14 @@ importers:
       '@komi-ui/utils': workspace:^0.0.0
       '@types/gulp': ^4.0.10
       '@types/gulp-sass': ^5.0.0
+      '@vitejs/plugin-vue': ^4.1.0
       '@vue-macros/volar': ^0.9.5
       gulp: ^4.0.2
       gulp-typescript: 6.0.0-alpha.1
+      komi-ui: workspace:^0.0.0
       sass: ^1.62.0
       unplugin-vue-define-options: ^1.3.3
+      vite: ^4.2.0
       vue: ^3.2.47
     dependencies:
       '@komi-ui/components': link:packages/components
@@ -26,6 +29,7 @@ importers:
       '@komi-ui/hooks': link:packages/hooks
       '@komi-ui/theme': link:packages/theme
       '@komi-ui/utils': link:packages/utils
+      komi-ui: link:packages/komi-ui
       vue: registry.npmmirror.com/vue/3.2.47
     devDependencies:
       '@esbuild-kit/cjs-loader': registry.npmmirror.com/@esbuild-kit/cjs-loader/2.4.2
@@ -33,22 +37,26 @@ importers:
       '@komi-ui/build-utils': link:build-utils
       '@types/gulp': registry.npmmirror.com/@types/gulp/4.0.10
       '@types/gulp-sass': registry.npmmirror.com/@types/gulp-sass/5.0.0
+      '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/4.1.0_vite@4.2.1+vue@3.2.47
       '@vue-macros/volar': registry.npmmirror.com/@vue-macros/volar/0.9.5_vue@3.2.47
       gulp: registry.npmmirror.com/gulp/4.0.2
       gulp-typescript: registry.npmmirror.com/gulp-typescript/6.0.0-alpha.1
       sass: registry.npmmirror.com/sass/1.62.0
       unplugin-vue-define-options: registry.npmmirror.com/unplugin-vue-define-options/1.3.3_vue@3.2.47
+      vite: registry.npmmirror.com/vite/4.2.1_sass@1.62.0
 
   build:
     specifiers:
       '@esbuild-kit/cjs-loader': ^2.4.2
       '@vitejs/plugin-vue': ^4.1.0
       gulp-typescript: 6.0.0-alpha.1
+      unplugin-vue-define-options: ^1.3.3
       vite: ^4.2.0
     devDependencies:
       '@esbuild-kit/cjs-loader': registry.npmmirror.com/@esbuild-kit/cjs-loader/2.4.2
       '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/4.1.0_vite@4.2.1
       gulp-typescript: registry.npmmirror.com/gulp-typescript/6.0.0-alpha.1
+      unplugin-vue-define-options: registry.npmmirror.com/unplugin-vue-define-options/1.3.3
       vite: registry.npmmirror.com/vite/4.2.1
 
   build-utils:
@@ -836,7 +844,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: registry.npmmirror.com/vite/4.2.1
+      vite: registry.npmmirror.com/vite/4.2.1_sass@1.62.0
       vue: registry.npmmirror.com/vue/3.2.47
     dev: true
 
@@ -903,6 +911,26 @@ packages:
     dependencies:
       '@volar/typescript': registry.npmmirror.com/@volar/typescript/1.3.0-alpha.0
       '@volar/vue-language-core': registry.npmmirror.com/@volar/vue-language-core/1.2.0
+    dev: true
+
+  registry.npmmirror.com/@vue-macros/common/1.2.0:
+    resolution: {integrity: sha512-lQglnRn+8wkdAhmGQbrI0mo4SzRuY5KBjst0qi8LBDYllFKtI2brapbewUME1AXnXbVett0SRDnB2EdZXyzCmw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue-macros/common/-/common-1.2.0.tgz}
+    name: '@vue-macros/common'
+    version: 1.2.0
+    engines: {node: '>=14.19.0'}
+    peerDependencies:
+      vue: ^2.7.0 || ^3.2.25
+    peerDependenciesMeta:
+      vue:
+        optional: true
+    dependencies:
+      '@babel/types': registry.npmmirror.com/@babel/types/7.21.4
+      '@rollup/pluginutils': registry.npmmirror.com/@rollup/pluginutils/5.0.2
+      '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/3.3.0-alpha.9
+      local-pkg: registry.npmmirror.com/local-pkg/0.4.3
+      magic-string-ast: registry.npmmirror.com/magic-string-ast/0.1.2
+    transitivePeerDependencies:
+      - rollup
     dev: true
 
   registry.npmmirror.com/@vue-macros/common/1.2.0_vue@3.2.47:
@@ -4310,6 +4338,20 @@ packages:
       through2-filter: registry.npmmirror.com/through2-filter/3.0.0
     dev: true
 
+  registry.npmmirror.com/unplugin-vue-define-options/1.3.3:
+    resolution: {integrity: sha512-gSBR84QJZUYhiLlQzJ8dQ9BCUAnnfWf+sTqhxXpzoL/nWH3sQqlGWznQtUPKTqQZdupQr1DCIVvLYMQD1/4X6g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/unplugin-vue-define-options/-/unplugin-vue-define-options-1.3.3.tgz}
+    name: unplugin-vue-define-options
+    version: 1.3.3
+    engines: {node: '>=14.19.0'}
+    dependencies:
+      '@vue-macros/common': registry.npmmirror.com/@vue-macros/common/1.2.0
+      ast-walker-scope: registry.npmmirror.com/ast-walker-scope/0.4.1
+      unplugin: registry.npmmirror.com/unplugin/1.3.1
+    transitivePeerDependencies:
+      - rollup
+      - vue
+    dev: true
+
   registry.npmmirror.com/unplugin-vue-define-options/1.3.3_vue@3.2.47:
     resolution: {integrity: sha512-gSBR84QJZUYhiLlQzJ8dQ9BCUAnnfWf+sTqhxXpzoL/nWH3sQqlGWznQtUPKTqQZdupQr1DCIVvLYMQD1/4X6g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/unplugin-vue-define-options/-/unplugin-vue-define-options-1.3.3.tgz}
     id: registry.npmmirror.com/unplugin-vue-define-options/1.3.3
@@ -4497,6 +4539,43 @@ packages:
       postcss: registry.npmmirror.com/postcss/8.4.21
       resolve: registry.npmmirror.com/resolve/1.22.2
       rollup: registry.npmmirror.com/rollup/3.20.2
+    optionalDependencies:
+      fsevents: registry.npmmirror.com/fsevents/2.3.2
+    dev: true
+
+  registry.npmmirror.com/vite/4.2.1_sass@1.62.0:
+    resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite/-/vite-4.2.1.tgz}
+    id: registry.npmmirror.com/vite/4.2.1
+    name: vite
+    version: 4.2.1
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: registry.npmmirror.com/esbuild/0.17.16
+      postcss: registry.npmmirror.com/postcss/8.4.21
+      resolve: registry.npmmirror.com/resolve/1.22.2
+      rollup: registry.npmmirror.com/rollup/3.20.2
+      sass: registry.npmmirror.com/sass/1.62.0
     optionalDependencies:
       fsevents: registry.npmmirror.com/fsevents/2.3.2
     dev: true

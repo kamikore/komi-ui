@@ -8,6 +8,8 @@ export const withInstall = <T>(plugin:T) => {
     // for (const comp of [main, ...Object.values(extra ?? {})]) {
     //   app.component(comp.name, comp)
     // }
+    console.log("注册plugin",plugin.name,plugin);
+    
     app.component(plugin.name, plugin)
   }
 
