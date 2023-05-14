@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
 import App from './src/App.vue'
-import komi from 'komi-ui'
+import komiUi from 'komi-ui'
 
 
 import '../dist/komi-ui/theme/index.css'
 
 
 const app = createApp(App)
-app.use(komi)
+app.use(komiUi)
 app.mount('#app')

@@ -5,10 +5,12 @@
     "description": "Build Toolchain for komi-ui",
     "main": "dist/index.cjs",
     "scripts": {
-        "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts"
+        "build": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts"
     },
     "devDependencies": {
         "@esbuild-kit/cjs-loader": "^2.4.2",
-        "gulp-typescript": "6.0.0-alpha.1"
+        "@vitejs/plugin-vue": "^4.1.0",
+        "gulp-typescript": "6.0.0-alpha.1",
+        "vite": "^4.2.0"
     }
 }

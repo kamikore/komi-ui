@@ -5,7 +5,7 @@
   "main": "dist/index.css",
   "style": "dist/index.css",
   "scripts": {
-    "build": "gulp",
+    "build": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts",
     "watch": "gulp watchBuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

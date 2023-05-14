@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import {kiOutput} from '@komi-ui/build-utils'
-import {join} from 'node:path'
+import {kiOutput,kiRoot} from '@komi-ui/build-utils'
+import {resolve} from 'node:path'
 
 export default defineConfig({
   build: {
@@ -9,23 +9,22 @@ export default defineConfig({
     // 压缩
     minify: true,
     rollupOptions: {
-      // 忽略打包vue文件
       external: ['vue'],
-      input: ['index.ts'],
+      input: resolve(kiRoot,'index.ts'),
       output: [
         {
           format: 'es',
-          entryFileNames: '[name].js',
+          entryFileNames: '[name].mjs',
           preserveModules: true,
           // 配置打包根目录
-          dir: join(kiOutput,'es'),
+          dir: resolve(kiOutput,'es'),
           preserveModulesRoot: 'src'
         },
         {
           format: 'cjs',
           entryFileNames: '[name].js',
           preserveModules: true,
-          dir: join(kiOutput,'lib'),
+          dir: resolve(kiOutput,'lib'),
           preserveModulesRoot: 'src'
         }
       ]

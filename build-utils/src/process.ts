@@ -4,7 +4,6 @@ import { projRoot } from './paths'
 
 // 执行命令线程
 export const run = (cmd: string,cwd:string = projRoot) => 
-    
     new Promise((resolve,reject) => {
         const childProcess = spawn(cmd,{
             cwd,

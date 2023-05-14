@@ -9,8 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm -C playground dev",
-    "build": "pnpm -C build start",
+    "build": "pnpm -C build build",
     "build:theme": "pnpm -C packages/theme build",
+    "clean:dist": "rimraf dist",
     "theme:watch": "pnpm -C packages/theme watch",
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
@@ -22,7 +23,6 @@
     "@komi-ui/hooks": "workspace:^0.0.0",
     "@komi-ui/theme": "workspace:^0.0.0",
     "@komi-ui/utils": "workspace:^0.0.0",
-    "komi-ui": "workspace:^0.0.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {

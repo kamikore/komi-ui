@@ -1,26 +1,28 @@
 import { dest, parallel, series, src } from 'gulp'
-import {join} from 'node:path'
+import {resolve} from 'node:path'
 import {copyFile} from 'node:fs/promises';
-import {pkgRoot,buildOutput,kiOutput,kiPackage} from '@komi-ui/build-utils'
+import {projRoot,buildRoot,pkgRoot,buildOutput,kiOutput,kiPackage,runTask} from '@komi-ui/build-utils'
 import ts from 'gulp-typescript'
  
 
 export const copyFiles = () =>
   // 返回promise
   Promise.all([
-    copyFile(kiPackage, join(kiOutput, 'package.json'))
+    copyFile(kiPackage, resolve(kiOutput, 'package.json')),
+    copyFile(
+      resolve(projRoot, 'README.md'),
+      resolve(kiOutput, 'README.md')
+    ),
   ])
 
-
-
-export const buildPkg = () => {
-    return src(join(pkgRoot,'**','*.ts'))
-        .pipe(ts())
-        .pipe(dest(buildOutput))
-} 
-
-
-
-export const build = parallel(copyFiles)
+export const build = series(
+  // clean dist
+  runTask('pnpm run clean:dist'),
+  // bundle packages
+  runTask('vite build',buildRoot),
+  // bundle theme
+  runTask('pnpm run build',resolve(pkgRoot,'theme')),
+  copyFiles
+)
 
 export default build
