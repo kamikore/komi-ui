@@ -1,4 +1,4 @@
-import { getBounding } from "./DOM"
+import { getBounding } from "@komi-ui/utils"
 
 interface PopStyle {
     position: string,
