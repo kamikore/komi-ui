@@ -1,5 +1,5 @@
 import { dest, src, watch } from 'gulp'
-import { themeOutput } from '@komi-ui/build-utils';
+import { themeRoot,themeOutput } from '@komi-ui/build-utils';
 import {resolve} from 'node:path'
 // import {copyFile} from 'node:fs/promise'
 import dartSass from 'sass';
@@ -20,7 +20,7 @@ const sass = gulpSass(dartSass);
 
 // 编译sass
 const buildStyles = () => {
-    return src(resolve(__dirname,'src/*.scss'))
+    return src(resolve(themeRoot,'src/**/*.scss'))
         .pipe(sass({
             outputStyle: 'compressed'
         }).on('error', sass.logError))
@@ -30,7 +30,7 @@ const buildStyles = () => {
 
 
 export const watchBuild = () => {
-    watch(resolve(__dirname,'src/*.scss'), () => {
+    watch('src/**/*.scss', () => {
         buildStyles()
         return Promise.resolve()
     });
