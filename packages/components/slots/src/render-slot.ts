@@ -15,7 +15,7 @@ export interface RenderCallbackObj {
     unmountedCallFun?: CallFun
   }
 
-export const renderSlot = ({mountedCallFun, updatedCallFun, unmountedCallFun}: RenderCallbackObj ) => {
+export const RenderSlot = ({mountedCallFun, updatedCallFun, unmountedCallFun}: RenderCallbackObj ) => {
     return defineComponent({
       props: {
         vnode:null

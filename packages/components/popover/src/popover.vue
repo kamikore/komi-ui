@@ -1,5 +1,8 @@
 <template>
-    <RenderSlot :vnode="defaultSlot"></RenderSlot>
+    <!-- <RenderSlot :vnode="defaultSlot"></RenderSlot> -->
+    <ki-only-child ref="triggerRef">
+        <slot/>
+    </ki-only-child>
     <!-- 确保定位相对于body，避免过多的组件嵌套，存在严重副作用 -->
     <teleport to='body'>
         <!-- 初次渲染时应用过渡 -->
@@ -11,9 +14,10 @@
                 v-show="isShow"
                 v-clickoutside:[triggerRef]="trigger === 'click'?handleClickOutside:''"
             >
-                <!-- 默认弹出内容 -->
-                <span v-if="!$slots.content">Content</span>
-                <slot name="content"/>
+                <slot name="content">
+                    <!-- 默认弹出内容 -->
+                    <span>Content</span>
+                </slot>
                 <span 
                     v-if="showArrow"
                     :class="ns.e('arrow')"
@@ -29,14 +33,14 @@ import {
     ref, 
     defineProps,
     onMounted,
-    onUpdated,
     onUnmounted,
     useSlots,
 } from 'vue'
+import {KiOnlyChild} from '@komi-ui/components/slots'
 import {popoverProps} from './popover'
 import {useNamespace} from '@komi-ui/hooks'
 import { vClickoutside } from '@komi-ui/directives'
-import {renderSlot, debounce} from '@komi-ui/utils'
+import {debounce} from '@komi-ui/utils'
 import { 
     popIsOverflow, 
     togglePlacement, 
@@ -61,10 +65,6 @@ const slots = useSlots()
 // slots.default()获取到的是默认插槽所有vnode，但拿不到对应的dom实例, 仅获取第一个vnode
 const defaultSlot = slots.default && slots.default()[0]
 
-const RenderSlot = renderSlot({
-    mountedCallFun: slotMounted
-})
-
 const popoverStyle = ref<any>()
 const arrowStyle = ref<any>()
 
@@ -72,15 +72,17 @@ const pop_placement = ref(props.placement)
 
 const isShow = ref(true)
 
-// 获取slot的DOM
-function slotMounted(slotElm: HTMLElement) {
-    triggerRef.value = slotElm
-}
+
+
 
 onMounted(() => {
+
+    // vueInstance.ctx.$el 
+    console.log("trigger", triggerRef.value);
+    
     // 判断triggerElm是否存在
     // 。。。
-    const triggerElm = triggerRef.value
+    const triggerElm = triggerRef.value?.$el
     const documentElm = document.documentElement
 
     // 缓存popover offsetWidth, offsetHeight
@@ -113,11 +115,6 @@ onMounted(() => {
 })
 
 
-onUpdated(() => {
-    console.log("update hooks");
-    
-})
-
 onUnmounted(() => {
     resizeObserver.disconnect()
     window.removeEventListener('scroll',updatePopoverDebounce)
@@ -146,7 +143,6 @@ function updatePopover(triggerElm:Element, popWidth:number, popHeight:number) {
 
 
 function handleClickOutside() {
-    console.log("clickOutside");
     
     if(isShow.value) {
         isShow.value = false
