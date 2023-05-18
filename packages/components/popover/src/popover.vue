@@ -1,23 +1,19 @@
 <template>
-    <!-- <RenderSlot :vnode="defaultSlot"></RenderSlot> -->
     <ki-only-child ref="triggerRef">
         <slot/>
     </ki-only-child>
     <!-- 确保定位相对于body，避免过多的组件嵌套，存在严重副作用 -->
     <teleport to='body'>
         <!-- 初次渲染时应用过渡 -->
-       <Transition appear>
+       <Transition name="ki-popover" appear>
             <div 
                 :class="[ns.b()]" 
                 :style="popoverStyle"
                 ref="popoverRef"
                 v-show="isShow"
-                v-clickoutside:[triggerRef]="trigger === 'click'?handleClickOutside:''"
+                v-clickoutside:[triggerRef?.$el]="trigger === 'click'?handleClickOutside:''"
             >
-                <slot name="content">
-                    <!-- 默认弹出内容 -->
-                    <span>Content</span>
-                </slot>
+                <slot name="content"/>
                 <span 
                     v-if="showArrow"
                     :class="ns.e('arrow')"
@@ -34,7 +30,6 @@ import {
     defineProps,
     onMounted,
     onUnmounted,
-    useSlots,
 } from 'vue'
 import {KiOnlyChild} from '@komi-ui/components/slots'
 import {popoverProps} from './popover'
@@ -61,27 +56,16 @@ const popoverRef = ref<HTMLElement | null>(null)
 let resizeObserver:ResizeObserver
 let updatePopoverDebounce:Function
 
-const slots = useSlots()
-// slots.default()获取到的是默认插槽所有vnode，但拿不到对应的dom实例, 仅获取第一个vnode
-const defaultSlot = slots.default && slots.default()[0]
-
 const popoverStyle = ref<any>()
 const arrowStyle = ref<any>()
 
 const pop_placement = ref(props.placement)
-
 const isShow = ref(true)
-
-
 
 
 onMounted(() => {
 
     // vueInstance.ctx.$el 
-    console.log("trigger", triggerRef.value);
-    
-    // 判断triggerElm是否存在
-    // 。。。
     const triggerElm = triggerRef.value?.$el
     const documentElm = document.documentElement
 
@@ -93,7 +77,7 @@ onMounted(() => {
 
      updatePopoverDebounce = 
         debounce(() => {
-            updatePopover(triggerElm as Element,offsetWidth,offsetHeight)
+            updatePopover(triggerElm,offsetWidth,offsetHeight)
         })
 
     resizeObserver = new ResizeObserver(updatePopoverDebounce as ResizeObserverCallback)
@@ -104,24 +88,19 @@ onMounted(() => {
     window.addEventListener('scroll', updatePopoverDebounce)
    
     if(props.trigger === 'hover') {
-        triggerElm.addEventListener('mouseenter', (event) => isShow.value = true)
-        triggerElm.addEventListener('mouseleave', (event) => isShow.value = false)
+        triggerElm.addEventListener('mouseenter', () => isShow.value = true)
+        triggerElm.addEventListener('mouseleave', () => isShow.value = false)
     } else {
-        // 关闭交由clickOutside关闭
-        triggerElm.addEventListener('click', (event) => {
-            isShow.value = !isShow.value
-        })
+        triggerElm.addEventListener('click', () => isShow.value = !isShow.value)
     }
 })
-
 
 onUnmounted(() => {
     resizeObserver.disconnect()
     window.removeEventListener('scroll',updatePopoverDebounce)
 })
 
-
-function updatePopover(triggerElm:Element, popWidth:number, popHeight:number) {
+function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number) {
     
     // 判断是否溢出
     if(popIsOverflow(triggerElm,popWidth,popHeight,props.placement,props.showArrow)) {
@@ -130,7 +109,6 @@ function updatePopover(triggerElm:Element, popWidth:number, popHeight:number) {
         // 不溢出判断placement是否已切换
         pop_placement.value !== props.placement?pop_placement.value = props.placement:''
     }
-
 
     if(props.showArrow) {
         arrowStyle.value = {
@@ -141,28 +119,10 @@ function updatePopover(triggerElm:Element, popWidth:number, popHeight:number) {
     popoverStyle.value = getPopStyle(triggerElm,pop_placement.value,props.showArrow)
 }
 
-
 function handleClickOutside() {
-    
     if(isShow.value) {
         isShow.value = false
     }
 }
 
-
 </script>
-
-<style lang="scss" scoped>
-
-/* transition config */
-   .v-enter-active,
-   .v-leave-active {
-     transition: opacity 0.5s ease;
-   }
-
-   .v-enter-from,
-   .v-leave-to {
-     opacity: 0;
-   }
-
-</style>

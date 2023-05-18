@@ -9,14 +9,7 @@
                 <slot/>
             </template>
             <template #content>
-                <slot name="dropdown">
-                    <!-- 默认内容 -->
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
-                </slot>
+                <slot name="dropdown"/>
             </template>
         </ki-popover>
     </div>

@@ -13,9 +13,8 @@ import { useNamespace } from "@komi-ui/hooks"
 
 const NAME = 'KiOnlyChild'
 
-
 export const KiOnlyChild  = defineComponent(
-  (props, { slots, attrs}) => {
+  (_, { slots, attrs}) => {
     const defaultSlot = slots.default?.(attrs)
     if (!defaultSlot) return () => null
 
@@ -34,7 +33,6 @@ export const KiOnlyChild  = defineComponent(
 
     return () => firstNode
   },
-  // 其他选项，例如声明 props 和 emits。
   {
     name:NAME
   }
@@ -42,6 +40,9 @@ export const KiOnlyChild  = defineComponent(
 
 function findFirstLegitChild(vnodes: VNode[] | undefined): VNode | null {
   if (!vnodes) return null
+  if(vnodes.length > 1)  
+    console.warn(NAME, 'requires exact only one valid child.')
+
   for (const vnode of vnodes) {
     if (isObject(vnode)) {
       switch (vnode.type) {
