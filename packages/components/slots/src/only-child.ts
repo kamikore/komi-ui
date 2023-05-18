@@ -1,26 +1,21 @@
+import type { VNode } from 'vue'
 import { 
   Comment,
   Fragment,
   Text,
   defineComponent,
-  defineExpose,
   h
 } from "vue"
 import { isObject } from "@komi-ui/utils"
 import { useNamespace } from "@komi-ui/hooks"
-import type { Ref, VNode } from 'vue'
+
 
 
 const NAME = 'KiOnlyChild'
 
-export const KiOnlyChild = defineComponent({
-  props: {
-    name: NAME
-  },
-  // setup
-  setup(props, { slots, attrs, expose }) {
-    
-    console.log("only child",slots.default());
+
+export const KiOnlyChild  = defineComponent(
+  (props, { slots, attrs}) => {
     const defaultSlot = slots.default?.(attrs)
     if (!defaultSlot) return () => null
 
@@ -37,11 +32,13 @@ export const KiOnlyChild = defineComponent({
       return () => null
     }
 
-
     return () => firstNode
+  },
+  // 其他选项，例如声明 props 和 emits。
+  {
+    name:NAME
   }
-})
-
+)
 
 function findFirstLegitChild(vnodes: VNode[] | undefined): VNode | null {
   if (!vnodes) return null
