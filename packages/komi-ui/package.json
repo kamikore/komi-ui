@@ -2,11 +2,11 @@
   "name": "komi-ui",
   "version": "0.0.0",
   "description": "A Component Library for Vue 3, 基于Vue3的组件库",
-  "main": "lib/komi-ui/index.js",
+  "main": "index.ts",
   "module": "es/komi-ui/index.mjs",
   "exports": {
     ".": {
-      "import": "es/komi-ui/index.mjs",
+      "import": "index.ts",
       "require": "lib/komi-ui/index.js"
     },
    "./*": "./*"
@@ -15,6 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": ["dist"],
   "keywords": [
     "komi-ui",
     "component library",
@@ -24,8 +25,8 @@
   ],
   "author": "kamikore",
   "license": "MIT",
-  "files": ["dist"],
   "dependencies": {
+    "vue": "^3.3.4",
     "@element-plus/icons-vue": "^2.1.0"
   }
 }

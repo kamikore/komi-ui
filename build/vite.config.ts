@@ -1,7 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// ！！设置组件 option
-import DefineOptions from 'unplugin-vue-define-options/vite'
 import {kiOutput,kiRoot} from '@komi-ui/build-utils'
 import {resolve} from 'node:path'
 
@@ -43,6 +41,5 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    DefineOptions()
   ]
 })
