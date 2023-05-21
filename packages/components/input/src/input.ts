@@ -1,26 +1,91 @@
-
+import {isString} from '@komi-ui/utils'
+import type { PropType } from 'vue'
 
 export const inputProps = {
-    // 原生属性
+    /**
+    * @description binding value
+    */
+    modelValue: {
+        type: String,
+        default: '',
+    },
+    /**
+    * @description type of input
+    */
     type: {
         type: String,
-        value:['text','password','email','file'],
         default: 'text'
     },
+	 /**
+     * @description native input placeholder
+     */
     placeholder: {
         type: String,
         default: ''
     },
-    readonly: Boolean,
-    require: Boolean,
-    disabled: Boolean,
-    autofocus: Boolean,
-    checked: Boolean,
-    maxlength: {
-        type: Number,
-        
+    /**
+     * @description format content
+     */
+    formatter: Function,
+    /**
+     * @description parse content
+     */
+    parser: Function,
+    /**
+     * @description native input maxlength, minlength
+     */
+    max: Number,
+    min: Number,
+    /**
+     * @description input suffix icon
+     */
+    clearable: {
+        type: Boolean,
+        default: false,
     },
-    minlength: {
-        type:Number,
-    }
+    showPassword: {
+        type: Boolean,
+        default: false,
+    },
+    /**
+     * @description native input id
+     */
+    id: {
+        type: String,
+        default: undefined,
+    },
+	/**
+	* @description native input readonly
+	*/
+    readonly: {
+        type: Boolean,
+        default: false,
+    },
+	/**
+	* @description native input disabled
+	*/
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    autofocus: {
+        type: Boolean,
+        default: false,
+    },
+    checked: {
+        type: Boolean,
+        default: false,
+    },
+}
+
+export const inputEmits = {
+    // v-model update
+    ['update:modelValue']: (value: string) => isString(value),
+    input: (value: string) => isString(value),
+    change: (value: string) => isString(value),
+    focus: (e: FocusEvent) => e instanceof FocusEvent,
+    blur: (e: FocusEvent) => e instanceof FocusEvent,
+    clear: () => true,
+    mouseleave: (e: MouseEvent) => e instanceof MouseEvent,
+    mouseenter: (e: MouseEvent) => e instanceof MouseEvent,
 }

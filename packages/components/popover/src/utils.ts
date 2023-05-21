@@ -59,6 +59,7 @@ export function calcPopWidth(elm:HTMLElement):string {
     return `${offsetWidth*(4/3)}px`
 }
 
+// 
 export function popIsOverflow(triggerElm:Element,popWidth:number, popHeight:number,placement:string,showArrow:boolean):boolean {
     const pos = placement.split('-')[0]
     const bounding = getBounding(triggerElm)
