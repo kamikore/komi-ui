@@ -3,9 +3,8 @@
 layout: home
 
 hero:
-  name: "komi-ui"
+  name: "Komi ui"
   text: "A Component Library for Vue 3"
-  tagline: My great project tagline
   actions:
     - theme: brand
       text: Markdown Examples
@@ -13,13 +12,19 @@ hero:
     - theme: alt
       text: API Examples
       link: /api-examples
-
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/kamikore/komi-ui
 features:
-  - title: Feature A
+  - icon: 
+      src: /vue.svg
+    title: Vue 3 Composition API
+    details: With Vue 3 Composition API, custom Vue Directives
+  - icon: 🛠️
+    title: Feature B
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
+  - icon: 🛠️
+    title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
