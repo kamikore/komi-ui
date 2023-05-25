@@ -7,7 +7,7 @@
 // set css var value, because we need translate value to string
 // for example:
 // @include set-css-var-value(('color', 'primary'), red);
-// --el-color-primary: red;
+// --ki-color-primary: red;
 @mixin set-css-var-value($name, $value) {
     #{joinVarName($name)}: #{$value};
 }
@@ -33,13 +33,15 @@
 }
 
 
-// 遍历变量属性命名为组件变量 text-color ==> .el-button-text-color
+// 遍历变量属性命名为组件变量 button, text-color ==> .ki-button-text-color
 // set all css var for component by map
 @mixin set-component-css-var($name, $variables) {
   @each $attribute, $value in $variables {
     @if $attribute == 'default' {
+      // 对于'default'不会添加前缀 .ki-{$name}
       #{getCssVarName($name)}: #{$value};
     } @else {
+      // .ki-{$name}-${attribute}
       #{getCssVarName($name, $attribute)}: #{$value};
     }
   }
@@ -48,7 +50,7 @@
 @mixin set-css-color-rgb($type) {
   $color: map.get($colors, $type, 'base');
   @include set-css-var-value(
-    // key: --el-color-${type}
+    // key: --ki-color-${type}
     ('color', $type, 'rgb'),
     // value: 255 255 255
     #{red($color),  
@@ -60,7 +62,7 @@
 // generate css var from existing css var
 // for example:
 // @include css-var-from-global(('button', 'text-color'), ('color', $type))
-// --el-button-text-color: var(--el-color-#{$type});
+// --ki-button-text-color: var(--ki-color-#{$type});
 @mixin css-var-from-global($var, $gVar) {
   $varName: joinVarName($var);
   $gVarName: joinVarName($gVar);

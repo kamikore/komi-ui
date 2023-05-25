@@ -146,8 +146,8 @@
   @each $type, $typeMap in $button-color-types {
     // $typeColor: text-color, bg-color, border-color
     @each $typeColor, $list in $typeMap {
-      // --el-button-bg-color: --el-color-primary
-      // --el-button-hover-bg-color: -el-color-primary-light-3
+      // --ki-button-bg-color: --el-color-primary
+      // --ki-button-hover-bg-color: -ki-color-primary-light-3
       @include css-var-from-global(('button', $type, $typeColor), $list);
     }
   }

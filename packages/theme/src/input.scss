@@ -1,0 +1,58 @@
+@use 'sass:map';
+
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+
+
+@include b(input) {
+    @include set-component-css-var('input', $input);
+}
+
+@include b(input) {
+    // --ki-input-height: var(--ki-component-size)
+    @include css-var-from-global('input-height', 'component-size');
+
+    width: 100%;
+    line-height: getCssVar('input-height');
+    position: relative;
+    display: inline-flex;
+    margin: getCssVar('margin');
+    padding: 0 getCssVar('padding');
+    border: getCssVar('border');
+    border-color: getCssVar('button', 'border-color');
+    border-radius: getCssVar('border-radius','base');
+
+    @include e(inner) {
+        font-size: getCssVar('font-size', 'base');
+        height: getCssVar('input-height');
+        line-height: getCssVar('input-height');
+        width: 100%;
+        border: none;
+        outline: none;
+        vertical-align: middle;
+        box-sizing: border-box;
+        display: inline-flex;
+
+        color: getCssVar('input','text-color');
+        @include scroll-bar;
+
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    
+    @include e(suffix-inner) {
+        text-align: center;
+        
+        & i {
+            font-size: getCssVar('font-size', 'base');
+            font-style: normal;
+            cursor: pointer;
+        }
+    }
+
+}

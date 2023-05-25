@@ -1,0 +1,20 @@
+
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+
+@include b(scrollbar) {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: getCssVar('padding') 0;
+    
+
+    @include e(wrap) {
+        height: 100%;
+        overflow: auto;
+
+        @include scroll-bar;
+    }
+}

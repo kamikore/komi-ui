@@ -1,7 +1,19 @@
 @use 'sass:map';
 @use 'sass:math';
-
 @use '../mixins/function.scss' as *;
+
+
+
+$common-component-size: () !default;
+$common-component-size: map.merge(
+  (
+    'large': 40px,
+    'default': 32px,
+    'small': 24px,
+  ),
+  $common-component-size
+);
+
 
 // types
 $types: primary, success, warning, danger, error, info;
@@ -70,7 +82,7 @@ $color-info: map.get($colors, 'info', 'base') !default;
 
 // merge $color var
 // $colors.primary.light-i
-// --el-color-primary-light-i
+// --ki-color-primary-light-i
 // 10% #53a8ff
 // 20% #66b1ff
 // 30% #79bbff
@@ -86,7 +98,7 @@ $color-info: map.get($colors, 'info', 'base') !default;
   }
 }
 
-// --el-color-primary-dark-2
+// --ki-color-primary-dark-2
 @each $type in $types {
   @include set-color-mix-level($type, 2, 'dark', $color-black);
 }
@@ -100,6 +112,8 @@ $text-color: map.merge(
     'secondary': #909399,
     'placeholder': #a8abb2,
     'disabled': #c0c4cc,
+    'white': #ffffff,
+    'black': #000000,
   ),
   $text-color
 );
@@ -127,7 +141,8 @@ $fill-color: map.merge(
     'extra-light': #fafcff,
     'dark': #ebedf0,
     'darker': #e6e8eb,
-    'blank': #ffffff,
+    'white': #ffffff,
+    'black': #000000,
   ),
   $fill-color
 );
@@ -214,6 +229,30 @@ $font-size: map.merge(
 );
 
 
+// padding
+$padding:() !default;
+$padding: map.merge(
+  (
+    'small': 4px,
+    'default': 8px,
+    'large': 12px,
+  ),
+  $padding
+);
+
+// margin
+$margin:() !default;
+$margin: map.merge(
+  (
+    'small': 0.25rem,
+    'default': 0.5rem,
+    'large': 1rem,
+  ),
+  $margin
+);
+
+
+
 // z-index
 $zIndex: () !default;
 $zIndex: map.merge(
@@ -236,20 +275,6 @@ $disabled: map.merge(
   ),
   $disabled
 );
-
-
-// component-size
-$common-component-size: () !default;
-$common-component-size: map.merge(
-  (
-    'large': 40px,
-    'default': 32px,
-    'small': 24px,
-  ),
-  $common-component-size
-);
-
-
 
 // Input
 // css3 var in packages/theme-chalk/src/input.scss
@@ -329,8 +354,8 @@ $button: map.merge(
   (
     'font-weight': getCssVar('font-weight-primary'),
     'border-color': getCssVar('border-color'),
-    'bg-color': getCssVar('fill-color', 'blank'),
-    'text-color': getCssVar('text-color', 'regular'),
+    'bg-color': getCssVar('fill-color', 'black'),
+    'text-color': getCssVar('text-color', 'white'),
     'disabled-text-color': getCssVar('disabled-text-color'),
     'disabled-bg-color': getCssVar('fill-color', 'blank'),
     'disabled-border-color': getCssVar('border-color-light'),
@@ -359,4 +384,5 @@ $button-border-radius: map.merge(
   ),
   $button-border-radius
 );
+
 

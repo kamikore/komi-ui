@@ -9,8 +9,8 @@
 
 // 配置组件变量，sass var 转 css var的操作 => --ki-button-bg-color
 @include b(button) {
-    @include set-component-css-var('button', $button);
-  }
+  @include set-component-css-var('button', $button);
+}
 
 
 // 组件应用样式，.ki-button {...}
@@ -21,7 +21,6 @@
   align-items: center;
 
   line-height: 1;
-  // min-height will expand when in flex
   height: map.get($input-height, 'default');
   white-space: nowrap;
   cursor: pointer;
@@ -39,6 +38,9 @@
   border-color: getCssVar('button', 'border-color');
   border-radius: getCssVar('border-radius','base');
   font-size: getCssVar('font-size', 'base');
+  padding: 0 getCssVar('padding');
+  margin:getCssVar('margin');
+
 
   // border 类型
   @include when(round) {

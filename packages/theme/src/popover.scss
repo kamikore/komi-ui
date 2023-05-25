@@ -1,25 +1,37 @@
-@use './mixins/function' as *;
+@use 'mixins/function' as *;
 @use 'mixins/mixins' as *;
+
+
+/* transition config */
+.#{$namespace}-popover-fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
 
 
 @include b(popover) {
     position: absolute;
     z-index: 200;
-    background-color: black;
+    background-color: getCssVar('color','white');
     text-align: center;
     border-radius: getCssVar('border-radius','base');
-    color: #fff;
+    color: getCssVar('color','black');
 
-    // min-size
     min-width: 50px;
     min-height: 24px;
-    padding: 4px;
+    padding: getCssVar('padding');
 
-    transition: all 0.5s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;;
 
-
-    // .el-popover__arrow
-    @include e(arrow) {
+    // .ki-popover .ki-popover__arrow
+    @include e((arrow)) {
         position: absolute;
         inset: 50% auto auto 50%;
         z-index: getCssVar('index','bottom');
@@ -32,7 +44,7 @@
           height: 10px;
           // 注意转换顺序
           transform: translate(-50%,-50%) rotate(45deg) ;
-          background: black;
+          background: getCssVar('color','white');
           box-sizing: border-box;
         }
       }
