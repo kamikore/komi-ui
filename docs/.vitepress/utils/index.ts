@@ -1,2 +1,7 @@
-export * from './sidebar'
-export * from './locales'
+
+
+
+/**
+ * @description 判断是否处于浏览器环境
+ */
+export const inBrowser = () => typeof window !== 'undefined'

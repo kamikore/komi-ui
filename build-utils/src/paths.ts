@@ -15,3 +15,8 @@ export const buildOutput = resolve(projRoot, 'dist')
 export const kiOutput = resolve(buildOutput, 'komi-ui')
 // "/dist/komi-ui/theme"
 export const themeOutput = resolve(kiOutput,'theme')
+
+
+// docs
+export const docRoot = resolve(projRoot,'docs')
+export const vpRoot = resolve(docRoot, '.vitepress')
