@@ -1,6 +1,5 @@
 
 (() => {
-    console.log("执行了")
     const supportedLangs = [
         'en-US',
         'zh-CN',

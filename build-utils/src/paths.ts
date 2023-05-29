@@ -18,5 +18,5 @@ export const themeOutput = resolve(kiOutput,'theme')
 
 
 // docs
-export const docRoot = resolve(projRoot,'docs')
+export const docRoot = resolve(projRoot, 'docs')
 export const vpRoot = resolve(docRoot, '.vitepress')

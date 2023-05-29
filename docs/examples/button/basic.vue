@@ -4,6 +4,6 @@
     <ki-button type="primary">button</ki-button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 </script>
