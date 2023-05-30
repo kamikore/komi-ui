@@ -1,17 +1,11 @@
 import prism from 'prismjs'
 import  loadLanguages from 'prismjs/components/'
 
-function wrap(code: string, lang: string): string {
-    return `<pre v-pre><code>${code}</code></pre>`
-  }
-
-
 export const highlight = (source: string, lang: string) => {
     if (!lang) {
         return wrap(source, 'text')
       }
       lang = lang.toLowerCase()
-      const rawLang = lang
       if (lang === 'vue' || lang === 'html') {
         lang = 'markup'
       }
@@ -30,7 +24,7 @@ export const highlight = (source: string, lang: string) => {
       }
       if (prism.languages[lang]) {
         const code = prism.highlight(source, prism.languages[lang], lang)
-        return wrap(code, rawLang)
+        return code
       }
-      return wrap(source, 'text')
+      return source
 }
