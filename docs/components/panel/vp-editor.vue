@@ -30,7 +30,8 @@ onMounted(() => {
     console.log(test)
 })
 
-const code = computed(() => decodeURIComponent(props.source))
+// 修改code的同时，修改hlCode，撑大容器
+const code = ref(decodeURIComponent(props.source))
 const hlCode = computed(() => highlight(code.value, 'vue')) 
 
 defineExpose({
@@ -46,7 +47,9 @@ defineExpose({
     text-align: left;
     color: #333333;
     font-family: var(--vp-font-family-mono);
-    padding: 0 12px;
+    padding: 12px;
+    background-color: #eeeeee;
+    border-radius: 12px;
 
     textarea {
         position: absolute;
@@ -72,6 +75,8 @@ defineExpose({
         font-size: inherit;
         text-align: inherit;
         font-family: inherit;
+        margin: 0;
+        padding: 0;
     }
 }
 </style>
