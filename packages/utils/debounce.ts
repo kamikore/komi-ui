@@ -1,5 +1,4 @@
 
-// 防抖
 export function debounce(callback:Function, timeout:number = 100) {
     let timer:NodeJS.Timeout 
     return function(...args:any[]) {
