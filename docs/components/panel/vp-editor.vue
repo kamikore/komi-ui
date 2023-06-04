@@ -2,20 +2,25 @@
     <div class="editor-wrap">
         <textarea 
             class="editor-textarea" 
-            v-model="code"
+            :value ="store.state.mainFile.code"
             wrap="hard"
-            ref="test"
+            @input="onInput"
         ></textarea>
         <pre 
             v-html="hlCode"
             class="editor-pre"
         ></pre>
     </div>
+    <!-- lang="x" pre-processors for <template> or <style> are currently not supported. -->
+    <!-- <Message v-show="runtimeError"></Message> -->
+
 </template>
 
 <script setup lang="ts">
-import {ref, computed, onMounted} from 'vue'
-import { highlight } from '../../.vitepress/utils'
+import {ref, computed, inject, onMounted} from 'vue'
+import { highlight, debounce } from '../../.vitepress/utils'
+import type { Store } from './store'
+
 
 const props = defineProps({
     source: {
@@ -24,19 +29,29 @@ const props = defineProps({
     }
 })
 
-const test = ref(null)
-
-onMounted(() => {
-    console.log(test)
-})
+// 注入store
+const store = inject('store') as Store
 
 // 修改code的同时，修改hlCode，撑大容器
-const code = ref(decodeURIComponent(props.source))
-const hlCode = computed(() => highlight(code.value, 'vue')) 
+const onInput = debounce((e: any) => {
+    store.state.mainFile.code = e.target.value
+}, 50) 
 
-defineExpose({
-    code,
-})
+const hlCode = computed(() => highlight(store.state.mainFile.code, 'vue')) 
+
+
+
+// 处理iframe消息
+window.addEventListener('message', handle_repl_message)
+
+function handle_repl_message(e: any) {
+    // 编译code是否报错 
+    // if (e.source !== this.iframe.contentWindow) return
+
+}
+
+
+
 
 </script>
 
@@ -67,6 +82,9 @@ defineExpose({
         background: none;
         cursor: text;
         padding: inherit;
+
+        // 无法将整个单词放置时换行
+        overflow-wrap: break-word;
     }
 
     pre {
@@ -77,6 +95,12 @@ defineExpose({
         font-family: inherit;
         margin: 0;
         padding: 0;
+
+        overflow-wrap: break-word;
+
+        // 允许<pre>中换行
+        word-wrap: break-word;      /* IE 5.5-7 */
+        white-space: pre-wrap;      /* current browsers */
     }
 }
 </style>

@@ -1,8 +1,7 @@
 <template>
     <div class="vp-panel-wrap">
         <div class="example-wrap">
-            <h3>example</h3>
-            <!-- <Compiler :source="editorRef.code"></Compiler> -->
+            <Preview ></Preview>
         </div>
         <div class="props-wrap">
             <template v-for="(value, key) in config.props" :key="key" >
@@ -12,17 +11,23 @@
             </template>
         </div>    
         <div class="sourceCode-wrap">
-            <Editor ref="editorRef" :source="encodeURIComponent(source)"></Editor>
+            <Editor ref="editorRef" ></Editor>
         </div>
+        <!-- lang="x" pre-processors for <template> or <style> are currently not supported. -->
+        <!-- <Message></Message> -->
     </div>
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted} from 'vue'
-import Compiler from './panel/vp-compiler.vue'
+import {
+    ref, 
+    onMounted,
+    provide,
+} from 'vue'
+import Preview from './panel/vp-preview.vue'
 import Editor from './panel/vp-editor.vue'
 import fs from 'vite-plugin-fs/browser';
-import {highlight} from '../.vitepress/utils'
+import {ReplStore,Store } from './panel/store'
 
 
 const props = defineProps({
@@ -30,8 +35,9 @@ const props = defineProps({
         type: Object,
         require: true,
         default: {}
-    }
+    },
 })
+
 
 const propsComp = (prop) => {
     switch(prop) {
@@ -42,17 +48,22 @@ const propsComp = (prop) => {
     }
 }
 
-console.log("v-panel config: ",props.config)
 
-const editorRef = ref(null)
+const editorRef = ref()
 const [dir ,file] = props.config?.example.split('/')
-
 
 const source = await fs.readFile(`../examples/${dir}/${file}.vue`)
 
+const store: Store  = new ReplStore({initCode:source})
+    
+// 共享store
+provide('store', store)
+
 onMounted(() => {
-    console.log('editorRef:',editorRef.value.code)
+    console.log('editorRef:',editorRef.value)
+ 
 })
+
 
 </script>
 
