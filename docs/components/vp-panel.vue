@@ -1,20 +1,16 @@
 <template>
-    <div class="vp-panel-wrap">
-        <div class="example-wrap">
+    <div class="vp-panel_wrap">
+        <div class="example_wrap">
             <Preview ></Preview>
         </div>
+        <hr color="#e2e2e2" size="4px"/>
         <div class="props-wrap">
-            <template v-for="(value, key) in config.props" :key="key" >
-                <div>
-                    
-                </div>
-            </template>
+            <Props :configs="configs.props"></Props>
         </div>    
-        <div class="sourceCode-wrap">
+        <div class="sourceCode_wrap">
+            <EditorExtend :initCode="source"></EditorExtend>
             <Editor ref="editorRef" ></Editor>
         </div>
-        <!-- lang="x" pre-processors for <template> or <style> are currently not supported. -->
-        <!-- <Message></Message> -->
     </div>
 </template>
 
@@ -25,42 +21,33 @@ import {
     provide,
 } from 'vue'
 import Preview from './panel/vp-preview.vue'
+import Props from './panel/vp-props.vue'
 import Editor from './panel/vp-editor.vue'
+import EditorExtend from './panel/vp-editor-extend.vue'
 import fs from 'vite-plugin-fs/browser';
 import {ReplStore,Store } from './panel/store'
 
 
 const props = defineProps({
-    config: {
+    configs: {
         type: Object,
         require: true,
         default: {}
     },
 })
 
-
-const propsComp = (prop) => {
-    switch(prop) {
-        case Boolean: 
-            return 'checkbox'
-        case 'Enum': 
-            return ''
-    }
-}
-
-
 const editorRef = ref()
-const [dir ,file] = props.config?.example.split('/')
+const [dir ,file] = props.configs?.example.split('/')
 
 const source = await fs.readFile(`../examples/${dir}/${file}.vue`)
 
-const store: Store  = new ReplStore({initCode:source})
+
+const store: Store  = new ReplStore({initCode: source.trim()})
     
 // 共享store
 provide('store', store)
 
 onMounted(() => {
-    console.log('editorRef:',editorRef.value)
  
 })
 
@@ -69,12 +56,23 @@ onMounted(() => {
 
 
 <style scoped lang="scss">
-.vp-panel-wrap {
+.vp-panel_wrap {
     border: #e2e2e2 2px solid;
     border-radius: 12px;
     overflow: hidden;
     background: #fff;
-    padding: 12px;
+    
+    hr {
+        margin: 0;
+    }
+
+    .example_wrap {
+        padding: 12px;
+    }
+
+    .sourceCode_wrap {
+        padding: 12px;
+    }
 }
 
 </style>

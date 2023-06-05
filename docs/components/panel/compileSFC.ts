@@ -14,87 +14,103 @@ export function compileSFC(store: Store, mainFile: File) {
     store.state.errors.length = 0
     const {filename, code , compiled} = mainFile
 
+    if (!code.trim()) {
+        store.state.errors = []
+        return
+    }       
+
     const id = Date.now().toString();
     const scopeId = `data-v-${id}`;
 
-    let clientCode = `\nconst __module__ = __modules__["${mainFile.filename}"] = {}`
+    // 需要注意换行
+    let clientCode = `\nconst __module__ = __modules__["${mainFile.filename}"] = {}\n`
+    let reCode = ''
 
     const {descriptor, errors} = parse(code, {
         filename,
         sourceMap: true
     }) 
 
+    console.log("descriptor:",descriptor,"errors:", errors)
+
+    // 解析阶段错误
+    if (errors.length) {
+        store.state.errors = errors
+        return
+    }
+
     if (
         descriptor.styles.some((s) => s.lang) ||
-        (descriptor.template && descriptor.template.lang)
-      ) {
+        descriptor.template?.lang
+    ) {
         store.state.errors = [
-          `lang="x" pre-processors for <template> or <style> are currently not ` +
+        `lang="x" pre-processors for <template> or <style> are currently not ` +
             `supported.`
         ]
         return
     }
 
-    console.log("重新编译",descriptor)
 
+    try {
+        if(descriptor.template) {
+            const template = compileTemplate({
+                source: descriptor.template?.content,
+                filename: mainFile.filename,
+                id: scopeId,
+            })
 
-    if(descriptor.template) {
-        const template = compileTemplate({
-            source: descriptor.template?.content,
-            filename: mainFile.filename,
-            id: scopeId,
-        })
+            console.log(template)
 
+            // export function render() -> 
+            // function render()
+            // __sfc__.render = render
+            // __module__.default = __sfc__
+            reCode = `\nconst ${COMP_IDENTIFIER} = {}`
+            reCode += `\n${template.code.replace(
+            /\nexport (function|const) render/,
+            `$1 render`
+            )}`
+            reCode += `\n${COMP_IDENTIFIER}.render = render`
 
-
-        // export function render() -> 
-        // function render()
-        // __sfc__.render = render
-        // __module__.default = __sfc__
-        let reCode = `\nconst ${COMP_IDENTIFIER} = {}`
-        reCode += `\n${template.code.replace(
-          /\nexport (function|const) render/,
-          `$1 render`
-        )}`
-        reCode += `\n${COMP_IDENTIFIER}.render = render`
-
-        clientCode += reCode
-
-        console.log("template编译", reCode)
-    }
-
-
-    if(descriptor.script || descriptor.scriptSetup) {
-        const script = compileScript(
-            descriptor, 
-            { 
-                // 是否编译模板并直接在setup()里面内联生成的渲染函数
-                inlineTemplate: true,
-                id: scopeId
-            }
-        )
-    
-        
-        // 将默认导出转变为变量
-        let reCode = rewriteDefault(script.content,COMP_IDENTIFIER)
-               
-        clientCode += reCode
-        console.log("compileScript结果：", reCode);
-        
-    }
-
-    // <style> 可以有多个
-    if(descriptor.styles.length != 0) {
-        // compiled.css = 
-        for (const styleBlock of descriptor.styles) {
-            compiled.css += styleBlock.content 
+            // console.log("template编译", reCode)
         }
+
+
+        if(descriptor.script || descriptor.scriptSetup) {
+            const script = compileScript(
+                descriptor, 
+                { 
+                    // 是否编译模板并直接在setup()里面内联生成的渲染函数
+                    inlineTemplate: true,
+                    id: scopeId
+                }
+            )
+        
+            // 如果存在script则覆盖掉template编译结果
+            // 将默认导出转变为变量 export default -> const __sfc__
+            reCode = rewriteDefault(script.content,COMP_IDENTIFIER)
+                
+            // console.log("script编译：", reCode);
+            
+        }
+
+        // <style> 可以有多个
+        if(descriptor.styles.length != 0) {
+            // compiled.css = 
+            for (const styleBlock of descriptor.styles) {
+                compiled.css += styleBlock.content 
+            }
+        }
+
+        clientCode += reCode
+        clientCode +=  `\n__module__.default = __sfc__`
+
+        compiled.js = clientCode
+    } catch(error: any) {
+        console.log(error.stack.split('\n').slice(0, 12))
+        // error.stack 数组类型
+        store.state.errors = [error.stack.split('\n').slice(0, 12).join('\n')]
+        return
     }
-
-    clientCode +=  `\n__module__.default = __sfc__`
-
-    compiled.js = clientCode
-
-
 
 }

@@ -12,11 +12,12 @@
         ></pre>
     </div>
     <!-- lang="x" pre-processors for <template> or <style> are currently not supported. -->
-    <!-- <Message v-show="runtimeError"></Message> -->
+    <Message v-show="store.state.errors.length" :err="store.state.errors[0]"></Message>
 
 </template>
 
 <script setup lang="ts">
+import Message from './vp-message.vue'
 import {ref, computed, inject, onMounted} from 'vue'
 import { highlight, debounce } from '../../.vitepress/utils'
 import type { Store } from './store'
@@ -40,7 +41,6 @@ const onInput = debounce((e: any) => {
 const hlCode = computed(() => highlight(store.state.mainFile.code, 'vue')) 
 
 
-
 // 处理iframe消息
 window.addEventListener('message', handle_repl_message)
 
@@ -49,8 +49,6 @@ function handle_repl_message(e: any) {
     // if (e.source !== this.iframe.contentWindow) return
 
 }
-
-
 
 
 </script>

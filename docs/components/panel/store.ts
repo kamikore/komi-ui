@@ -9,16 +9,16 @@ import {
 const defaultMainFile = 'App.vue'
 
 const welcomeCode = `
+<template>
+  <h1>{{ msg }}</h1>
+  <input v-model="msg">
+</template>
+
 <script setup>
 import { ref } from 'vue'
 
 const msg = ref('Hello World!')
 </script>
-
-<template>
-  <h1>{{ msg }}</h1>
-  <input v-model="msg">
-</template>
 `.trim()
 
 export class File {
@@ -42,7 +42,6 @@ export interface StoreState {
   files: Record<string, File>
   errors: (string | Error)[]
   vueRuntimeURL: string
-  vueServerRendererURL: string
 }
 
 export interface SFCOptions {
@@ -62,7 +61,6 @@ export interface StoreOptions {
   initCode?: string
   // loose type to allow getting from the URL without inducing a typing error
   defaultVueRuntimeURL?: string
-  defaultVueServerRendererURL?: string
 }
 
 export class ReplStore implements Store {
@@ -71,15 +69,12 @@ export class ReplStore implements Store {
   options?: SFCOptions
 
   private defaultVueRuntimeURL: string
-  private defaultVueServerRendererURL: string
 
   constructor({
     // 初始化文件代码
     initCode = welcomeCode,
     // vue浏览器运行时环境
     defaultVueRuntimeURL = `https://unpkg.com/@vue/runtime-dom@${version}/dist/runtime-dom.esm-browser.js`,
-    // defaultVueServerRendererURL = `https://unpkg.com/@vue/server-renderer@${version}/dist/server-renderer.esm-browser.js`,
-    defaultVueServerRendererURL = ''
   }: StoreOptions = {}) {
     let files: StoreState['files'] = {
       [defaultMainFile]: new File(defaultMainFile, initCode)
@@ -87,15 +82,12 @@ export class ReplStore implements Store {
 
 
     this.defaultVueRuntimeURL = defaultVueRuntimeURL
-    this.defaultVueServerRendererURL = defaultVueServerRendererURL
-
 
     this.state = reactive({
       files,
       mainFile: files[defaultMainFile],
       errors: [],
       vueRuntimeURL: this.defaultVueRuntimeURL,
-      vueServerRendererURL: this.defaultVueServerRendererURL,
     })
 
     this.initImportMap()
@@ -121,7 +113,6 @@ export class ReplStore implements Store {
           {
             imports: {
               vue: this.defaultVueRuntimeURL,
-              'vue/server-renderer': this.defaultVueServerRendererURL
             }
           },
           null,

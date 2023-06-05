@@ -1,6 +1,6 @@
 <template>
     <div class="preview-wrap">
-        <div  class="preview-container" ref="container" ></div>
+        <div class="preview-container" ref="container" ></div>
     </div>
 </template>
 
@@ -64,6 +64,7 @@ function createSandbox() {
   )
   sandbox.style.border = 'none'
   sandbox.style.width = '100%'
+  sandbox.style.overflow = 'hidden'
 
   const importMap = store.getImportMap()
   if (!importMap.imports) {
@@ -90,13 +91,15 @@ function createSandbox() {
 
 // 更新预览
 async function updatePreview() {
-    console.log("updatePreview 重新调用" )
 
     // 用于创建<script>
     let codeToEval
 
     try {
         const { mainFile }= store.state
+
+        // 编译错误截断
+        if(store.state.errors.length != 0) return
 
         codeToEval = [
           `window.__modules__ = {}\nwindow.__css__ = ''\n` +
@@ -112,7 +115,6 @@ async function updatePreview() {
             `import {createApp as _createApp } from "vue"
              const _mount = () => {
               const AppComponent = __modules__["${mainFile.filename}"].default
-              AppComponent.name = 'Repl'
               const app = _createApp(AppComponent)
               app.mount('#app')
             }
@@ -139,3 +141,14 @@ onUnmounted(() => {
 })
 
 </script>
+
+
+
+<style lang="scss" scoped>
+.preview-container {
+  width: 100%;
+  height:100%;
+  border: none;
+  overflow: hidden;
+}
+</style>
