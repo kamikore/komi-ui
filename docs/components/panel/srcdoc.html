@@ -1,5 +1,20 @@
 <!doctype html>
 	<head>
+		<style>
+			html {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				display: inline-flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
 		<style id="__sfc-styles"></style>
 		<script>
 			(() => {
@@ -42,9 +57,14 @@
 								scriptEl.onerror = err => send_error(err.message, err.stack)
 								scriptEls.push(scriptEl)
 								await done
+
 							}
+							// window 为不可clone参数
+							parent.postMessage({
+								height: window.document.body?.offsetHeight
+							}, ev.origin)
 						} catch (error) {
-							console.error("创建script错误",error);
+							console.error(error);
 						}
 					}
 				}

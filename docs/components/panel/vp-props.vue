@@ -4,17 +4,23 @@
             v-for="({value,type,options,description}, key) in configs" 
             :key="key"
         >
+            <!-- prop label -->
             <div v-if="type === Boolean">
-                <ki-input type="checkbox" :check="value" :id="key"/>
-                <label :for="key">{{ key }}</label>
+                <ki-checkbox :label="key" />
             </div>
             <div v-else-if="type === 'Enum'">
-                <fieldset>
-                    <template v-for="option of options" :key="option">
-                        <ki-input type="radio" :id="option" :name="key" :value="option" />
-                        <label :for="option">{{ option }}</label>
-                    </template>
-                </fieldset>
+                <label :for="key">{{ key }}</label>
+                <ki-radio-group v-modle="key">
+                    <ki-radio
+                        v-for="option of options" 
+                        :key="option" 
+                        :label="option" 
+                    />
+                </ki-radio-group>
+            </div>
+            <div v-else-if="String(type).includes('Function')">
+                <label :for="key">{{ key }}</label>
+                <ki-input type="textarea" :id="key" :placeholder="value"/>
             </div>
             <div v-else>
                 <label :for="key">{{ key }}</label>
@@ -39,19 +45,16 @@ const props = defineProps<{
     configs: Record<string,Prop>
 }>()
 
-// function propToElm(prop: Prop): String {
-//     const {value,type,options,description} = prop
-//     if(type === Boolean) return 
-// }
 
 
 </script>
 
 <style lang="scss" scoped>
 .v-props_wrap {
-    fieldset {
-        border: none;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
 }
 
 

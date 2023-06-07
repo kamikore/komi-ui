@@ -26,7 +26,8 @@ function onCopy() {
 }
 
 function onReset() {
-
+    store.state.mainFile.code = props.initCode
+    window.alert('已重置')
 }
 
 

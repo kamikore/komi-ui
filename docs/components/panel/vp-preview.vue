@@ -1,16 +1,9 @@
 <template>
-    <div class="preview-wrap">
-        <div class="preview-container" ref="container" ></div>
-    </div>
+    <div class="preview-container" ref="container" ></div>
 </template>
 
 
 <script setup lang="ts">
-import {
-    parse, 
-    compileScript, 
-    compileStyle
-} from 'vue/compiler-sfc'
 import {
   ref, 
   computed, 
@@ -62,9 +55,13 @@ function createSandbox() {
       'allow-top-navigation-by-user-activation'
     ].join(' ')
   )
-  sandbox.style.border = 'none'
-  sandbox.style.width = '100%'
-  sandbox.style.overflow = 'hidden'
+
+  Object.assign(sandbox.style, {
+    width: '100%',
+    border: 'none',
+    overflow: 'hidden',
+  })
+
 
   const importMap = store.getImportMap()
   if (!importMap.imports) {
@@ -81,7 +78,6 @@ function createSandbox() {
   )
   sandbox.srcdoc = sandboxSrc
   container.value.appendChild(sandbox)
-
 
   sandbox.addEventListener('load', () => {
     stopUpdateWatcher = watchEffect(updatePreview)
@@ -130,14 +126,26 @@ async function updatePreview() {
 }
 
 
-onMounted(() => {
+// iframe 发送的消息 
+window.addEventListener('message', handle_reply_message, false)
 
+function handle_reply_message(ev: MessageEvent) {
+  console.log("iframe repl",ev)
+  const {height} = ev.data
+  if(height) {
+     sandbox.height = `${height}px`
+  }
+}
+
+
+onMounted(() => {
   createSandbox()
 })
 
 
 onUnmounted(() => {
   stopUpdateWatcher && stopUpdateWatcher()
+  window.removeEventListener('message',handle_reply_message)
 })
 
 </script>
@@ -146,9 +154,6 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .preview-container {
-  width: 100%;
-  height:100%;
-  border: none;
-  overflow: hidden;
+
 }
 </style>

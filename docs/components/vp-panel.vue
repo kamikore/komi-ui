@@ -4,6 +4,7 @@
             <Preview ></Preview>
         </div>
         <hr color="#e2e2e2" size="4px"/>
+        <!-- 选项排序顺序根据传入config -->
         <div class="props-wrap">
             <Props :configs="configs.props"></Props>
         </div>    
@@ -19,6 +20,7 @@ import {
     ref, 
     onMounted,
     provide,
+    watchEffect
 } from 'vue'
 import Preview from './panel/vp-preview.vue'
 import Props from './panel/vp-props.vue'
@@ -34,6 +36,12 @@ const props = defineProps({
         require: true,
         default: {}
     },
+})
+
+const test = ref('test') 
+
+watchEffect(() => {
+    console.log("group modelValue", test)
 })
 
 const editorRef = ref()
@@ -67,7 +75,7 @@ onMounted(() => {
     }
 
     .example_wrap {
-        padding: 12px;
+        padding: 24px 16px;
     }
 
     .sourceCode_wrap {
