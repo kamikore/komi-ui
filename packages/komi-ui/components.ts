@@ -3,13 +3,19 @@ import {
     KiInput,
     KiDropdown,
     KiDialog,
-    KiPopover
+    KiPopover,
+    KiRadio,
+    KiCheckbox,
 } from '@komi-ui/components'
-import { Plugin } from '@vue/runtime-core'
+import type { Plugin } from 'vue'
+
+
 export default [
     KiButton,
     KiInput,
     KiDropdown,
     KiDialog,
     KiPopover,
-] as Plugin
+    KiRadio,
+    KiCheckbox,
+] as Plugin[]

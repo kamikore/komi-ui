@@ -22,7 +22,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps} from 'vue'
 import {buttonProps} from './button'
 import {useNamespace} from '@komi-ui/hooks'
 
@@ -33,9 +32,7 @@ defineOptions({
 const props = defineProps(buttonProps)
 const ns = useNamespace('button')
 
-console.log("button props:",props);
 
-console.log("console.log test")
 
 </script>
 
