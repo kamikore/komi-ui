@@ -28,6 +28,10 @@
     @include set-css-var-value('font-weight-primary', 500);
     @include set-css-var-value('font-line-height-primary', 24px);
   
+
+    // Fill --el-fill-color-#{$type}
+    @include set-component-css-var('fill-color', $fill-color);
+
     // --ki-index-#{$type}, normal, top, popper
     @include set-component-css-var('index', $zIndex);
 

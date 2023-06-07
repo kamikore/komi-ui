@@ -1,0 +1,73 @@
+@use 'sass:map';
+
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+
+@include b(radio) {
+    @include set-component-css-var('radio', $radio);
+  }
+
+@include b(radio) {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    
+    @include e(input) {
+        width: getCssVar('radio-input-width');
+        height: getCssVar('radio-input-height');
+        white-space: nowrap;
+        cursor: pointer;
+        outline: none;
+        display: inline-flex;
+        position: relative;
+        vertical-align: middle;
+
+        // 单选按钮选中
+        @include when(checked) {
+            
+            @include e(inner) {
+                border: 6px solid black;
+            }
+        }
+    
+    }
+
+    // 原生input不可见
+    @include e(original) {
+        opacity: 0;
+        outline: none;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+    }
+
+    // 单选按钮
+    @include e(inner) {
+        appearance: none;
+        width: getCssVar('radio-input-width');
+        height: getCssVar('radio-input-height');
+        position: relative;
+        border-radius: 50%;
+      
+        border:  getCssVar('radio-input-border');
+        border-color:  getCssVar('radio-input-border-color');;
+        transition: 0.2s all linear;
+      
+        position: relative;
+    }
+
+    @include e(label) {
+        cursor: pointer;
+        vertical-align: middle;
+
+        color: getCssVar('radio-text-color');
+        font-weight: getCssVar('radio-font-weight');
+    }
+
+}

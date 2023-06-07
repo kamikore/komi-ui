@@ -18,7 +18,6 @@
     line-height: getCssVar('input-height');
     position: relative;
     display: inline-flex;
-    margin: getCssVar('margin');
     padding: 0 getCssVar('padding');
     border: getCssVar('border');
     border-color: getCssVar('button', 'border-color');
@@ -36,6 +35,7 @@
         display: inline-flex;
 
         color: getCssVar('input','text-color');
+
         @include scroll-bar;
 
 

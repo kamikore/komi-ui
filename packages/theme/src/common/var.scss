@@ -23,7 +23,7 @@ $types: primary, success, warning, danger, error, info;
 $colors: () !default;
 $colors: map.deep-merge(
   (
-    'white': #ffffff,   // default 
+    'white': #ffffff,   
     'black': #000000,
     'primary': (
       'base': #409eff,
@@ -374,7 +374,6 @@ $button: map.merge(
 );
 
 
-
 $button-border-radius: () !default;
 $button-border-radius: map.merge(
   (
@@ -385,4 +384,21 @@ $button-border-radius: map.merge(
   $button-border-radius
 );
 
+
+
+// Radio
+$radio: () !default;
+$radio: map.merge(
+  (
+    'font-size': getCssVar('font-size-base'),
+    'text-color': getCssVar('text-color-regular'),
+    'font-weight': getCssVar('font-weight-primary'),
+    'input-height': 16px,
+    'input-width': 16px,
+    'input-border': 2px solid,
+    'input-border-color': getCssVar('border-color','dark'),
+    'input-border-color-hover': getCssVar('color-primary'),
+  ),
+  $radio
+);
 

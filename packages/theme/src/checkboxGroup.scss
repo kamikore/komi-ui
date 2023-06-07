@@ -1,0 +1,11 @@
+@use 'sass:map';
+
+@use 'mixins/mixins' as *;
+
+
+@include b(checkbox-group) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
