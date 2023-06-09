@@ -1,5 +1,84 @@
-
+/* Color base */
 :root {
-    --vp-home-hero-name-color: black;
+    --vp-c-white: #ffffff;
+    --vp-c-black: #000000;
+
+    --vp-c-black-light: #202020;
+    --vp-c-black-lighter: #333333;
+
+    --vp-c-text-light-1: rgba(60, 60, 67);
+    --vp-c-text-light-2: rgba(60, 60, 67, 0.75);
+    --vp-c-text-light-3: rgba(60, 60, 67, 0.33);
+  
+    --vp-c-text-dark-1: rgba(255, 255, 245, 0.86);
+    --vp-c-text-dark-2: rgba(235, 235, 245, 0.6);
+    --vp-c-text-dark-3: rgba(235, 235, 245, 0.38);
 }
 
+
+/* Colors Theme */
+:root {
+    --vp-c-bg: #ffffff;
+    --vp-c-bg-soft: #ebebeb;
+
+    --vp-c-brand: #000000;
+
+}
+
+.dark {
+    --vp-c-bg: #343436;
+    --vp-c-bg-soft: #252529;
+
+
+    --vp-c-brand: var(--vp-c-white);
+
+    --vp-c-black-light: #161616;
+    --vp-c-black-lighter: #333333;
+}
+
+
+
+
+/* hero section */
+:root {
+    --vp-home-hero-name-color: var(--vp-c-brand);
+}
+
+/* brand button */
+:root {
+    
+
+    --vp-button-brand-border: none;
+    --vp-button-brand-text: var(--vp-c-white);
+    --vp-button-brand-bg: var(--vp-c-black);
+
+    --vp-button-brand-hover-border: none;
+    --vp-button-brand-hover-text: var(--vp-c-white);
+    --vp-button-brand-hover-bg:  var(--vp-c-black-light);
+
+    --vp-button-alt-bg: var();
+    
+}
+
+.dark {
+    --vp-button-alt-bg: var(--vp-c-mute);
+}
+
+
+
+
+
+:root {
+    --vp-header-anchor-symbol: '🔗';
+}
+
+
+:root {
+    --vp-badge-info-bg: red;
+}
+
+
+/* dark模式 */
+.dark {
+    
+}

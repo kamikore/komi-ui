@@ -1,2 +1,11 @@
 @import url('./prism.css');
 @import url('./var.css');
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 0;
+}
