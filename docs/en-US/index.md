@@ -9,7 +9,7 @@ hero:
   text: "A Component Library for Vue 3"
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: Get Started
       link: /markdown-examples
     - theme: alt
       text: API Examples

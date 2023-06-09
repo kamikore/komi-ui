@@ -4,10 +4,20 @@ lang: en-US
 ---
 
 
+<script setup>
+import {buttonPanelConfig} from '../../components/panel/config'
+
+</script>
+
 # Button
+<section>
+  <Suspense>
+    <Panel :configs="buttonPanelConfig"></Panel>
+  </Suspense>
+</section>
 
-:::info Use `type`, `plain`, `round` and `circle` to define Button's style.
+### Basic Usage
 
-button/basic
-
-:::
+<Suspense>
+  <Demo example="button/basic"></Demo>
+</Suspense>

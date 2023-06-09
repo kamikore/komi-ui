@@ -1,5 +1,4 @@
 <template>
-    <ki-button type="default">{{ message }}</ki-button>
 </template>
 
 <script setup>

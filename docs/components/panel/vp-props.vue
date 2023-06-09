@@ -1,5 +1,5 @@
 <template>
-    <div class="v-props_wrap">
+    <div class="v-props_wrap" v-if="configs">
         <template 
             v-for="({value,type,options,description}, key) in configs" 
             :key="key"
@@ -38,14 +38,10 @@ interface Prop {
     description: String
 }
 
-import {computed} from 'vue'
-
 
 const props = defineProps<{
-    configs: Record<string,Prop>
+    configs?: Record<string,Prop>
 }>()
-
-
 
 </script>
 

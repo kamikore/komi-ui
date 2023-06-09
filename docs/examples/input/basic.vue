@@ -1,5 +1,5 @@
 <template>
-    <ki-button type="default">{{ message }}</ki-button>
+    <ki-input type="text">{{ message }}</ki-input>
 </template>
 
 <script setup>
