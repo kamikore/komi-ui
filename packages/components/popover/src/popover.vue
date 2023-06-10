@@ -5,10 +5,10 @@
     <!-- 确保定位相对于body，避免过多的组件嵌套，存在严重副作用 -->
     <teleport to='body'>
         <!-- 初次渲染时应用过渡 -->
-       <Transition name="ki-popover" appear>
+       <Transition :name="ns.b('fade')" appear>
             <div 
                 :class="[ns.b()]" 
-                :style="popoverStyle"
+                :style="Object.assign(popoverStyle, $attrs?.style)"
                 ref="popoverRef"
                 v-show="isShow"
                 v-clickoutside:[triggerRef?.$el]="trigger === 'click'?handleClickOutside:''"
@@ -27,9 +27,9 @@
 <script lang="ts" setup>
 import {
     ref, 
-    defineProps,
     onMounted,
     onUnmounted,
+    StyleValue,
 } from 'vue'
 import {KiOnlyChild} from '@komi-ui/components/slots'
 import {popoverProps} from './popover'
@@ -56,8 +56,8 @@ const popoverRef = ref<HTMLElement | null>(null)
 let resizeObserver:ResizeObserver
 let updatePopoverDebounce:Function
 
-const popoverStyle = ref<any>()
-const arrowStyle = ref<any>()
+const popoverStyle = ref<any>({})
+const arrowStyle = ref<any>({})
 
 const pop_placement = ref(props.placement)
 const isShow = ref(true)
@@ -104,9 +104,11 @@ function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number
     
     // 判断是否溢出
     if(popIsOverflow(triggerElm,popWidth,popHeight,props.placement,props.showArrow)) {
-        pop_placement.value = togglePlacement(props.placement)
+        // 如果溢出了判断切换位置后，是否仍是溢出,仍溢出则保持
+        if(!popIsOverflow(triggerElm,popWidth,popHeight,togglePlacement(props.placement),props.showArrow)) 
+            pop_placement.value = togglePlacement(props.placement)
     } else {
-        // 不溢出判断placement是否已切换
+        // 不溢出判断placement是否已切换，需要复位
         pop_placement.value !== props.placement?pop_placement.value = props.placement:''
     }
 

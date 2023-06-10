@@ -17,7 +17,15 @@ const endRate = 2/3
 
 // 计算组件在浏览器窗口中的位置
 export function getPopStyle(triggerElm:HTMLElement, placement:string, showArrow:boolean): PopStyle {
-    const {offsetLeft, offsetTop, offsetWidth, offsetHeight} = triggerElm
+    // 需要保证根据整体文档的偏移，而不是某个父级
+    const { scrollLeft ,scrollTop} = document.documentElement
+    const {x, y} = triggerElm.getBoundingClientRect()
+    const offsetLeft = x + scrollLeft
+    const offsetTop = y + scrollTop 
+
+    const {offsetWidth, offsetHeight} = triggerElm
+
+    
     // bottom-start, bottom-end
     const [pos, subPos] = placement.split('-')
     const popGap = showArrow?gap.large:gap.normal

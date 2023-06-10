@@ -1,5 +1,4 @@
 
-
 export const popoverProps = {
     trigger: {
         type: String,
@@ -7,7 +6,7 @@ export const popoverProps = {
     },
     showArrow: {
         type: Boolean,
-        default: true
+        default: false
     },
     placement: {
         type: String,
