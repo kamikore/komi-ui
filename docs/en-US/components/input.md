@@ -5,14 +5,14 @@ lang: en-US
 
 
 <script setup>
-import {InputPanelConfig} from '../../components/panel/config'
+import {inputPanelConfig} from '../../components/panel/config'
 
 </script>
 
 # Input
 <section>
   <Suspense>
-    <Panel :configs="InputPanelConfig"></Panel>
+    <Panel :configs="inputPanelConfig"></Panel>
   </Suspense>
 </section>
 

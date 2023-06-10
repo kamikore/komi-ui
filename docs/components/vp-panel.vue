@@ -18,9 +18,7 @@
 <script setup lang="ts">
 import {
     ref, 
-    onMounted,
     provide,
-    watchEffect
 } from 'vue'
 import Preview from './panel/vp-preview.vue'
 import Props from './panel/vp-props.vue'
@@ -38,11 +36,6 @@ const props = defineProps({
     },
 })
 
-const test = ref('test') 
-
-watchEffect(() => {
-    console.log("group modelValue", test)
-})
 
 const editorRef = ref()
 const [dir ,file] = props.configs?.example.split('/')
@@ -55,9 +48,6 @@ const store: Store  = new ReplStore({initCode: source.trim()})
 // 共享store
 provide('store', store)
 
-onMounted(() => {
- 
-})
 
 
 </script>
@@ -69,6 +59,7 @@ onMounted(() => {
     border-radius: 12px;
     overflow: hidden;
     background: #fff;
+    margin: 12px 0;
     
     hr {
         margin: 0;

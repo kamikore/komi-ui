@@ -6,13 +6,13 @@
     --vp-c-black-light: #202020;
     --vp-c-black-lighter: #333333;
 
-    --vp-c-text-light-1: rgba(60, 60, 67);
-    --vp-c-text-light-2: rgba(60, 60, 67, 0.75);
-    --vp-c-text-light-3: rgba(60, 60, 67, 0.33);
+    --vp-c-text-light-1: #484852;
+    --vp-c-text-light-2: #3c3c43bf;
+    --vp-c-text-light-3: #3c3c4354;
   
-    --vp-c-text-dark-1: rgba(255, 255, 245, 0.86);
-    --vp-c-text-dark-2: rgba(235, 235, 245, 0.6);
-    --vp-c-text-dark-3: rgba(235, 235, 245, 0.38);
+    --vp-c-text-dark-1: #eeeee3db;
+    --vp-c-text-dark-2: #ebebf599;
+    --vp-c-text-dark-3: #ebebf561;
 }
 
 
@@ -20,6 +20,8 @@
 :root {
     --vp-c-bg: #ffffff;
     --vp-c-bg-soft: #ebebeb;
+    --vp-c-bg-soft-up: #f7f7f7;
+    --vp-c-bg-soft-down: #cecece;
 
     --vp-c-brand: #000000;
 
@@ -39,9 +41,10 @@
 
 
 
-/* hero section */
+/* Home Page */
 :root {
     --vp-home-hero-name-color: var(--vp-c-brand);
+
 }
 
 /* brand button */
@@ -67,18 +70,11 @@
 
 
 
-
+/* Header Anchor */
 :root {
     --vp-header-anchor-symbol: '🔗';
 }
 
 
-:root {
-    --vp-badge-info-bg: red;
-}
 
 
-/* dark模式 */
-.dark {
-    
-}

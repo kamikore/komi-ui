@@ -130,7 +130,6 @@ async function updatePreview() {
 window.addEventListener('message', handle_reply_message, false)
 
 function handle_reply_message(ev: MessageEvent) {
-  console.log("iframe repl",ev)
   const {height} = ev.data
   if(height) {
      sandbox.height = `${height}px`

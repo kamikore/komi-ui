@@ -1,10 +1,11 @@
 import KomiUi from 'komi-ui'
 import DefaultTheme from 'vitepress/theme'
-import '../styles/var.css'
+import '../styles/index.css'
 import { useData } from 'vitepress'
 import {watchEffect, onUnmounted} from 'vue'
 import {globalComps} from '../../components'
 import {inBrowser} from '../utils'
+import '../../../dist/komi-ui/theme/index.css'
 
 export default {
     extends: DefaultTheme,
@@ -13,6 +14,7 @@ export default {
             app.component(name, comp)
         })
         app.use(KomiUi)
+
     },
     setup() {
         const supportedLangs = [

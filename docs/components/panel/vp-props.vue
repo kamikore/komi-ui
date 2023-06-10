@@ -1,7 +1,17 @@
+<!-- 
+popover
+多个 [String, Number, Boolean] | 单一 | 其他复杂类型
+
+clearable: boolean
+
+If true, adds a clear value icon button to the end of the input container.
+
+ -->
+
 <template>
     <div class="v-props_wrap" v-if="configs">
         <template 
-            v-for="({value,type,options,description}, key) in configs" 
+            v-for="({value = undefined,type,options,description}, key) in configs" 
             :key="key"
         >
             <!-- prop label -->
@@ -32,7 +42,7 @@
 
 <script setup lang="ts">
 interface Prop {
-    value: String,
+    value: String | undefined,
     options?: Array<string>,
     type: Object | String,
     description: String

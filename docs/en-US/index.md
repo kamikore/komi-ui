@@ -7,6 +7,9 @@ lang: en-US
 hero:
   name: "Komi ui"
   text: "A Component Library for Vue 3"
+  image:
+    src: /tech-life.png
+    alt: Komi-ui
   actions:
     - theme: brand
       text: Get Started

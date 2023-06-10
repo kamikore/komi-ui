@@ -1,5 +1,5 @@
 const TYPE = ['default','primary','success']
-const SIZE = ['default','small','large']
+import {COMPONENTSIZES} from '@komi-ui/utils'
 
 export const buttonPanelConfig = {
     componentName: 'KiButton',
@@ -24,11 +24,11 @@ export const buttonPanelConfig = {
           value: 'default',
           options: TYPE,
           type: 'Enum',
-          description: 'Defines the kind (purpose) of a button.',
+          description: 'Defines the kind of a button.',
         },
         size: {
           value: 'default',
-          options: SIZE,
+          options: COMPONENTSIZES,
           type: 'Enum',
           description: 'Defines the size of the button.',
         },

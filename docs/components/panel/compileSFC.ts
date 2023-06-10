@@ -31,8 +31,6 @@ export function compileSFC(store: Store, mainFile: File) {
         sourceMap: true
     }) 
 
-    console.log("descriptor:",descriptor,"errors:", errors)
-
     // 解析阶段错误
     if (errors.length) {
         store.state.errors = errors
@@ -59,8 +57,6 @@ export function compileSFC(store: Store, mainFile: File) {
                 id: scopeId,
             })
 
-            console.log(template)
-
             // export function render() -> 
             // function render()
             // __sfc__.render = render
@@ -72,7 +68,6 @@ export function compileSFC(store: Store, mainFile: File) {
             )}`
             reCode += `\n${COMP_IDENTIFIER}.render = render`
 
-            // console.log("template编译", reCode)
         }
 
 
@@ -90,8 +85,6 @@ export function compileSFC(store: Store, mainFile: File) {
             // 将默认导出转变为变量 export default -> const __sfc__
             reCode = rewriteDefault(script.content,COMP_IDENTIFIER)
                 
-            // console.log("script编译：", reCode);
-            
         }
 
         // <style> 可以有多个
@@ -107,7 +100,6 @@ export function compileSFC(store: Store, mainFile: File) {
 
         compiled.js = clientCode
     } catch(error: any) {
-        console.log(error.stack.split('\n').slice(0, 12))
         // error.stack 数组类型
         store.state.errors = [error.stack.split('\n').slice(0, 12).join('\n')]
         return
