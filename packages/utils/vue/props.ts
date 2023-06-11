@@ -1,6 +1,6 @@
 import {isArray, isObject} from '@komi-ui/utils'
 import {warn} from 'vue'
-import type { PropType,ComponentOptions} from 'vue'
+import type { PropType, Component, ComponentOptions} from 'vue'
 
 
 export type KiProp<T = any> = KiPropOptions<T> | PropType<T>
