@@ -36,7 +36,6 @@
     "@vue-macros/volar": "^0.9.5",
     "gulp": "^4.0.2",
     "gulp-typescript": "6.0.0-alpha.1",
-    "sass": "^1.62.0",
-    "vite": "^4.2.1"
+    "sass": "^1.62.0"
   }
 }

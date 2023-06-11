@@ -8,35 +8,44 @@ export default defineConfig({
     target: 'modules',
     minify: true,
     rollupOptions: {
+      // 忽略vue.js
       external: ['vue'],
       input: [resolve(kiRoot,'index.ts')],
       output: [
         {
-          format: 'es',
-          entryFileNames: '[name].mjs',
-          preserveModules: true,
-          // 配置打包根目录
-          dir: resolve(kiOutput,'es'),
-          preserveModulesRoot: 'src',
+          format: 'umd',
+          name: 'KomiUi',
+          entryFileNames: '[name].full.js',
+          dir: resolve(kiOutput,'dist'),
           globals: {
             vue: 'Vue'
           },
         },
         {
-          format: 'cjs',
-          entryFileNames: '[name].js',
-          preserveModules: true,
-          dir: resolve(kiOutput,'lib'),
-          preserveModulesRoot: 'src',
+          format: 'es',
+          entryFileNames: '[name].mjs',
+          dir: resolve(kiOutput,'es'),
           globals: {
             vue: 'Vue'
           },
-        }
+          preserveModules: true,
+          preserveModulesRoot: kiRoot
+        },
+        {
+          format: 'cjs',
+          entryFileNames: '[name].js',
+          dir: resolve(kiOutput,'lib'),
+          globals: {
+            vue: 'Vue'
+          },
+          preserveModules: true,
+          preserveModulesRoot: kiRoot
+        },
+
       ]
     },
     lib: {
       entry: resolve(kiOutput,'lib','index.js'),
-      formats: ['es', 'cjs']
     }
   },
   plugins: [

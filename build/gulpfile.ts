@@ -1,9 +1,15 @@
 import { dest, parallel, series, src } from 'gulp'
 import {resolve} from 'node:path'
 import {copyFile} from 'node:fs/promises';
-import {projRoot,buildRoot,pkgRoot,buildOutput,kiOutput,kiPackage,runTask} from '@komi-ui/build-utils'
-import ts from 'gulp-typescript'
- 
+import {
+  projRoot,
+  buildRoot,
+  pkgRoot,
+  kiOutput,
+  kiPackage,
+  themeOutput,
+  runTask
+} from '@komi-ui/build-utils'
 
 export const copyFiles = () =>
   // 返回promise
@@ -13,6 +19,12 @@ export const copyFiles = () =>
       resolve(projRoot, 'README.md'),
       resolve(kiOutput, 'README.md')
     ),
+    
+    // 样式入口
+    copyFile(
+      resolve(themeOutput,'index.css'),
+      resolve(kiOutput,'dist','index.css')
+    )
   ])
 
 export const build = series(
