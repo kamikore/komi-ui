@@ -1,6 +1,6 @@
 import { dest, parallel, series, src } from 'gulp'
 import {resolve} from 'node:path'
-import {copyFile} from 'node:fs/promises';
+import {copyFile} from 'node:fs/promises'
 import {
   projRoot,
   buildRoot,

@@ -23,7 +23,6 @@
     "@komi-ui/hooks": "workspace:^0.0.0",
     "@komi-ui/theme": "workspace:^0.0.0",
     "@komi-ui/utils": "workspace:^0.0.0",
-    "komi-ui": "workspace:^0.0.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {

@@ -18,7 +18,6 @@ importers:
       '@vue-macros/volar': ^0.9.5
       gulp: ^4.0.2
       gulp-typescript: 6.0.0-alpha.1
-      komi-ui: workspace:^0.0.0
       sass: ^1.62.0
       vue: ^3.3.4
     dependencies:
@@ -27,7 +26,6 @@ importers:
       '@komi-ui/hooks': link:packages/hooks
       '@komi-ui/theme': link:packages/theme
       '@komi-ui/utils': link:packages/utils
-      komi-ui: link:packages/komi-ui
       vue: registry.npmmirror.com/vue/3.3.4
     devDependencies:
       '@esbuild-kit/cjs-loader': registry.npmmirror.com/@esbuild-kit/cjs-loader/2.4.2
@@ -63,6 +61,12 @@ importers:
       '@esbuild-kit/cjs-loader': registry.npmmirror.com/@esbuild-kit/cjs-loader/2.4.2
       gulp-typescript: registry.npmmirror.com/gulp-typescript/6.0.0-alpha.1
 
+  dist/komi-ui:
+    specifiers:
+      vue: ^3.3.4
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.3.4
+
   docs:
     specifiers:
       prismjs: ^1.29.0
@@ -78,9 +82,9 @@ importers:
 
   packages/komi-ui:
     specifiers:
-      '@element-plus/icons-vue': ^2.1.0
+      vue: ^3.3.4
     dependencies:
-      '@element-plus/icons-vue': registry.npmmirror.com/@element-plus/icons-vue/2.1.0
+      vue: registry.npmmirror.com/vue/3.3.4
 
   packages/theme:
     specifiers:
@@ -378,14 +382,6 @@ packages:
     transitivePeerDependencies:
       - '@algolia/client-search'
     dev: true
-
-  registry.npmmirror.com/@element-plus/icons-vue/2.1.0:
-    resolution: {integrity: sha512-PSBn3elNoanENc1vnCfh+3WA9fimRC7n+fWkf3rE5jvv+aBohNHABC/KAR5KWPecxWxDTVT1ERpRbOMRcOV/vA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.1.0.tgz}
-    name: '@element-plus/icons-vue'
-    version: 2.1.0
-    peerDependencies:
-      vue: ^3.2.0
-    dev: false
 
   registry.npmmirror.com/@esbuild-kit/cjs-loader/2.4.2:
     resolution: {integrity: sha512-BDXFbYOJzT/NBEtp71cvsrGPwGAMGRB/349rwKuoxNSiKjPraNNnlK6MIIabViCjqZugu6j+xeMDlEkWdHHJSg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@esbuild-kit/cjs-loader/-/cjs-loader-2.4.2.tgz}
