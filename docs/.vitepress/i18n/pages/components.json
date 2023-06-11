@@ -1,0 +1,62 @@
+{
+    "en-US": {
+        "components": [
+            {
+                "text": "Basic",
+                "items": [
+                  { "text": "Button", "link": "/en-US/components/button" }
+                ]
+            },
+            {
+                "text": "Form",
+                "items": [
+                    {"text": "Input", "link": "/en-US/components/input"},
+                    {"text": "Radio", "link": "/en-US/components/radio"},
+                    {"text": "Checkbox", "link": "/en-US/components/checkbox"}
+                ]
+            },
+            {
+                "text": "Navigation",
+                "items": [
+                    {"text": "Dropdown", "link": "/en-US/components/dropdown"}
+                ]
+            },
+            {
+                "text": "Feedback",
+                "items": [
+                    {"text": "Popover", "link": "/en-US/components/popover"}
+                ]
+            }
+        ]
+    },
+    "zh-CN": {
+        "components": [
+            {
+                "text": "Basic 基础组件",
+                "items": [
+                  { "text": "Button 按钮", "link": "/zh-CN/components/button" }
+                ]
+            },
+            {
+                "text": "Form 表单组件",
+                "items": [
+                    {"text": "Input 输入框", "link": "/zh-CN/components/input"},
+                    {"text": "Radio 单选按钮", "link": "/zh-CN/components/radio"},
+                    {"text": "Checkbox 多选框", "link": "/zh-CN/components/checkbox"}
+                ]
+            },
+            {
+                "text": "Navigation 导航组件",
+                "items": [
+                    {"text": "Dropdown 下拉菜单", "link": "/zh-CN/components/dropdown"}
+                ]
+            },
+            {
+                "text": "Feedback 反馈组件",
+                "items": [
+                    {"text": "Popover 弹出框", "link": "/zh-CN/components/popover"}
+                ]
+            }
+        ]
+    }
+}

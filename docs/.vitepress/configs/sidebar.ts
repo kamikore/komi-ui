@@ -7,7 +7,6 @@ function getGuideSidebar() {
     Object.entries(guideSidebar).map(([lang, val]) => 
       Object.entries(val).map(([dir, items]) => 
         {
-          console.log(dir, items)
           return [`/${lang}/${dir}/`, items]
         }
       ).flat()
@@ -20,7 +19,6 @@ function getComponentsSideBar() {
     Object.entries(componentsSidebar).map(([lang, val]) => 
       Object.entries(val).map(([dir, items]) => 
         {
-          console.log(dir, items)
           return [`/${lang}/${dir}/`, items]
         }
       ).flat()
