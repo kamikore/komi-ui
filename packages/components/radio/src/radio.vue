@@ -21,7 +21,6 @@
                 v-model="modelValue"
                 :value="label"
                 @change="handleChange"
-                :check="modelValue === label"
             >
             <span :class="ns.e('inner')"></span>
         </span>
@@ -51,25 +50,20 @@ const emit = defineEmits(['update:modelValue','change'])
 const radioGroup = inject(radioGroupKey, undefined)
 
 const ns = useNamespace('radio')
-console.log(radioProps)
 const props = defineProps(radioProps)
 const radioRef = ref<HTMLInputElement>()
-
-console.log(props.name || radioGroup?.name);
-
 
 const modelValue = computed({
     get() {
         return radioGroup ? radioGroup?.modelValue : props.modelValue
     },
     set(val) {
-      console.log("set",val)
       if (radioGroup) {
         radioGroup!.changeEvent(val)
       } else {
         emit && emit('update:modelValue', val)
       }
-      radioRef.value!.checked = props.modelValue === props.label
+    //   radioRef.value!.checked = props.modelValue === props.label
     },
 })
 

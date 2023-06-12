@@ -1,33 +1,94 @@
 <template>
-    <span
+    <span 
         :class="[
             ns.b(),
-            ns.is('checked', modelValue === label),
+            ns.is(
+                'checked', 
+                checkboxGroup ? 
+                    modelValue?.includes(label)
+                    : modelValue
+            ),
         ]"
     >
-        <input
-            :class="[ns.e('input')]" 
-            type="checkbox"
-            :name="name"
-            :id="id || label"
-            :value="label"
+        <span 
+            :class="[
+                ns.e('input'),
+                ns.is(
+                    'checked', 
+                    checkboxGroup ? 
+                        modelValue?.includes(label)
+                        : modelValue
+                ),
+            ]"
+        >   
+            <!-- value值赋值给modelValue -->
+            <input 
+                :class="ns.e('original')"
+                ref="checkboxRef"
+                type="checkbox" 
+                :id="id"
+                :name="name"
+                v-model="modelValue"
+                :value="label"
+                @change="handleChange"
+            >
+            <span :class="ns.e('inner')"></span>
+        </span>
+        
+        <span
+            :class="ns.e('label')" 
+            @click="labelClick"
         >
-        <label :for="id || label">{{ label }}</label>
-</span>
+            <slot>{{label}}</slot>
+        </span>
+    </span>
 </template>
 
 <script setup lang="ts">
+import {ref, computed, inject, nextTick} from 'vue'
 import {checkboxProps} from './checkbox'
-import { useNamespace } from '@komi-ui/hooks';
+import { useNamespace } from '@komi-ui/hooks'
+import {checkboxGroupKey} from './constants'
 
 defineOptions({
     name: 'KiCheckbox'
 })
 
-const props = defineProps(checkboxProps)
+const emit = defineEmits(['update:modelValue','change'])
+
+// 如果没有包裹Group，默认值为undefined
+const checkboxGroup = inject(checkboxGroupKey, undefined)
 
 const ns = useNamespace('checkbox')
+const props = defineProps(checkboxProps)
+const checkboxRef = ref<HTMLInputElement>()
 
+
+// 不使用group则modelValue:Boolean, 否则是一个选中label的数组
+const modelValue = computed({
+    get() {
+        return checkboxGroup ? checkboxGroup?.modelValue : props.modelValue
+    },
+    set(val) {
+      if (checkboxGroup) {
+        checkboxGroup!.changeEvent(props.label)
+      } else {
+        emit && emit('update:modelValue', val)
+      }
+    },
+})
+
+function handleChange() {
+    // 触发change
+    nextTick(() => emit('change', modelValue.value))
+}
+
+function labelClick() {
+    checkboxGroup ?  
+        checkboxGroup!.changeEvent(props.label)
+        : emit && emit('update:modelValue', !!modelValue.value)
+    nextTick(() => emit('change', modelValue.value))
+}
 
 
 </script>

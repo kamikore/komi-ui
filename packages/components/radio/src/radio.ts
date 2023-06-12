@@ -1,5 +1,5 @@
 import { buildProps } from '@komi-ui/utils'
-import {componentSizes} from '@komi-ui/utils'
+import { COMPONENTSIZES} from '@komi-ui/utils'
 
 
 export const radioProps = buildProps({
@@ -22,25 +22,25 @@ export const radioProps = buildProps({
      */
     modelValue: {
         type: [String, Number, Boolean],
-        default: '',
+        default: undefined,
     },
     /**
      * @description size of the Radio
      */
     size: {
       type: String,
-      values: componentSizes,
+      values:  COMPONENTSIZES,
       default: 'default'
+    },
+  /**
+   * @description value of the Radio when used inside a `radio-group`
+   */
+    label: {
+      type: [String, Number, Boolean],
+      default: undefined,
     },
     /**
      * @description whether Radio is disabled
      */
     disabled: Boolean,
-    /**
-     * @description the value of Radio
-     */
-    label: {
-      type: [String, Number, Boolean],
-      default: '',
-    }
 })

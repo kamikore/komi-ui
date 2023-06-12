@@ -13,6 +13,6 @@ export const radioGroupProps = buildProps({
      */
     modelValue: {
         type: [String, Number, Boolean],
-        default: '',
+        default: undefined,
     }, 
 })
