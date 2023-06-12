@@ -277,7 +277,7 @@ $disabled: map.merge(
 );
 
 // Input
-// css3 var in packages/theme-chalk/src/input.scss
+// css3 var in packages/theme/src/input.scss
 $input: () !default;
 $input: map.merge(
   (
@@ -387,6 +387,8 @@ $button-border-radius: map.merge(
 
 
 // Radio
+// css3 var in packages/theme/src/radio.scss
+
 $radio: () !default;
 $radio: map.merge(
   (
@@ -402,3 +404,24 @@ $radio: map.merge(
   $radio
 );
 
+
+// checkbox
+// css3 var in packages/theme/src/checkbox.scss
+$checkbox: () !default;
+$checkbox: map.merge(
+  (
+    'font-size': getCssVar('font-size-base'),
+    'text-color': getCssVar('text-color-white'),
+    'font-weight': 200,
+    'input-height': 16px,
+    'input-width': 16px,
+    'input-border': 2px solid,
+    'input-border-color': getCssVar('border-color','dark'),
+    'input-border-color-hover': getCssVar('color','black'),
+
+    'checked-input-border-color': getCssVar('color','black'),
+    'checked-bg-color': getCssVar('color','black'),
+    'checked-icon-color': getCssVar('color', 'white'),
+  ),
+  $radio
+);

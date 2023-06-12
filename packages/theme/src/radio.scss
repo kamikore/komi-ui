@@ -10,9 +10,15 @@
   }
 
 @include b(radio) {
+    position: relative;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
+    white-space: nowrap;
+    outline: none;
     gap: 4px;
+    vertical-align: middle;
+
     
     @include e(input) {
         width: getCssVar('radio-input-width');
@@ -22,7 +28,6 @@
         outline: none;
         display: inline-flex;
         position: relative;
-        vertical-align: middle;
 
         // 单选按钮选中
         @include when(checked) {
@@ -45,10 +50,12 @@
         right: 0;
         bottom: 0;
         margin: 0;
+        cursor: pointer;
     }
 
     // 单选按钮
     @include e(inner) {
+        box-sizing: border-box;
         appearance: none;
         width: getCssVar('radio-input-width');
         height: getCssVar('radio-input-height');
@@ -58,14 +65,12 @@
         border:  getCssVar('radio-input-border');
         border-color:  getCssVar('radio-input-border-color');;
         transition: 0.2s all linear;
-      
         position: relative;
     }
 
     @include e(label) {
         cursor: pointer;
         vertical-align: middle;
-
         color: getCssVar('radio-text-color');
         font-weight: getCssVar('radio-font-weight');
     }
