@@ -26,11 +26,7 @@ export const radioPanelConfig = {
         disabled: {
             type: Boolean,
             description: 'Whether Radio is disabled.'
-        },
-        checked: {
-            type: Boolean,
-            description: 'Whether Radio is checked.'
-        },
+        }
     },
 }
 

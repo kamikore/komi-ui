@@ -1,7 +1,7 @@
 <template>
     <div class="vp-panel_wrap">
         <div class="example_wrap">
-            <Preview ></Preview>
+            <Preview></Preview>
         </div>
         <hr color="#e2e2e2" size="4px"/>
         <!-- 选项排序顺序根据传入config -->
@@ -10,16 +10,13 @@
         </div>    
         <div class="sourceCode_wrap">
             <EditorExtend :initCode="source"></EditorExtend>
-            <Editor ref="editorRef" ></Editor>
+            <Editor></Editor>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import {
-    ref, 
-    provide,
-} from 'vue'
+import { provide } from 'vue'
 import Preview from './panel/vp-preview.vue'
 import Props from './panel/vp-props.vue'
 import Editor from './panel/vp-editor.vue'
@@ -36,8 +33,6 @@ const props = defineProps({
     },
 })
 
-
-const editorRef = ref()
 const [dir ,file] = props.configs?.example.split('/')
 
 const source = await fs.readFile(`../examples/${dir}/${file}.vue`)

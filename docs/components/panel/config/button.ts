@@ -8,12 +8,12 @@ export const buttonPanelConfig = {
         children: {
           value: 'Hello',
           type: HTMLElement,
-          description: `Visible label.`,
+          description: 'Visible label.',
         },
         onClick: {
           value: '() => alert("click")',
           type: Function,
-          description: `Function called when button is clicked.`,
+          description: 'Function called when button is clicked.',
         },
         disabled: {
           value: false,

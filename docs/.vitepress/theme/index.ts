@@ -1,11 +1,12 @@
 import KomiUi from 'komi-ui'
+import 'komi-ui/dist/index.css'
 import DefaultTheme from 'vitepress/theme'
 import '../styles/index.css'
 import { useData } from 'vitepress'
 import {watchEffect, onUnmounted} from 'vue'
 import {globalComps} from '../../components'
 import {inBrowser} from '../utils'
-import '../../../dist/komi-ui/theme/index.css'
+
 
 export default {
     extends: DefaultTheme,

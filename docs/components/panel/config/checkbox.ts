@@ -26,11 +26,7 @@ export const checkboxPanelConfig = {
         disabled: {
             type: Boolean,
             description: 'Whether Checkbox is disabled.'
-        },
-        checked: {
-            type: Boolean,
-            description: 'Whether Checkbox is checked.'
-        },
+        }
     },
 }
 
