@@ -18,29 +18,45 @@
     outline: none;
     gap: 4px;
     vertical-align: middle;
-    line-height: getCssVar('checkbox-input-height');
-
+    // line-height: getCssVar('checkbox-input-height');
+    line-height: 20px;
     
     @include e(input) {
-        width: getCssVar('checkbox-input-width');
-        height: getCssVar('checkbox-input-height');
         white-space: nowrap;
         cursor: pointer;
         outline: none;
         display: inline-flex;
         align-items: center;
         position: relative;
+        vertical-align: middle;
+
+
+        &:hover {
+            .#{$namespace}-checkbox__inner {
+                border-color: getCssVar('checkbox-input-border-color-hover');
+            }
+        }
     
         // 多选框选中
         @include when(checked) {
             
             @include e(inner) {
-                // 调整背景颜色为#000
+                // check button
                 background-color: getCssVar('checkbox-checked-bg-color');
                 border-color: getCssVar('checkbox-checked-input-border-color');
 
                 &::after {
                     transform: rotate(45deg) scaleY(1);
+                }
+
+                // toggle button
+                @include when(toggle) {
+                    background-color: #e1e1e1;
+                    
+                    &::after {
+                        transform: translate(calc(20px - 50%),-50%);
+                        background-color: black;
+                    }
                 }
             }
         }
@@ -52,7 +68,6 @@
         opacity: 0;
         outline: none;
         position: absolute;
-        z-index: 1;
         top: 0;
         left: 0;
         right: 0;
@@ -63,7 +78,7 @@
 
     // 多选框按钮
     @include e(inner) {
-        box-sizing: border-box;
+        // box-sizing: border-box;
         appearance: none;
         width: getCssVar('checkbox-input-width');
         height: getCssVar('checkbox-input-height');
@@ -73,11 +88,12 @@
         border-color:  getCssVar('checkbox-input-border-color');
         transition: 0.2s all linear;
         position: relative;
+        // 点击穿透
+        pointer-events: none;
+        vertical-align: middle;
 
-        &:hover {
-            border-color: getCssVar('checkbox-input-border-color-hover');
-        }
-    
+
+        // check button
         &::after {
             // border 绘制icon
             box-sizing: content-box;
@@ -94,6 +110,32 @@
             transform: rotate(45deg) scaleY(0);
             transition: transform 0.15s ease-in 0.05s;
             transform-origin: center;
+            
+        }
+
+        // toggle button
+        @include when(toggle) {
+            width: 24px;
+            height: 12px;
+            background-color: #eeeeee;
+            border: none;
+            border-radius: 6px;
+            margin-right: 4px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0px;
+                transform: translate(-50%,-50%);
+                height: 16px;
+                width: 16px;
+                border: none;
+                border-radius: 50%;
+                background-color: #fff;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
+
+            }
         }
     }
 

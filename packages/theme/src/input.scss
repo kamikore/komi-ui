@@ -19,9 +19,17 @@
     position: relative;
     display: inline-flex;
     padding: 0 getCssVar('padding');
-    border: getCssVar('border');
-    border-color: getCssVar('button', 'border-color');
+    border: getCssVar('input-border');
+    border-color: getCssVar('input', 'border-color');
     border-radius: getCssVar('border-radius','base');
+    
+    &:hover {
+        border-color: getCssVar('input-hover-border-color');
+    }
+
+    @include when(focused) {
+        border-color: getCssVar('input-focus-border-color');
+    }
 
     @include e(inner) {
         font-size: getCssVar('font-size', 'base');

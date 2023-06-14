@@ -23,10 +23,13 @@ $types: primary, success, warning, danger, error, info;
 $colors: () !default;
 $colors: map.deep-merge(
   (
-    'white': #ffffff,   
+    'white': #ffffff,
     'black': #000000,
+    'default': (
+      'base': #ffffff,
+    ),
     'primary': (
-      'base': #409eff,
+      'base': #000000,
     ),
     'success': (
       'base': #67c23a,
@@ -49,6 +52,7 @@ $colors: map.deep-merge(
 
 $color-white: map.get($colors, 'white') !default;
 $color-black: map.get($colors, 'black') !default;
+$color-black: map.get($colors, 'default','base') !default;
 $color-primary: map.get($colors, 'primary', 'base') !default;
 $color-success: map.get($colors, 'success', 'base') !default;
 $color-warning: map.get($colors, 'warning', 'base') !default;
@@ -127,6 +131,7 @@ $border-color: map.merge(
     'extra-light': #f2f6fc,
     'dark': #d4d7de,
     'darker': #cdd0d6,
+    'hover': #000000,
   ),
   $border-color
 );
@@ -282,18 +287,16 @@ $input: () !default;
 $input: map.merge(
   (
     'text-color': getCssVar('text-color-regular'),
-    'border': getCssVar('border'),
-    'hover-border': getCssVar('border-color-hover'),
-    'focus-border': getCssVar('color-primary'),
+    'border': 2px solid,
     'transparent-border': 0 0 0 1px transparent inset,
     'border-color': getCssVar('border-color'),
     'border-radius': getCssVar('border-radius-base'),
     'bg-color': getCssVar('fill-color', 'blank'),
     'icon-color': getCssVar('text-color-placeholder'),
     'placeholder-color': getCssVar('text-color-placeholder'),
-    'hover-border-color': getCssVar('border-color-hover'),
+    'hover-border-color': getCssVar('border-color','hover'),
     'clear-hover-color': getCssVar('text-color-secondary'),
-    'focus-border-color': getCssVar('color-primary'),
+    'focus-border-color': getCssVar('border-color','hover'),
   ),
   $input
 );
@@ -354,8 +357,8 @@ $button: map.merge(
   (
     'font-weight': getCssVar('font-weight-primary'),
     'border-color': getCssVar('border-color'),
-    'bg-color': getCssVar('fill-color', 'black'),
-    'text-color': getCssVar('text-color', 'white'),
+    'bg-color': getCssVar('fill-color', 'white'),
+    'text-color': getCssVar('text-color', 'black'),
     'disabled-text-color': getCssVar('disabled-text-color'),
     'disabled-bg-color': getCssVar('fill-color', 'blank'),
     'disabled-border-color': getCssVar('border-color-light'),
@@ -386,6 +389,39 @@ $button-border-radius: map.merge(
 
 
 
+// Popover
+// css3 var in packages/theme/src/popover.scss
+$popover: () !default;
+$popover: map.merge(
+  (
+  ),
+  $popover
+);
+
+
+$popover-font-size: () !default;
+$popover-font-size: map.merge(
+  (
+    'large': 16px,
+    'default': 14px,
+    'small': 12px,
+  ),
+  $popover-font-size
+);
+
+
+$popover-padding: () !default;
+$popover-padding: map.merge(
+  (
+    'large': getCssVar('padding') getCssVar('padding','large'),
+    'default': getCssVar('padding','small') getCssVar('padding'),
+    'small': getCssVar('padding','small') getCssVar('padding'),
+  ),
+  $popover-padding
+);
+
+
+
 // Radio
 // css3 var in packages/theme/src/radio.scss
 
@@ -399,7 +435,7 @@ $radio: map.merge(
     'input-width': 16px,
     'input-border': 2px solid,
     'input-border-color': getCssVar('border-color','dark'),
-    'input-border-color-hover': getCssVar('color-primary'),
+    'input-border-color-hover': getCssVar('border-color','hover'),
   ),
   $radio
 );
@@ -417,11 +453,40 @@ $checkbox: map.merge(
     'input-width': 16px,
     'input-border': 2px solid,
     'input-border-color': getCssVar('border-color','dark'),
-    'input-border-color-hover': getCssVar('color','black'),
+    'input-border-color-hover': getCssVar('border-color','hover'),
 
     'checked-input-border-color': getCssVar('color','black'),
     'checked-bg-color': getCssVar('color','black'),
     'checked-icon-color': getCssVar('color', 'white'),
+
+    'toggle-input-height': 12px,
+    'toggle-input-width': 12px,
+    'toggle-track-height': 8px,
+    'toggle-track-width': 24px,
   ),
   $radio
 );
+
+
+$checkbox-track-radius: () !default;
+$checkbox-track-radius: map.merge(
+  (
+      'large': 8px,
+      'default': 6px,
+      'small': 4px
+  ),
+  $checkbox-track-radius
+);
+
+
+$checkbox-radius: () !default;
+$checkbox-radius: map.merge(
+  (
+      'large': 24px,
+      'default': 16px,
+      'small': 12px
+  ),
+  $checkbox-radius
+);
+
+

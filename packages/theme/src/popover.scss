@@ -1,6 +1,8 @@
-@use 'mixins/function' as *;
-@use 'mixins/mixins' as *;
+@use 'sass:map';
 
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
 
 /* transition config */
 .#{$namespace}-popover-fade {
@@ -22,12 +24,12 @@
     background-color: getCssVar('color','white');
     border-radius: getCssVar('border-radius','base');
     color: getCssVar('color','black');
-
-    min-width: 50px;
-    min-height: 24px;
-    padding: getCssVar('padding');
-
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;;
+    min-width: 32px;
+    line-height: 20px;
+    padding: map.get($popover-padding, 'default');
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+    word-wrap: break-word;
+    font-size: map.get($popover-font-size, 'default');
 
     // .ki-popover .ki-popover__arrow
     @include e((arrow)) {
@@ -46,5 +48,14 @@
           background: getCssVar('color','white');
           box-sizing: border-box;
         }
-      }
+    }
+
+    @each $size in(large, small) {
+        @include m($size) {
+            font-size: map.get($popover-font-size, $size);
+            padding: map.get($popover-padding, $size);
+        }
+    }
 }
+
+

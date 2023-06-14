@@ -6,15 +6,18 @@
 
 @include b(scrollbar) {
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
-    padding: getCssVar('padding') 0;
-    
+    padding: 0 getCssVar('padding','large');
+    margin: 8px 0;
+
+    // scrollbar 样式
+    @include scroll-bar;
 
     @include e(wrap) {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         height: 100%;
-        overflow: auto;
-
-        @include scroll-bar;
     }
 }

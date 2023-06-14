@@ -14,9 +14,16 @@
   $scrollbar-thumb-background: #C9CCD0;
   $scrollbar-track-background: transparent;
 
+  overflow: hidden;
+
+  // hover to show scrollbar
+  &:hover {
+    overflow: auto;
+  }
+
   &::-webkit-scrollbar {
     z-index: 11;
-    width: 4px;
+    width: 2px;
     height: 20%;
 
 

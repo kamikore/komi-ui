@@ -29,6 +29,13 @@
         display: inline-flex;
         position: relative;
 
+        
+        &:hover {
+            .#{$namespace}-radio__inner {
+                border-color: getCssVar('radio-input-border-color-hover');
+            }
+        }
+
         // 单选按钮选中
         @include when(checked) {
             
@@ -44,13 +51,13 @@
         opacity: 0;
         outline: none;
         position: absolute;
-        z-index: 1;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         margin: 0;
         cursor: pointer;
+
     }
 
     // 单选按钮
@@ -66,7 +73,11 @@
         border-color:  getCssVar('radio-input-border-color');;
         transition: 0.2s all linear;
         position: relative;
+        // 点击穿透
+        pointer-events: none;
     }
+
+
 
     @include e(label) {
         cursor: pointer;
