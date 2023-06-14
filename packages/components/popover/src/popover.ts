@@ -1,5 +1,12 @@
+import {PLACEMENT,COMPONENTSIZES, buildProps} from '@komi-ui/utils'
 
-export const popoverProps = {
+
+export const popoverProps = buildProps({
+    size: {
+        type: String,
+        values: COMPONENTSIZES,
+        default: 'default'
+    },
     trigger: {
         type: String,
         default: 'hover'
@@ -10,6 +17,7 @@ export const popoverProps = {
     },
     placement: {
         type: String,
+        values: PLACEMENT,
         default: 'bottom'
     }
-}
+})

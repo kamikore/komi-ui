@@ -7,7 +7,7 @@
         <!-- 初次渲染时应用过渡 -->
        <Transition :name="ns.b('fade')" appear>
             <div 
-                :class="[ns.b()]" 
+                :class="[ns.b(),ns.m(size)]" 
                 :style="Object.assign(popoverStyle, $attrs?.style)"
                 ref="popoverRef"
                 v-show="isShow"
