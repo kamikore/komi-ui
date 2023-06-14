@@ -25,11 +25,10 @@ const ns = useNamespace('scrollbar')
 
 const props = defineProps(scrollbarProps)
 
-console.log(props);
 
-const scrollbarStyle: CSSProperties = ref({
+const scrollbarStyle = ref({
     height: props.height
-})
+} as CSSProperties)
 
 
 </script>

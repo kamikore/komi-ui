@@ -6,6 +6,7 @@
     <teleport to='body'>
         <!-- 初次渲染时应用过渡 -->
        <Transition :name="ns.b('fade')" appear>
+            <!-- 兼容样式 -->
             <div 
                 :class="[ns.b(),ns.m(size)]" 
                 :style="Object.assign(popoverStyle, $attrs?.style)"
@@ -29,7 +30,6 @@ import {
     ref, 
     onMounted,
     onUnmounted,
-    StyleValue,
 } from 'vue'
 import {KiOnlyChild} from '@komi-ui/components/slots'
 import {popoverProps} from './popover'

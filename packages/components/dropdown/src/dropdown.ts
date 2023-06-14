@@ -1,23 +1,20 @@
+import { buildProps, PLACEMENT } from "@komi-ui/utils"
 
-export const dropdownProps = {
-    items: {
-        type: Array,
-        default: undefined,
-    },
-    // 展开触发方式
+export const dropdownProps = buildProps({
+    maxHeight: String,
     trigger: {
         type: String,
+        values: ['hover','click'],
         default: 'hover'
     },
-    // 菜单弹出位置
     placement: {
         type: String,
+        values: PLACEMENT,
         default: 'bottom'
     },
-    // 弹出框箭头
     showArrow: {
         type: Boolean,
         default: false
     }
 
-}
+})
