@@ -76,5 +76,12 @@
 }
 
 
+/* Code block */
+:root {
+    --vp-code-block-bg: #eeeeee;
+    --vp-code-block-color: #333333;
+}
 
-
+.dark {
+    --vp-code-block-bg: #161618;
+}

@@ -1,3 +1,4 @@
+@import url('./iconfont.css');
 @import url('./prism.css');
 @import url('./var.css');
 
@@ -13,4 +14,8 @@ body {
 
 a {
     text-decoration-line: none !important;
+}
+
+.VPSidebarItem .has-active {
+    font-weight: 700 !important;
 }
