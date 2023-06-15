@@ -1,5 +1,5 @@
 <template>
-    <div class="preview-container" ref="container" ></div>
+    <div class="preview-showcase" ref="container" ></div>
 </template>
 
 
@@ -152,7 +152,7 @@ onUnmounted(() => {
 
 
 <style lang="scss" scoped>
-.preview-container {
+.preview-showcase {
 
 }
 </style>

@@ -31,6 +31,7 @@ export function compileSFC(store: Store, mainFile: File) {
         sourceMap: true
     }) 
 
+
     // 解析阶段错误
     if (errors.length) {
         store.state.errors = errors
@@ -69,7 +70,6 @@ export function compileSFC(store: Store, mainFile: File) {
             reCode += `\n${COMP_IDENTIFIER}.render = render`
 
         }
-
 
         if(descriptor.script || descriptor.scriptSetup) {
             const script = compileScript(

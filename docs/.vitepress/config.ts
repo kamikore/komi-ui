@@ -9,8 +9,8 @@ export default defineConfig({
 	head,
 	locales,
 	themeConfig: {
-		siteTitle: 'Komi',
-		logo:'/logo.svg',
+		siteTitle: '',
+		logo:'/komi-logo.svg',
 		sidebar,
 		socialLinks: [
 			{ icon: 'github', link: 'https://github.com/kamikore/komi-ui' }

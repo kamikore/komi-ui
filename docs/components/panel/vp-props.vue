@@ -1,5 +1,5 @@
 <template>
-    <div class="v-props_wrap" v-if="configs">
+    <div class="v-props_wrap" v-if="configs && name">
         <template 
             v-for="({value = undefined,type,options,description}, key) in configs" 
             :key="key"
@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import PropsLabel from '../panel/vp-props-label.vue'
-import {reactive, watchEffect, inject} from 'vue'
+import {reactive, watch, watchEffect, inject} from 'vue'
 import { Store,defaultMainFile } from './store'
 import type { PropType } from "vue"
 
@@ -56,6 +56,7 @@ interface Prop<T = any> {
 
 
 const props = defineProps<{
+    name?: String
     configs?: Record<string,Prop>
 }>()
 
@@ -68,10 +69,57 @@ for(let key in props.configs) {
 // 注入store
 const store = inject('store') as Store
 
-watchEffect(() => {
-    console.log('compProps 修改', compProps)
-    store.state.compProps[defaultMainFile] = compProps
-})
+
+watch(
+  () => compProps,
+  (newValue, oldValue) => {
+    console.log("compProps change", newValue)
+    store.state.mainFile.code = formatCode(newValue)
+  },
+  { deep: true }
+)
+
+/**
+ * @description 根据组件props格式化代码
+ * @param compProps 组件props
+ * @returns 返回处理后代码
+ */
+function formatCode(compProps: Record<string,any>) {
+    let propsStr = ''
+    console.log(compProps)
+    for(let key in compProps) {
+        if(!compProps[key]) continue
+
+        if(key === 'children') continue
+        if(key === 'modelValue') {
+            propsStr += `\n\tv-model=" ${compProps[key]}"`
+            continue
+        }
+        switch(props?.configs[key].type) {
+            case String: 
+            case 'Enum':
+                propsStr += `\n\t${key}="${compProps[key]}"`
+                break
+            case Function: 
+                propsStr += `\n\t@${key}="${compProps[key]}"`
+                break
+            default:
+                propsStr += `\n\t:${key}="${compProps[key]}"`
+                break
+        }
+    }
+
+
+return  `
+<template>
+    <${props.name}${propsStr}
+    >
+        ${String(compProps.children)}
+    </${props.name}>
+</template>
+`.trim()
+
+}
 
 </script>
 

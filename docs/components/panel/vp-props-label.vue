@@ -1,8 +1,8 @@
 <template>
-    <ki-popover>
+    <ki-popover style="max-width: 240px;">
         <label>{{ title }}</label>
         <template #content>
-            <h5>{{title + ': ' +  formatType(type)}}</h5>
+            <h3>{{title + ': ' +  formatType(type)}}</h3>
             <p>{{ description }}</p>
         </template>
     </ki-popover>
@@ -51,8 +51,9 @@ label {
     text-decoration: underline;
 }
 
-h4 {
-    font-weight: 600;
+h3 {
+    font-size: 14px;
+    font-weight: 800;
 }
 
 

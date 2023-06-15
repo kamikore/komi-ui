@@ -1,7 +1,13 @@
 <template>
     <div class="vp-editor-extend_wrap">
-        <ki-button @click="onCopy">Copy</ki-button>
-        <ki-button @click="onReset">Reset</ki-button>
+        <ki-button @click="onCopy" type="primary">
+            <i class="iconfont icon-copy"></i>
+            <span>Copy</span>
+        </ki-button>
+        <ki-button @click="onReset" type="primary">
+            <i class="iconfont icon-icon-resetting"></i>
+            <span>Reset</span>
+        </ki-button>
     </div>
 </template>
 
@@ -22,7 +28,7 @@ const clipboardObj = navigator.clipboard
 
 function onCopy() {
     window.alert('已复制')
-    clipboardObj.writeText(store.state.mainFile.code);
+    clipboardObj.writeText(store.state.mainFile.code)
 }
 
 function onReset() {
@@ -38,6 +44,10 @@ function onReset() {
     width: 100%;
     display: inline-flex;
     justify-content: flex-end;
+
+    i {
+        margin-right: 2px;
+    }
 }
 
 </style>

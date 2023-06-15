@@ -6,12 +6,8 @@
             wrap="hard"
             @input="onInput"
         ></textarea>
-        <pre 
-            v-html="hlCode"
-            class="editor-pre"
-        ></pre>
+        <pre v-html="hlCode"></pre>
     </div>
-    <!-- lang="x" pre-processors for <template> or <style> are currently not supported. -->
     <Message v-show="store.state.errors.length" :err="store.state.errors[0]"></Message>
 
 </template>

@@ -6,7 +6,7 @@
         <hr color="#e2e2e2" size="4px"/>
         <!-- 选项排序顺序根据传入config -->
         <div class="props-wrap">
-            <Props :configs="configs.props"></Props>
+            <Props :name="configs.name" :configs="configs.props"></Props>
         </div>    
         <div class="sourceCode_wrap">
             <EditorExtend :initCode="source"></EditorExtend>
@@ -58,6 +58,8 @@ provide('store', store)
     
     hr {
         margin: 0;
+        size: 4px;
+        color: #e2e2e2;
     }
 
     .example_wrap {
