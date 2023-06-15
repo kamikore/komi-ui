@@ -73,7 +73,6 @@ const store = inject('store') as Store
 watch(
   () => compProps,
   (newValue, oldValue) => {
-    console.log("compProps change", newValue)
     store.state.mainFile.code = formatCode(newValue)
   },
   { deep: true }
@@ -85,8 +84,9 @@ watch(
  * @returns 返回处理后代码
  */
 function formatCode(compProps: Record<string,any>) {
+    // 's' 允许.匹配换行符 或 ([\s\S]*)
+    const reg = new RegExp(`\<${props.name}\>(.*)<\/${props.name}\>`,'s')
     let propsStr = ''
-    console.log(compProps)
     for(let key in compProps) {
         if(!compProps[key]) continue
 
@@ -114,7 +114,7 @@ return  `
 <template>
     <${props.name}${propsStr}
     >
-        ${String(compProps.children)}
+        ${reg.exec(store.state.mainFile.code)[1]}
     </${props.name}>
 </template>
 `.trim()

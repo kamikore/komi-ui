@@ -109,9 +109,11 @@ async function updatePreview() {
         if (mainFile.filename.endsWith('.vue')) {
           codeToEval.push(
             `import {createApp as _createApp } from "vue"
+             import KomiUi from 'komi-ui'
              const _mount = () => {
               const AppComponent = __modules__["${mainFile.filename}"].default
               const app = _createApp(AppComponent)
+              app.use(KomiUi)
               app.mount('#app')
             }
             _mount()`
