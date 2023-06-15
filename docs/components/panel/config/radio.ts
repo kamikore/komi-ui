@@ -2,7 +2,7 @@ import {COMPONENTSIZES} from '@komi-ui/utils'
 
 
 export const radioPanelConfig = {
-    componentName: 'KiRadio',
+    name: 'KiRadio',
     example: 'radio/basic',
     props: {
         size: {

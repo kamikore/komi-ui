@@ -2,7 +2,7 @@ import {COMPONENTSIZES} from '@komi-ui/utils'
 
 
 export const inputPanelConfig = {
-    componentName: 'KiInput',
+    name: 'KiInput',
     example: 'input/basic',
     props: {
         size: {

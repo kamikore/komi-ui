@@ -1,9 +1,30 @@
+import { PLACEMENT } from "@komi-ui/utils"
 
 export const dropdownPanelConfig = {
-    componentName: 'KiDropdown',
+    name: 'KiDropdown',
     example: 'dropdown/basic',
     props: {
-   
+        maxHeight: {
+            type: String,
+            description: ''
+        },
+        trigger: {
+            value: 'hover',
+            type: String,
+            options: ['hover','click'],
+            description: 'Controls how to position the popover relative to the target.'
+        },
+        placement: {
+            value: 'bottom',
+            options: PLACEMENT,
+            type: 'Enum',
+            description: 'Controls how to position the popover relative to the target.'
+        },
+        showArrow: {
+            value: true,
+            type: Boolean,
+            description: 'If true, an arrow will be shown pointing from the popover to the trigger element.'
+        }
     },
 }
 

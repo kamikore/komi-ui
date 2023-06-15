@@ -1,9 +1,9 @@
-const TYPE = ['default','primary','success']
+const TYPE = ['default','primary']
 import {COMPONENTSIZES} from '@komi-ui/utils'
 
 export const buttonPanelConfig = {
-    componentName: 'KiButton',
-    example: 'button/basic',
+    name: 'KiButton',
+    example: 'button/panel-example',
     props: {
         children: {
           value: 'Hello',
@@ -11,7 +11,7 @@ export const buttonPanelConfig = {
           description: 'Visible label.',
         },
         onClick: {
-          value: '() => alert("click")',
+          value: "() => alert('click')",
           type: Function,
           description: 'Function called when button is clicked.',
         },
