@@ -42,6 +42,7 @@ export interface StoreState {
   files: Record<string, File>
   errors: (string | Error)[]
   vueRuntimeURL: string
+  uiLibURL?: string
 }
 
 export interface SFCOptions {
@@ -61,6 +62,9 @@ export interface StoreOptions {
   initCode?: string
   // loose type to allow getting from the URL without inducing a typing error
   defaultVueRuntimeURL?: string
+  // KomiUi 
+  defaultUiLibURL?: string
+
 }
 
 export class ReplStore implements Store {
@@ -69,12 +73,15 @@ export class ReplStore implements Store {
   options?: SFCOptions
 
   private defaultVueRuntimeURL: string
+  private defaultUiLibURL: string
 
   constructor({
     // 初始化文件代码
     initCode = welcomeCode,
     // vue浏览器运行时环境
     defaultVueRuntimeURL = `https://unpkg.com/@vue/runtime-dom@${version}/dist/runtime-dom.esm-browser.js`,
+    // komi-ui ESM
+    defaultUiLibURL = 'https://unpkg.com/komi-ui/es/index.mjs'
   }: StoreOptions = {}) {
     let files: StoreState['files'] = {
       [defaultMainFile]: new File(defaultMainFile, initCode)
@@ -82,12 +89,14 @@ export class ReplStore implements Store {
 
 
     this.defaultVueRuntimeURL = defaultVueRuntimeURL
+    this.defaultUiLibURL = defaultUiLibURL
 
     this.state = reactive({
       files,
       mainFile: files[defaultMainFile],
       errors: [],
       vueRuntimeURL: this.defaultVueRuntimeURL,
+      uiLibURL: this.defaultVueRuntimeURL
     })
 
     this.initImportMap()
@@ -113,6 +122,7 @@ export class ReplStore implements Store {
           {
             imports: {
               vue: this.defaultVueRuntimeURL,
+              'komi-ui': this.defaultUiLibURL,
             }
           },
           null,
