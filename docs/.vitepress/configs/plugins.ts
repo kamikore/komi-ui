@@ -47,4 +47,36 @@ export const mdPlugin = (md:MarkdownIt) => {
       },
     } as ContainerOpts)
   
+
+    md.use(mdContainer, 'panel', {
+      validate(params) {
+        return !!params.trim().match(/^panel\s*(.*)$/)
+      },
+  
+      render(tokens, idx) {
+          const m = tokens[idx].info.trim().match(/^panel\s*(.*)$/)
+          if (tokens[idx].nesting === 1 ) {
+              const configFile = m && m.length > 1 ? m[1] : ''
+              const sourceFileToken = tokens[idx + 2]
+              let sourceCode = ''
+              const sourceFile = sourceFileToken.children?.[0].content ?? ''
+              const filePath =  resolve(docRoot, 'examples', `${sourceFile}.vue`)
+
+              if (sourceFileToken.type === 'inline') {
+                  sourceCode = readFileSync(filePath,'utf-8')
+              }
+
+              if (!sourceCode) throw new Error(`Incorrect source file: ${sourceFile}`)
+
+              return `
+                <Suspense>
+                  <Panel 
+                    :configs="${configFile}"  
+                    source="${encodeURIComponent(sourceCode)}"
+                  >`
+          } else {
+              return '</Panel></Suspense>'
+          }
+      },
+    } as ContainerOpts)
   }
