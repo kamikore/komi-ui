@@ -19,6 +19,7 @@ import {checkboxGroupProps} from './checkboxGroup'
 import { useNamespace, useId } from '@komi-ui/hooks';
 import {checkboxGroupKey} from './constants'
 import type {CheckboxLabelType} from './checkbox'
+import {isArray} from '@komi-ui/utils'
 
 defineOptions({
     name: 'KiCheckboxGroup'
@@ -34,7 +35,7 @@ const name = computed(() => {
 })
 
 const changeEvent = (val: CheckboxLabelType) => {
-    console.log("changeEvent", val)
+    if(!isArray(props.modelValue)) return
     val = checkboxChange(val)
     emit('update:modelValue', val)
     nextTick(() => emit('change', val))

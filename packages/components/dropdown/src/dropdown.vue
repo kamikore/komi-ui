@@ -23,8 +23,6 @@
 import {ref,useSlots} from 'vue'
 import {useNamespace} from '@komi-ui/hooks'
 import {dropdownProps} from './dropdown'
-import KiPopover from '@komi-ui/components/popover'
-import KiScrollbar from '@komi-ui/components/scrollbar'
 
 defineOptions({
     name: 'KiDropdown'
@@ -32,9 +30,7 @@ defineOptions({
 
 const props = defineProps(dropdownProps)
 const ns = useNamespace('dropdown')
-const isShow = ref(false)
 
-const slots = useSlots()
 
 
 </script>

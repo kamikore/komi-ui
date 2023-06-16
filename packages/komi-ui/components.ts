@@ -6,7 +6,9 @@ import {
     KiPopover,
     KiRadio,
     KiCheckbox,
+    KiScrollbar,
     KiTransition,
+    KiOnlyChild,
 } from '@komi-ui/components'
 import type { Plugin } from 'vue'
 
@@ -19,5 +21,7 @@ export default [
     KiPopover,
     KiRadio,
     KiCheckbox,
+    KiScrollbar,
     KiTransition,
+    KiOnlyChild,
 ] as Plugin[]

@@ -5,7 +5,6 @@
      v-bind="$props"
      :class= "[
         ns.b(),
-        // primary, success, warning, error
         ns.m(type),
         ns.is('disabled',disabled),
         ns.is('round',round),
@@ -15,7 +14,7 @@
     <!-- 按钮icon -->
     
     <!-- 按钮文本，如果传入了内容，插槽默认为default -->
-    <span v-if="$slots.default">     
+    <span :class="ns.e('text')" v-if="$slots.default">     
         <slot/>
     </span>
    </component>

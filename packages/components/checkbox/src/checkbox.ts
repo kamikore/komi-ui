@@ -40,6 +40,14 @@ export const checkboxProps = buildProps({
       type: [String, Boolean, Number, Object],
     },
     /**
+     * @description Renders component in a toggle state.
+     */
+    checkmarkType: {
+      type: String,
+      values: ['checkbox','toggle'],
+      default: 'checkbox'
+    },
+    /**
      * @description whether Radio is disabled
      */
     disabled: Boolean,

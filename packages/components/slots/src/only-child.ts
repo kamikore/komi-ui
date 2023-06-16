@@ -13,7 +13,7 @@ import { useNamespace } from "@komi-ui/hooks"
 
 const NAME = 'KiOnlyChild'
 
-export const KiOnlyChild  = defineComponent(
+export default defineComponent(
   (_, { slots, attrs}) => {
     const defaultSlot = slots.default?.(attrs)
     if (!defaultSlot) return () => null

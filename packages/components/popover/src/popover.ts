@@ -1,6 +1,5 @@
 import {PLACEMENT,COMPONENTSIZES, buildProps} from '@komi-ui/utils'
 
-
 export const popoverProps = buildProps({
     size: {
         type: String,
@@ -19,5 +18,5 @@ export const popoverProps = buildProps({
         type: String,
         values: PLACEMENT,
         default: 'bottom'
-    }
+    },
 })

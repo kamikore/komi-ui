@@ -1,6 +1,8 @@
 <template>
-    <div :class="[ ns.b()]">
-        {{modelValue}}
+    <div :class="[ 
+        ns.b(),
+        ns.is('focused', focused)
+    ]">
         <input 
             :class="ns.e('inner')"
 			ref="input"
@@ -10,7 +12,9 @@
             :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
             @input="handleInput"
             @focus="handleFocus"
+            @blur="handleBlur"
             @change="handleChange"
+            @keydown="handleKeydown"
         >
         
         <!-- suffix slot -->
@@ -58,7 +62,6 @@ defineOptions({
 const emit = defineEmits(inputEmits)
 
 const props = defineProps(inputProps)
-console.log('input props:',props)
 
 const ns = useNamespace('input')
 
@@ -69,14 +72,14 @@ const input = shallowRef<HTMLInputElement>(null)
 const _ref = computed(() => input.value)
 
 
+const focused = ref(false)
 // input.value的值，如果未提供v-model则一直为''
 const nativeInputValue = computed(() =>
   !props.modelValue ? '' : String(props.modelValue)
 )
 
 const setNativeInputValue = () => { 
-	console.log("此时的value",nativeInputValue.value)
-	// input element
+	// input element value
 	const input = _ref.value		
 	if (!input || input.value === nativeInputValue.value) return
 	input.value = nativeInputValue.value
@@ -142,13 +145,25 @@ const handleChange = (e: Event) => {
 	emit('change',e.target.value)
 }
 
-const handleFocus = () => {
 
+const handleFocus = (event: FocusEvent) => {
+  focused.value = true
+  emit('focus', event)
 }
+
+const handleBlur = (event: FocusEvent) => {
+  focused.value = false
+  emit('blur', event)
+}
+
+
+const handleKeydown = (evt: KeyboardEvent) => {
+  emit('keydown', evt)
+}
+
 
 const handleClearClick = () => {
     emit('update:modelValue','')
-
 }
 
 

@@ -7,7 +7,7 @@ export const inputProps = {
     */
     modelValue: {
         type: String,
-        default: '',
+        default: undefined,
     },
     /**
     * @description type of input
@@ -32,10 +32,15 @@ export const inputProps = {
      */
     parser: Function,
     /**
-     * @description native input maxlength, minlength
+     * @description native input max, min
      */
     max: Number,
     min: Number,
+    /**
+     * @description native input maxlength, minlength
+     */
+    maxlength: Number,
+    minlength: Number,
     /**
      * @description input suffix icon
      */
@@ -68,10 +73,16 @@ export const inputProps = {
         type: Boolean,
         default: false,
     },
+    /**
+	* @description native input autofocus
+	*/
     autofocus: {
         type: Boolean,
         default: false,
     },
+    /**
+	* @description native input checked
+	*/
     checked: {
         type: Boolean,
         default: false,
@@ -84,8 +95,6 @@ export const inputEmits = {
     input: (value: string) => isString(value),
     change: (value: string) => isString(value),
     focus: (e: FocusEvent) => e instanceof FocusEvent,
-    blur: (e: FocusEvent) => e instanceof FocusEvent,
-    clear: () => true,
-    mouseleave: (e: MouseEvent) => e instanceof MouseEvent,
-    mouseenter: (e: MouseEvent) => e instanceof MouseEvent,
+    blur: (evt: FocusEvent) => evt instanceof FocusEvent,
+    keydown: (evt: KeyboardEvent | Event) => evt instanceof Event,
 }

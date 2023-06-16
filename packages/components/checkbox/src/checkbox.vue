@@ -32,7 +32,11 @@
                 :value="label"
                 @change="handleChange"
             >
-            <span :class="ns.e('inner')"></span>
+            <span :class="[
+                
+                ns.e('inner'),
+                ns.is('toggle', checkmarkType === 'toggle')
+            ]"></span>
         </span>
         
         <span
@@ -86,7 +90,8 @@ function handleChange() {
 function labelClick() {
     checkboxGroup ?  
         checkboxGroup!.changeEvent(props.label)
-        : emit && emit('update:modelValue', !!modelValue.value)
+        : emit && emit('update:modelValue', !modelValue.value)
+
     nextTick(() => emit('change', modelValue.value))
 }
 

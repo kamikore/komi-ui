@@ -13,6 +13,7 @@ export const buttonProps = buildProps({
     },
     type: {
         type: String,
+        values: ['default','primary'],
         default: 'default'
     },
     icon: {

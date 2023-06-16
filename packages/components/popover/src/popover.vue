@@ -31,7 +31,6 @@ import {
     onMounted,
     onUnmounted,
 } from 'vue'
-import {KiOnlyChild} from '@komi-ui/components/slots'
 import {popoverProps} from './popover'
 import {useNamespace} from '@komi-ui/hooks'
 import { vClickoutside } from '@komi-ui/directives'
@@ -44,7 +43,9 @@ import {
 } from "./utils"
 
 defineOptions({
-    name: 'KiPopover'
+    name: 'KiPopover',
+    // 关闭属性继承警告
+    inheritAttrs: false
 })
 
 const props = defineProps(popoverProps)
