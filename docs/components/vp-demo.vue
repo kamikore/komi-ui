@@ -24,7 +24,6 @@
               <SourceCode :source="encodeURIComponent(hlSource)" />
             </div>
         </KiCollapseTransition>
-   
       
         <div 
             class="sourceCode-float-control" 
@@ -42,26 +41,23 @@
 <script setup lang="ts">
 // https://cn.vitejs.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility
 // import fs from 'node:fs'
-import fs from 'vite-plugin-fs/browser';
 import { ref } from 'vue'
 import { useData } from 'vitepress'
 import Example from './demo/vp-example.vue'
 import SourceCode from './demo/vp-source-code.vue'
 import {highlight} from '../.vitepress/utils'
 
-const props = defineProps({
-  example: {
-    type: String,
-    require: true
-  }
-})
+const props = defineProps<{
+  path: string,
+  source: string
+}>()
 
 const { lang } = useData()
-const [dir ,file] = props.example?.split('/')
+
+const [dir ,file] = props.path?.split('/')
 
 const demo = await import(`../examples/${dir}/${file}.vue`)
-const source = await fs.readFile(`../examples/${dir}/${file}.vue`)
-const hlSource =  `<code>${highlight(source, 'vue')}</code>`
+const hlSource =  `<code>${highlight(decodeURIComponent(props.source), 'vue')}</code>`
 
 const extendOps = {
   Github: {
@@ -92,14 +88,12 @@ function extendClick(op: String) {
       break
     case 'Copy':
       window.alert('已复制')
-      clipboardObj.writeText(source)
+      clipboardObj.writeText(props.source)
       break
     case 'Github':
       break
   }
 }
-
-
 
 </script>
 

@@ -8,6 +8,7 @@
 
 <script setup lang="ts">
 const props = defineProps({
+  // 组件实例
   demo: {
     type: Object,
     required: true,

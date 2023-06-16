@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import {sidebar, locales, head} from './configs'
+import {sidebar, locales, head, mdPlugin} from './configs'
 
 
 export default defineConfig({
@@ -19,5 +19,8 @@ export default defineConfig({
 			message: 'Released under the MIT License.',
 			copyright: 'Copyright © 2023-present Kamikore'
 		}
+	},
+	markdown:{
+		config: (md) => mdPlugin(md)
 	}
 })

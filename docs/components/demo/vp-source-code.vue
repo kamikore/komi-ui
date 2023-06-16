@@ -1,7 +1,5 @@
 <template>
-    <div 
-      class="source-code-wrap" 
-    >
+    <div class="source-code-wrap">
         <pre v-html="decoded"></pre>
     </div>
 </template>
