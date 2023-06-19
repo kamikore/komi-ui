@@ -1,4 +1,4 @@
-export const COMPONENTSIZES = ['', 'default', 'small', 'large']
+export const COMPONENTSIZES = ['default', 'small', 'large']
 export const PLACEMENT = [
     'bottom', 
     'bottom-start',

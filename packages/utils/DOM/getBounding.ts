@@ -5,14 +5,15 @@ interface BOUNDING {
     right:number
 }
 
-// 获取元素距离视口的距离
+/**
+ * 获取元素距离视口的距离，不包括滚动条宽高
+ * @param elm 目标元素
+ * @returns {BOUNDING} 元素距离视口的top,bottom,left,right
+ */
 export function getBounding(elm:Element):BOUNDING{
-    // 不包括滚动条宽高
     const viewportWidth = document.documentElement.offsetWidth
     const viewportHeight = document.documentElement.offsetHeight
     
-    
-
     const rect:DOMRect = elm.getBoundingClientRect()
 
     const top = rect.top 

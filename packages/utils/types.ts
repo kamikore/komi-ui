@@ -16,3 +16,10 @@ export const isElement = (val: unknown): val is Element => {
     return val instanceof Element
  }
   
+
+export const isStringNumber = (val: string): boolean => {
+    if (!isString(val)) {
+        return false
+    }
+    return !Number.isNaN(Number(val))
+}
