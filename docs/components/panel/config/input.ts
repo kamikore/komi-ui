@@ -2,7 +2,7 @@ import {COMPONENTSIZES} from '@komi-ui/utils'
 
 
 export const inputPanelConfig = {
-    name: 'KiInput',
+    name: 'ki-input',
     example: 'input/basic',
     props: {
         size: {
@@ -12,6 +12,7 @@ export const inputPanelConfig = {
             description: 'Defines the size of the input.',
         },
         modelValue: {
+            value: 'message',
             type: String,
             description: 'Binding value.',
         },
@@ -21,25 +22,9 @@ export const inputPanelConfig = {
             description: 'Type of input.',
         },
         placeholder: {
-            value: 'Hello',
+            value: 'Hello World!',
             type: String,
             description: 'Native input placeholder.'
-        },
-        max: {
-            type: Number,
-            description: 'Native input max.'
-        },
-        min: {
-            type: Number,
-            description: 'Native input min.'
-        },
-        maxlength: {
-            type: Number,
-            description: 'Native input maxlength.'
-        },
-        minlength: {
-            type: Number,
-            description: 'Native input minlength.'
         },
         clearable: {
             type: Boolean,
@@ -69,11 +54,6 @@ export const inputPanelConfig = {
             value: false,
             type: Boolean,
             description: 'Native input autofocus.'
-        },
-        checked: {
-            value: false,
-            type: Boolean,
-            description: 'Native input checked.'
         },
     },
 }

@@ -2,7 +2,7 @@ import {COMPONENTSIZES} from '@komi-ui/utils'
 
 
 export const checkboxPanelConfig = {
-    name: 'KiCheckbox',
+    name: 'ki-checkbox',
     example: 'checkbox/panel-example',
     props: {
         size: {

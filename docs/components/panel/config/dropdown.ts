@@ -1,7 +1,7 @@
 import { PLACEMENT } from "@komi-ui/utils"
 
 export const dropdownPanelConfig = {
-    name: 'KiDropdown',
+    name: 'ki-dropdown',
     example: 'dropdown/basic',
     props: {
         maxHeight: {
@@ -16,7 +16,7 @@ export const dropdownPanelConfig = {
         },
         placement: {
             value: 'bottom',
-            options: PLACEMENT,
+            options: ['bottom','bottom-start','bottom-end'],
             type: 'Enum',
             description: 'Controls how to position the popover relative to the target.'
         },

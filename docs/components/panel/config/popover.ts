@@ -1,12 +1,13 @@
 import {PLACEMENT} from '@komi-ui/utils'
 
 export const popoverPanelConfig = {
-    name: 'KiPopover',
+    name: 'ki-popover',
     example: 'popover/basic',
     props: {
         trigger: {
             value: 'hover',
-            type: String,
+            type: 'Enum',
+            options: ['hover','click'],
             description: 'Controls how to position the popover relative to the target.',
         },
         showArrow: {

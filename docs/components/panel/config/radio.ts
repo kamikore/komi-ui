@@ -2,22 +2,13 @@ import {COMPONENTSIZES} from '@komi-ui/utils'
 
 
 export const radioPanelConfig = {
-    name: 'KiRadio',
+    name: 'ki-radio-group',
     example: 'radio/basic',
     props: {
-        size: {
-            value: 'default',
-            options: COMPONENTSIZES,
-            type: 'Enum',
-            description: 'Defines the size of the radio.',
-        },
         modelValue: {
-            type: [String, Number, Boolean],
-            description: 'Binding value.',
-        },
-        id: {
+            value: 'option',
             type: String,
-            description: 'Native input id.'
+            description: 'Binding value.',
         },
         name: {
             type: String,
