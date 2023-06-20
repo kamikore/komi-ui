@@ -15,9 +15,6 @@ hero:
       text: Get Started
       link: /markdown-examples
     - theme: alt
-      text: API Examples
-      link: /api-examples
-    - theme: alt
       text: View on GitHub
       link: https://github.com/kamikore/komi-ui
 features:
@@ -26,10 +23,10 @@ features:
     title: Vue 3 Composition API
     details: With Vue 3 Composition API, custom Vue Directives
   - icon: 🛠️
-    title: Feature B
+    title: Feature B...
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
   - icon: 🛠️
-    title: Feature C
+    title: Feature C...
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
