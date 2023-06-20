@@ -1,9 +1,10 @@
 <template>
     <ki-dropdown 
         :showArrow="true"
+        trigger="click"
         maxHeight="100px"
     >
-        <ki-button>Hover me !</ki-button>
+        <ki-button>Click me !</ki-button>
         <template #dropdown>
             <span>item1</span>
             <span>item2</span>

@@ -3,6 +3,7 @@
         type="text" 
         placeholder="Hello World!"
         v-model="message"
+        disabled
     />
 </template>
 
