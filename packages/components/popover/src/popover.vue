@@ -5,7 +5,7 @@
     <!-- 确保定位相对于body，避免过多的组件嵌套，存在严重副作用 -->
     <teleport to='body'>
         <!-- 初次渲染时应用过渡 -->
-       <Transition :name="ns.b('fade')" appear>
+       <Transition :name="ns.b(transition)" appear>
             <!-- 兼容样式 -->
             <div 
                 :class="[ns.b(),ns.m(size)]" 
@@ -119,7 +119,13 @@ function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number
         }
     }
 
-    popoverStyle.value = getPopStyle(triggerElm,pop_placement.value,props.showArrow)
+    popoverStyle.value = getPopStyle(
+        triggerElm,
+        popWidth,
+        popHeight,
+        pop_placement.value,
+        props.showArrow
+    )
 }
 
 function handleClickOutside() {

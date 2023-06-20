@@ -18,6 +18,24 @@
 }
 
 
+.#{$namespace}-popover-zoom-in-top {
+  &-enter-active,
+  &-leave-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transition: all 5s ease;
+    transform-origin: center top;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+}
+
+
 @include b(popover) {
     position: absolute;
     z-index: 200;

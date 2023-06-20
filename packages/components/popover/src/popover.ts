@@ -1,4 +1,9 @@
-import {PLACEMENT,COMPONENTSIZES, buildProps} from '@komi-ui/utils'
+import {
+    PLACEMENT, 
+    COMPONENTSIZES, 
+    NAMESPACE, 
+    buildProps
+} from '@komi-ui/utils'
 
 export const popoverProps = buildProps({
     size: {
@@ -19,4 +24,8 @@ export const popoverProps = buildProps({
         values: PLACEMENT,
         default: 'bottom'
     },
+    transition: {
+        type: String,
+        default: 'fade'
+    }
 })
