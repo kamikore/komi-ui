@@ -4,7 +4,8 @@
             {
                 "text": "Basic",
                 "items": [
-                  { "text": "Button", "link": "/en-US/components/button" }
+                  { "text": "Button", "link": "/en-US/components/button" },
+                  { "text": "Icon", "link": "/en-US/components/icon" }
                 ]
             },
             {
@@ -18,6 +19,7 @@
             {
                 "text": "Navigation",
                 "items": [
+                    {"text": "Menu", "link": "/en-US/components/menu"},
                     {"text": "Dropdown", "link": "/en-US/components/dropdown"}
                 ]
             },
@@ -34,7 +36,8 @@
             {
                 "text": "Basic 基础组件",
                 "items": [
-                  { "text": "Button 按钮", "link": "/zh-CN/components/button" }
+                  { "text": "Button 按钮", "link": "/zh-CN/components/button" },
+                  { "text": "Icon 图标", "link": "/zh-CN/components/icon" }
                 ]
             },
             {
@@ -48,6 +51,7 @@
             {
                 "text": "Navigation 导航组件",
                 "items": [
+                    {"text": "Menu 菜单", "link": "/zh-CN/components/menu"},
                     {"text": "Dropdown 下拉菜单", "link": "/zh-CN/components/dropdown"}
                 ]
             },

@@ -1,6 +1,6 @@
 import KomiUi from 'komi-ui'
 // import 'komi-ui/dist/index.css'
-import '../../../dist/komi-ui/theme/index.css'
+import '../../../dist/komi-ui/dist/index.css'
 import DefaultTheme from 'vitepress/theme'
 import '../styles/index.css'
 import { useData } from 'vitepress'
@@ -16,7 +16,6 @@ export default {
             app.component(name, comp)
         })
         app.use(KomiUi)
-
     },
     setup() {
         const supportedLangs = [

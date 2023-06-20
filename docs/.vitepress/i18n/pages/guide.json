@@ -4,7 +4,7 @@
             {
                 "text": "Guide",
                 "items": [
-                  { "text": "Installation", "link": "/en-US/guide/installation" },
+                  { "text": "Setup", "link": "/en-US/guide/setup" },
                   { "text": "QuickStart", "link": "/en-US/guide/quickStart" }
                 ]
             }
@@ -13,9 +13,9 @@
     "zh-CN": {
         "guide": [
             {
-                "text": "指南",
+                "text": "指引",
                 "items": [
-                  { "text": "安装", "link": "/zh-CN/guide/installation" },
+                  { "text": "安装", "link": "/zh-CN/guide/setup" },
                   { "text": "快速开始", "link": "/zh-CN/guide/quickStart" }
                 ]
             }

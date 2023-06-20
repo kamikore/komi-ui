@@ -6,7 +6,7 @@ export const locales = {
 	  ],
 	  themeConfig: {
 		nav: [
-		  { text: 'Guide', link: '/en-US/guide/installation' },
+		  { text: 'Guide', link: '/en-US/guide/setup' },
 		  { text: 'Component', link: '/en-US/components/button' },
 		],
 	  }
@@ -18,7 +18,7 @@ export const locales = {
 	  ],
 	  themeConfig: {
 		nav: [
-		  { text: '指南', link: '/zh-CN/guide/installation' },
+		  { text: '指引', link: '/zh-CN/guide/setup' },
 		  { text: '组件', link: '/zh-CN/components/button' },
 		],
 	  }
