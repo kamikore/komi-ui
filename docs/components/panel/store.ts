@@ -43,6 +43,7 @@ export interface StoreState {
   errors: (string | Error)[]
   vueRuntimeURL: string
   uiLibURL?: string
+  compProps: Record<string, any>
 }
 
 export interface SFCOptions {
@@ -96,7 +97,8 @@ export class ReplStore implements Store {
       mainFile: files[defaultMainFile],
       errors: [],
       vueRuntimeURL: this.defaultVueRuntimeURL,
-      uiLibURL: this.defaultVueRuntimeURL
+      uiLibURL: this.defaultVueRuntimeURL,
+      compProps: {}
     })
 
     this.initImportMap()

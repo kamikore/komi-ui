@@ -48,6 +48,7 @@ function formatType(
 <style lang="scss" scoped>
 
 label {
+    cursor: pointer;
     text-decoration: underline;
 }
 

@@ -13,11 +13,15 @@
 
 <script setup lang="ts">
 import {inject} from 'vue'
-import type { Store } from './store'
+import { Store, defaultMainFile } from './store'
 
 const props = defineProps({
     initCode: {
         type: String,
+        require: true,
+    },
+    initProps: {
+        type: Object,
         require: true,
     }
 })
@@ -26,12 +30,19 @@ const store = inject('store') as Store
 // 剪贴板对象
 const clipboardObj = navigator.clipboard
 
+// 初始化 props
+let compProps = {}
+for(let key in props.initProps) {
+    compProps[key] = props.initProps[key].value
+}
+
 function onCopy() {
     window.alert('已复制')
     clipboardObj.writeText(store.state.mainFile.code)
 }
 
 function onReset() {
+    Object.assign(store.state.compProps[defaultMainFile],compProps)
     store.state.mainFile.code = props.initCode
     window.alert('已重置')
 }

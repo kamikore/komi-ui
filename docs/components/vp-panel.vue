@@ -9,7 +9,10 @@
             <Props :name="configs.name" :configs="configs.props"></Props>
         </div>    
         <div class="sourceCode_wrap">
-            <EditorExtend :initCode="source"></EditorExtend>
+            <EditorExtend 
+                :initCode="decodeURIComponent(source)"
+                :initProps="configs.props"
+            ></EditorExtend>
             <Editor></Editor>
         </div>
     </div>
@@ -21,9 +24,9 @@ import Preview from './panel/vp-preview.vue'
 import Props from './panel/vp-props.vue'
 import Editor from './panel/vp-editor.vue'
 import EditorExtend from './panel/vp-editor-extend.vue'
-import fs from 'vite-plugin-fs/browser';
-import {ReplStore,Store } from './panel/store'
 
+// const fs = require('browserify-fs');
+import {ReplStore,Store } from './panel/store'
 
 const props = defineProps({
     configs: {
@@ -31,19 +34,16 @@ const props = defineProps({
         require: true,
         default: {}
     },
+    source: {
+        type: String,
+        require: true,
+    }
 })
 
-const [dir ,file] = props.configs?.example.split('/')
-
-const source = await fs.readFile(`../examples/${dir}/${file}.vue`)
-
-
-const store: Store  = new ReplStore({initCode: source.trim()})
+const store: Store  = new ReplStore({initCode: decodeURIComponent(props.source)})
     
 // 共享store
 provide('store', store)
-
-
 
 </script>
 
@@ -63,7 +63,6 @@ provide('store', store)
     }
 
     .example_wrap {
-        padding: 24px 16px;
     }
 
     .sourceCode_wrap {

@@ -27,14 +27,17 @@
                     :id="key" 
                     :placeholder="value"
                     v-model="compProps[key]"
+                    autoResize
                 />
             </div>
             <div v-else>
                 <PropsLabel :title="key" :type="type" :description="description"/>
                 <ki-input 
+                    type="textarea" 
                     :id="key" 
                     :placeholder="value"
                     v-model="compProps[key]"
+                    autoResize
                 />
             </div>
         </template>
@@ -69,13 +72,14 @@ for(let key in props.configs) {
 // 注入store
 const store = inject('store') as Store
 
+store.state.compProps[defaultMainFile] = compProps 
 
 watch(
-  () => compProps,
+  () => store.state.compProps[defaultMainFile],
   (newValue, oldValue) => {
-    store.state.mainFile.code = formatCode(newValue)
+        store.state.mainFile.code = formatCode(newValue)
   },
-  { deep: true }
+  { deep: true, immediate: true}
 )
 
 /**
@@ -84,15 +88,13 @@ watch(
  * @returns 返回处理后代码
  */
 function formatCode(compProps: Record<string,any>) {
-    // 's' 允许.匹配换行符 或 ([\s\S]*)
-    const reg = new RegExp(`\<${props.name}\>(.*)<\/${props.name}\>`,'s')
     let propsStr = ''
     for(let key in compProps) {
         if(!compProps[key]) continue
 
         if(key === 'children') continue
         if(key === 'modelValue') {
-            propsStr += `\n\tv-model=" ${compProps[key]}"`
+            propsStr += `\n\tv-model="${compProps[key]}"`
             continue
         }
         switch(props?.configs[key].type) {
@@ -109,14 +111,23 @@ function formatCode(compProps: Record<string,any>) {
         }
     }
 
+    // ?<= ,?=< 匹配组件名称的前后内容
+    const templateReg = new RegExp(`(?<=<${props.name}(.*[^=])?>)(.*)(?=<\/${props.name}>)`,'s')
+    const scriptReg = new RegExp('<script.*?>(.*)<\/script>','s')
+    const styleReg = new RegExp('<style.*?>(.*)<\/style>','s')
 
 return  `
 <template>
     <${props.name}${propsStr}
-    >
-        ${reg.exec(store.state.mainFile.code)[1]}
+    > 
+        ${templateReg.exec(store.state.mainFile.code)?.[0].trim() || ''.trim()}
     </${props.name}>
 </template>
+
+${scriptReg.exec(store.state.mainFile.code)?.[0].trim() || ''}
+
+${styleReg.exec(store.state.mainFile.code)?.[0].trim() || ''}
+
 `.trim()
 
 }
@@ -130,6 +141,5 @@ return  `
     gap: 12px;
     padding: 16px;
 }
-
 
 </style>

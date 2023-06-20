@@ -57,9 +57,10 @@ function createSandbox() {
   )
 
   Object.assign(sandbox.style, {
+    height: '100%',
     width: '100%',
     border: 'none',
-    overflow: 'hidden',
+    zIndex: 200
   })
 
 
