@@ -23,7 +23,7 @@
   &-leave-active {
     opacity: 1;
     transform: scaleY(1);
-    transition: all 5s ease;
+    transition: all 0.25s ease-in-out;
     transform-origin: center top;
   }
 

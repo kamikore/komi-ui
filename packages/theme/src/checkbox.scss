@@ -11,14 +11,12 @@
 
 @include b(checkbox) {
     position: relative;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
     outline: none;
     gap: 4px;
     vertical-align: middle;
-    // line-height: getCssVar('checkbox-input-height');
     line-height: 20px;
     
     @include e(input) {
@@ -54,8 +52,33 @@
                     background-color: #e1e1e1;
                     
                     &::after {
-                        transform: translate(calc(20px - 50%),-50%);
+                        transform: translate(calc(map.get($checkbox-track-width, 'default') - 4px - 50%),-50%);
                         background-color: black;
+                    }
+                }
+            }
+
+            
+        }
+
+
+        @include when(disabled) {
+
+            @include e(original) {
+                cursor: not-allowed;
+            }
+
+            @include when(checked) {
+                @include e(inner) {
+                    border-color:getCssVar('color','primary','light-5'); ;
+                    background-color: getCssVar('color','primary','light-5');
+
+                    @include when(toggle) {
+                        background-color: #eee;
+
+                        &::after {
+                            background-color: getCssVar('color','primary','light-5');
+                        }
                     }
                 }
             }
@@ -80,8 +103,9 @@
     @include e(inner) {
         // box-sizing: border-box;
         appearance: none;
-        width: getCssVar('checkbox-input-width');
-        height: getCssVar('checkbox-input-height');
+        
+        width: map.get($checkbox-font-size,'default');
+        height: map.get($checkbox-font-size,'default');
         position: relative;
       
         border:  getCssVar('checkbox-input-border');
@@ -92,6 +116,7 @@
         pointer-events: none;
         vertical-align: middle;
 
+        font-size: getCssVar('checkbox-font-size','default');
 
         // check button
         &::after {
@@ -99,14 +124,13 @@
             box-sizing: content-box;
             content: '';
             position: absolute;
-            top: 1px;
-            left: 4px;
+            inset: map.get($checkbox-inset, 'default');
             border:  getCssVar('checkbox-input-border');
             border-color:  getCssVar('checkbox-checked-icon-color');
             border-left: 0;
             border-top: 0;
-            height: 7px;
-            width: 3px;
+            height: map.get($checkbox-icon-height, 'default');
+            width: map.get($checkbox-icon-width, 'default');
             transform: rotate(45deg) scaleY(0);
             transition: transform 0.15s ease-in 0.05s;
             transform-origin: center;
@@ -115,11 +139,11 @@
 
         // toggle button
         @include when(toggle) {
-            width: 24px;
-            height: 12px;
+            width: map.get($checkbox-track-width,'default');
+            height: map.get($checkbox-track-height,'default');
             background-color: #eeeeee;
             border: none;
-            border-radius: 6px;
+            border-radius: map.get($checkbox-track-radius,'default');
             margin-right: 4px;
 
             &::after {
@@ -128,8 +152,8 @@
                 top: 50%;
                 left: 0px;
                 transform: translate(-50%,-50%);
-                height: 16px;
-                width: 16px;
+                height: map.get($checkbox-toggle-radius,'default');
+                width: map.get($checkbox-toggle-radius,'default');
                 border: none;
                 border-radius: 50%;
                 background-color: #fff;
@@ -139,11 +163,64 @@
         }
     }
 
+    
+
     @include e(label) {
         cursor: pointer;
+        font-size: map.get($checkbox-font-size,'default');
         vertical-align: middle;
         color: getCssVar('checkbox-text-color');
         font-weight: getCssVar('checkbox-font-weight');
+    }
+
+    @include when(disabled) {
+        @include e(label) {
+            cursor: not-allowed;
+            color: getCssVar('disabled-text-color');
+        }
+    }
+
+    @each $size in(large, small) {
+        @include m($size) {
+
+            @include e(inner) {
+                width: map.get($checkbox-font-size, $size);
+                height: map.get($checkbox-font-size, $size);
+
+                &::after {
+                    inset: map.get($checkbox-inset, 'default');
+                    height: map.get($checkbox-icon-height, $size);
+                    width: map.get($checkbox-icon-width, $size);
+                }
+
+                @include when(toggle) {
+                    width: map.get($checkbox-track-width, $size);
+                    height: map.get($checkbox-track-height, $size);
+
+                    &::after {
+                        width: map.get($checkbox-toggle-radius,$size);
+                        height: map.get($checkbox-toggle-radius,$size);
+                    }
+                }
+            }
+
+
+            @include when(checked) {
+                @include e(inner) {
+                    @include when(toggle) {
+                        
+                        &::after {
+                            transform: translate(calc(map.get($checkbox-track-width, $size) - 4px - 50%),-50%) !important;
+                        }
+                    }
+                }
+            }
+
+            @include e(label) {
+                font-size: map.get($checkbox-font-size,$size);
+            }
+
+        }
     }
 
 }

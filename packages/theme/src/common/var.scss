@@ -359,8 +359,6 @@ $button: map.merge(
     'border-color': getCssVar('border-color'),
     'bg-color': getCssVar('fill-color', 'white'),
     'text-color': getCssVar('text-color', 'black'),
-    'disabled-text-color': getCssVar('disabled-text-color'),
-    'disabled-bg-color': getCssVar('fill-color', 'blank'),
     'disabled-border-color': getCssVar('border-color-light'),
     'divide-border-color': rgba($color-white, 0.5),
     'hover-text-color': getCssVar('color-primary'),
@@ -385,6 +383,25 @@ $button-border-radius: map.merge(
     'small': calc(#{getCssVar('border-radius', 'base')} - 1px),
   ),
   $button-border-radius
+);
+
+
+$button-disabled-bg-color: () !default;
+$button-disabled-bg-color: map.merge(
+  (
+    'default': getCssVar('fill-color', 'blank'),
+    'primary': getCssVar('color','primary','light-5'),
+  ),
+  $button-disabled-bg-color
+);
+
+$button-disabled-text-color: () !default;
+$button-disabled-text-color: map.merge(
+  (
+    'default': getCssVar('disabled-text-color'),
+    'primary': getCssVar('text-color', 'white')
+  ),
+  $button-disabled-text-color
 );
 
 
@@ -424,7 +441,6 @@ $popover-padding: map.merge(
 
 // Radio
 // css3 var in packages/theme/src/radio.scss
-
 $radio: () !default;
 $radio: map.merge(
   (
@@ -441,6 +457,28 @@ $radio: map.merge(
 );
 
 
+$radio-font-size: () !default;
+$radio-font-size: map.merge(
+  (
+    'large': getCssVar('font-size','large'),
+    'default': getCssVar('font-size','medium'),
+    'small': getCssVar('font-size','base'),
+  ),
+  $radio-font-size
+);
+
+$radio-checked-border: () !default;
+$radio-checked-border: map.merge(
+  (
+    'large': 7px solid,
+    'default': 6px solid,
+    'small': 5px solid,
+  ),
+  $radio-checked-border
+);
+
+
+
 // checkbox
 // css3 var in packages/theme/src/checkbox.scss
 $checkbox: () !default;
@@ -449,8 +487,6 @@ $checkbox: map.merge(
     'font-size': getCssVar('font-size-base'),
     'text-color': getCssVar('text-color-white'),
     'font-weight': 200,
-    'input-height': 16px,
-    'input-width': 16px,
     'input-border': 2px solid,
     'input-border-color': getCssVar('border-color','dark'),
     'input-border-color-hover': getCssVar('border-color','hover'),
@@ -468,6 +504,67 @@ $checkbox: map.merge(
 );
 
 
+$checkbox-font-size: () !default;
+$checkbox-font-size: map.merge(
+  (
+    'large': getCssVar('font-size','large'),
+    'default': getCssVar('font-size','medium'),
+    'small': getCssVar('font-size','base'),
+  ),
+  $checkbox-font-size
+);
+
+$checkbox-inset: () !default;
+$checkbox-inset: map.merge(
+  (
+    'large': 0 0 0 4px,
+    'default': 1px 0 0 4px,
+    'small': 0 0 0 3px,
+  ),
+  $checkbox-inset
+);
+
+$checkbox-icon-height: () !default;
+$checkbox-icon-height: map.merge(
+  (
+    'large': 9px,
+    'default': 7px,
+    'small': 6px,
+  ),
+  $checkbox-icon-height
+);
+
+$checkbox-icon-width: () !default;
+$checkbox-icon-width: map.merge(
+  (
+    'large': 4px,
+    'default': 3px,
+    'small': 2px,
+  ),
+  $checkbox-icon-width
+);
+
+
+$checkbox-track-width: () !default;
+$checkbox-track-width: map.merge(
+  (
+      'large': 32px,
+      'default': 24px,
+      'small': 16px,
+  ),
+  $checkbox-track-width
+);
+
+$checkbox-track-height: () !default;
+$checkbox-track-height: map.merge(
+  (
+      'large': 14px,
+      'default': 12px,
+      'small': 10px
+  ),
+  $checkbox-track-height
+);
+
 $checkbox-track-radius: () !default;
 $checkbox-track-radius: map.merge(
   (
@@ -479,14 +576,14 @@ $checkbox-track-radius: map.merge(
 );
 
 
-$checkbox-radius: () !default;
-$checkbox-radius: map.merge(
+$checkbox-toggle-radius: () !default;
+$checkbox-toggle-radius: map.merge(
   (
-      'large': 24px,
+      'large': 18px,
       'default': 16px,
       'small': 12px
   ),
-  $checkbox-radius
+  $checkbox-toggle-radius
 );
 
 

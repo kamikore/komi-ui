@@ -2,7 +2,6 @@
 
 
 @use 'common/var' as *;
-// @use 'mixins/var' as *;
 @use 'mixins/button' as *;
 @use 'mixins/mixins' as *;
 
@@ -51,6 +50,8 @@
   }
 
   @include when(circle) {
+    height: map.get($input-height, 'default');
+    width: map.get($input-height, 'default');
     border-radius: 50%;
   }
 
@@ -66,20 +67,30 @@
     &,
     &:hover,
     &:focus {
-      color: getCssVar('button', 'disabled', 'text-color');
       cursor: not-allowed;
       background-image: none;
-      background-color: getCssVar('button', 'disabled', 'bg-color');
+      color: map.get($button-disabled-text-color,'default');
+      background-color: map.get($button-disabled-bg-color,'default');
       border-color: getCssVar('button', 'disabled', 'border-color');
     }
   }
   
 
   // 设置不同场景下的button的color var
-  @each $type in (primary, danger, info) {
+  @each $type in (primary) {
     @include m($type) {
         background-color: getCssVar('color',$type);
         color: getCssVar('color','white');
+
+        @include when(disabled) {
+          &,
+          &:hover,
+          &:focus {
+            color: map.get($button-disabled-text-color,$type);
+            cursor: not-allowed;
+            background-color: map.get($button-disabled-bg-color,$type);
+          }
+        }
     }
   }
 

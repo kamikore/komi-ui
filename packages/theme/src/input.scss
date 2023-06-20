@@ -5,19 +5,16 @@
 @use 'common/var' as *;
 
 
-
 @include b(input) {
     @include set-component-css-var('input', $input);
 }
 
 @include b(input) {
-    // --ki-input-height: var(--ki-component-size)
-    @include css-var-from-global('input-height', 'component-size');
-
+    box-sizing: border-box;
     width: 100%;
-    line-height: getCssVar('input-height');
+    // line-height: getCssVar('input-height');
     position: relative;
-    display: inline-flex;
+    display: flex;
     padding: 0 getCssVar('padding');
     border: getCssVar('input-border');
     border-color: getCssVar('input', 'border-color');
@@ -27,28 +24,38 @@
         border-color: getCssVar('input-hover-border-color');
     }
 
+    @include when(disabled) {
+        cursor: not-allowed;
+        color: getCssVar('disabled-text-color');
+    }
+
     @include when(focused) {
         border-color: getCssVar('input-focus-border-color');
     }
 
     @include e(inner) {
         font-size: getCssVar('font-size', 'base');
-        height: getCssVar('input-height');
-        line-height: getCssVar('input-height');
+        height: map.get($input-height,'default');
+        line-height: map.get($input-line-height,'default');
         width: 100%;
         border: none;
         outline: none;
         vertical-align: middle;
         box-sizing: border-box;
         display: inline-flex;
-
-        color: getCssVar('input','text-color');
+        font-size: inherit;
+        font-family: inherit;
+        color: map.get($text-color,'regular');
 
         @include scroll-bar;
 
-
         &:focus {
             outline: none;
+        }
+
+        @include when(disabled) {
+            cursor: not-allowed;
+            color: getCssVar('disabled-text-color');
         }
     }
 
@@ -57,10 +64,101 @@
         text-align: center;
         
         & i {
-            font-size: getCssVar('font-size', 'base');
+            font-size: inherit;
+            font-style: normal;
+            cursor: pointer;
+            line-height: map.get($input-line-height,'default') ;
+        }
+    }
+
+    @each $size in(large, small) {
+        @include m($size) {
+            @include e(inner) {
+                height: map.get($input-height,$size);
+                line-height: map.get($input-line-height,$size);
+                font-size: getCssVar('font-size', $size);
+            }
+        }
+    }
+}
+
+
+@include b(textarea) {
+    position: relative;
+
+    @include e(inner) {
+        width: 100%;
+        max-width: 100%;
+        line-height: 1.5;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: 1px 1px 1px #999;
+        padding: 10px 16px 10px 10px;
+        font-size: inherit;
+        font-family: inherit;
+        font-size: getCssVar('font-size', 'base');
+        color: map.get($text-color,'regular');
+
+        @include scroll-bar;
+
+    }
+
+    @include e(suffix-inner) {
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        text-align: center;
+
+        
+        & i {
+            font-size: inherit;
             font-style: normal;
             cursor: pointer;
         }
     }
 
+
+    @include e(autoResizeWrap) {
+        position: relative;
+
+
+        @include e(inner) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            color: inherit;
+            font-size: inherit;
+            text-align: inherit;
+            font-family: inherit;
+
+            resize: none;
+            // 无法将整个单词放置时换行
+            overflow-wrap: break-word;
+            // -webkit-text-fill-color: transparent;
+
+        }
+
+        pre {
+            height: 100%;
+            width: 100%;
+            font-size: inherit;
+            text-align: inherit;
+            font-family: inherit;
+            margin: 0;
+            padding: 0;
+            -webkit-text-fill-color: transparent;
+
+    
+            overflow-wrap: break-word;
+            // 允许<pre>中换行
+            word-wrap: break-word;      /* IE 5.5-7 */
+            white-space: pre-wrap;      /* current browsers */
+        }
+    }
+
 }
+
+

@@ -11,7 +11,6 @@
 
 @include b(radio) {
     position: relative;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
@@ -21,8 +20,8 @@
 
     
     @include e(input) {
-        width: getCssVar('radio-input-width');
-        height: getCssVar('radio-input-height');
+        width: map.get($radio-font-size,'default');
+        height: map.get($radio-font-size,'default');
         white-space: nowrap;
         cursor: pointer;
         outline: none;
@@ -40,8 +39,22 @@
         @include when(checked) {
             
             @include e(inner) {
-                border: 6px solid black;
+                border: map.get($radio-checked-border, 'default') getCssVar('color','primary');
             }
+        }
+
+        @include when(disabled) {
+
+            @include e(original) {
+                cursor: not-allowed;
+            }
+
+            @include when(checked) {
+                @include e(inner) {
+                    border-color: getCssVar('color','primary','light-5');
+                }
+            }
+        
         }
     
     }
@@ -64,26 +77,59 @@
     @include e(inner) {
         box-sizing: border-box;
         appearance: none;
-        width: getCssVar('radio-input-width');
-        height: getCssVar('radio-input-height');
+        width: map.get($radio-font-size,'default');
+        height: map.get($radio-font-size,'default');
         position: relative;
         border-radius: 50%;
       
         border:  getCssVar('radio-input-border');
-        border-color:  getCssVar('radio-input-border-color');;
+        border-color:  getCssVar('radio-input-border-color');
         transition: 0.2s all linear;
         position: relative;
         // 点击穿透
         pointer-events: none;
     }
 
-
-
+    
     @include e(label) {
         cursor: pointer;
         vertical-align: middle;
         color: getCssVar('radio-text-color');
         font-weight: getCssVar('radio-font-weight');
+    }
+
+    @include when(disabled) {
+        @include e(label) {
+            cursor: not-allowed;
+            color: getCssVar('disabled-text-color');
+        }
+    }
+
+
+    @each $size in(large, small) {
+        &.#{$namespace}-radio--#{$size} {
+
+            @include e(input) {
+                width: map.get($radio-font-size, $size);
+                height: map.get($radio-font-size, $size);
+            }            
+
+            @include e(inner) {
+                width: map.get($radio-font-size, $size);
+                height: map.get($radio-font-size, $size);
+            }
+
+            @include when(checked) {
+                @include e(inner) {
+                    border: map.get($radio-checked-border, $size) getCssVar('color','primary');
+                }
+            }
+
+            @include e(label) {
+                font-size: map.get($radio-font-size,$size);
+            }
+
+        }
     }
 
 }
