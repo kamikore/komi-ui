@@ -17,9 +17,10 @@ export const isElement = (val: unknown): val is Element => {
  }
   
 
-export const isStringNumber = (val: string): boolean => {
+ export const isStringNumber = (val: string): boolean => {
     if (!isString(val)) {
-        return false
+      return false
     }
     return !Number.isNaN(Number(val))
-}
+  }
+  

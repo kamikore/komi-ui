@@ -1,4 +1,4 @@
-import {isString, isNumber, isStringNumber} from '@komi-ui/utils'
+import {isString, isNumber, isStringNumber} from '../types'
 
 const SCOPE = 'utils/dom/style'
 
@@ -16,5 +16,6 @@ export function addUnit(value?: string | number, defaultUnit = 'px') {
       return value
     }
     console.warn(`[${SCOPE}] `,'binding value must be a string or number')
-  }
+}
+
   
