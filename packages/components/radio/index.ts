@@ -1,6 +1,6 @@
 import { withInstall } from "@komi-ui/utils"
 import Radio from './src/radio.vue'
-import RadioGroup from './src/radioGroup.vue'
+import RadioGroup from './src/radio-group.vue'
 
 
 

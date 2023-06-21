@@ -1,7 +1,15 @@
-import {isString} from '@komi-ui/utils'
+import {isString, COMPONENTSIZES} from '@komi-ui/utils'
 import type { PropType } from 'vue'
 
 export const inputProps = {
+    /**
+     * @description size of Input, works when type is not 'textarea'
+     */
+    size: {
+        type: String,
+        values:  COMPONENTSIZES,
+        default: 'default'
+    },
     /**
     * @description binding value
     */
@@ -14,6 +22,7 @@ export const inputProps = {
     */
     type: {
         type: String,
+        values: ['text','password','textarea'],
         default: 'text'
     },
 	 /**
@@ -32,16 +41,6 @@ export const inputProps = {
      */
     parser: Function,
     /**
-     * @description native input max, min
-     */
-    max: Number,
-    min: Number,
-    /**
-     * @description native input maxlength, minlength
-     */
-    maxlength: Number,
-    minlength: Number,
-    /**
      * @description input suffix icon
      */
     clearable: {
@@ -49,6 +48,13 @@ export const inputProps = {
         default: false,
     },
     showPassword: {
+        type: Boolean,
+        default: false,
+    },
+    /**
+     * @description whether textarea has an adaptive height, only works when type is 'textarea'. 
+     */
+    autoResize: {
         type: Boolean,
         default: false,
     },
@@ -77,13 +83,6 @@ export const inputProps = {
 	* @description native input autofocus
 	*/
     autofocus: {
-        type: Boolean,
-        default: false,
-    },
-    /**
-	* @description native input checked
-	*/
-    checked: {
         type: Boolean,
         default: false,
     },

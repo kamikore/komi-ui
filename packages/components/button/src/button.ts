@@ -1,6 +1,7 @@
 import type { Component, PropType } from 'vue'
 import {COMPONENTSIZES, buildProps} from '@komi-ui/utils'
 
+
 export const buttonProps = buildProps({
     tag: {
         type: [String, Object as PropType<Component>],       // Components 仅作为类型使用，而不是作为值
@@ -13,11 +14,11 @@ export const buttonProps = buildProps({
     },
     type: {
         type: String,
-        values: ['default','primary'],
+        values: ['default','primary',''],
         default: 'default'
     },
     icon: {
-        type: String,
+        type: [String, Object as PropType<Component>],
         default: 'loading'
     },
     round: Boolean,

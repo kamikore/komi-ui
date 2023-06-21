@@ -15,7 +15,7 @@ import {
     toRefs,
     nextTick
 } from 'vue'
-import {radioGroupProps} from './radioGroup'
+import {radioGroupProps} from './radio-group'
 import { useNamespace, useId } from '@komi-ui/hooks';
 import {radioGroupKey} from './constants'
 
@@ -32,7 +32,7 @@ const name = computed(() => {
   return props.name || radioId.value
 })
 
-const changeEvent = (val) => {
+const changeEvent = (val: Event) => {
     emit('update:modelValue', val)
     nextTick(() => emit('change', val))
 }

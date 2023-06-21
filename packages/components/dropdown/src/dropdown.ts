@@ -1,7 +1,7 @@
 import { buildProps, PLACEMENT } from "@komi-ui/utils"
 
 export const dropdownProps = buildProps({
-    maxHeight: String,
+    maxHeight: [String, Number],
     trigger: {
         type: String,
         values: ['hover','click'],
@@ -9,7 +9,7 @@ export const dropdownProps = buildProps({
     },
     placement: {
         type: String,
-        values: PLACEMENT,
+        values: ['bottom','bottom-start','bottom-end'],
         default: 'bottom'
     },
     showArrow: {

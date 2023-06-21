@@ -1,5 +1,5 @@
 import { withInstall } from "@komi-ui/utils"
-import KiCollapseTransition from './src/collapseTransition.vue'
+import CollapseTransition from './src/collapseTransition.vue'
 
-export const KiTransition = withInstall(KiCollapseTransition)
+export const KiTransition = withInstall(CollapseTransition)
 export default KiTransition

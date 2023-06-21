@@ -15,7 +15,7 @@ import {
     toRefs,
     nextTick
 } from 'vue'
-import {checkboxGroupProps} from './checkboxGroup'
+import {checkboxGroupProps} from './checkbox-group'
 import { useNamespace, useId } from '@komi-ui/hooks';
 import {checkboxGroupKey} from './constants'
 import type {CheckboxLabelType} from './checkbox'

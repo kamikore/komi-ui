@@ -4,14 +4,13 @@
             :showArrow="showArrow"
             :trigger="trigger"
             :placement="placement"
-            style="padding: 0;"
+            :style="{padding: 0}"
+            transition="zoom-in-top"
         >
             <!-- 渲染第一个元素 -->
-            <ki-only-child>
-                <slot/>
-            </ki-only-child>
+            <slot/>
             <template #content>
-                <ki-scrollbar :height="maxHeight">
+                <ki-scrollbar :height="addUnit(maxHeight)">
                     <slot name="dropdown"/>
                 </ki-scrollbar>
             </template>
@@ -23,6 +22,7 @@
 import {ref,useSlots} from 'vue'
 import {useNamespace} from '@komi-ui/hooks'
 import {dropdownProps} from './dropdown'
+import { addUnit } from '@komi-ui/utils'
 
 defineOptions({
     name: 'KiDropdown'

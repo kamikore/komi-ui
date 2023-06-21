@@ -8,6 +8,8 @@
                     modelValue?.includes(label)
                     : modelValue
             ),
+            ns.is('disabled', disabled),
+            ns.m(size)
         ]"
     >
         <span 
@@ -19,6 +21,7 @@
                         modelValue?.includes(label)
                         : modelValue
                 ),
+                ns.is('disabled', disabled),
             ]"
         >   
             <!-- value值赋值给modelValue -->
@@ -28,12 +31,13 @@
                 type="checkbox" 
                 :id="id"
                 :name="name"
+                v-bind="$attrs"
+                :disabled="disabled"
                 v-model="modelValue"
                 :value="label"
                 @change="handleChange"
             >
             <span :class="[
-                
                 ns.e('inner'),
                 ns.is('toggle', checkmarkType === 'toggle')
             ]"></span>

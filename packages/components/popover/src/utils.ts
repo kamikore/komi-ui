@@ -3,7 +3,6 @@ import { getBounding } from "@komi-ui/utils"
 interface PopStyle {
     position: string,
     inset: string,
-    transform: string
 }
 
 // popover与triggerElm之间的间隔
@@ -16,13 +15,22 @@ const startRate =  1/3
 const endRate = 2/3
 
 // 计算组件在浏览器窗口中的位置
-export function getPopStyle(triggerElm:HTMLElement, placement:string, showArrow:boolean): PopStyle {
+export function getPopStyle(
+    triggerElm:HTMLElement, 
+    popWidth: number,
+    popHeight: number,
+    placement:string, 
+    showArrow:boolean
+): PopStyle {
     // 需要保证根据整体文档的偏移，而不是某个父级
     const { scrollLeft ,scrollTop} = document.documentElement
     const {x, y} = triggerElm.getBoundingClientRect()
+
+    // 相对于body的x轴，y轴
     const offsetLeft = x + scrollLeft
     const offsetTop = y + scrollTop 
 
+    // 触发元素宽高
     const {offsetWidth, offsetHeight} = triggerElm
 
     
@@ -30,35 +38,30 @@ export function getPopStyle(triggerElm:HTMLElement, placement:string, showArrow:
     const [pos, subPos] = placement.split('-')
     const popGap = showArrow?gap.large:gap.normal
     const offsetRate = subPos?(subPos === 'start'?startRate:endRate) : normalRate 
-    let top:number = 0,left:number = 0, transform:string = ''
+    let top:number = 0,left:number = 0
     
     switch(pos) {
         case 'bottom': 
-            transform = 'translateX(-50%)'
             top = offsetTop + offsetHeight + popGap
-            left = offsetLeft + offsetWidth * offsetRate
+            left = offsetLeft + offsetWidth * offsetRate - popWidth/2
             break
         case 'top':
-            transform = 'translate(-50%,-100%)'
-            top = offsetTop - popGap
-            left = offsetLeft + offsetWidth * offsetRate
+            top = offsetTop - popGap - popHeight
+            left = offsetLeft + offsetWidth * offsetRate - popWidth/2
             break
         case 'right':
-            transform = 'translateY(-50%)'
-            top = offsetTop + offsetHeight * offsetRate
+            top = offsetTop + offsetHeight * offsetRate - popHeight/2
             left = offsetLeft + offsetWidth + popGap
             break
         case 'left':
-            transform = 'translate(-100%,-50%)'
-            top = offsetTop + offsetHeight * offsetRate
-            left = offsetLeft - popGap
+            top = offsetTop + offsetHeight * offsetRate - popHeight/2
+            left = offsetLeft - popGap - popWidth
             break
     }
     
     return {
         position: 'absolute',
         inset: `${top}px auto auto ${left}px`,
-        transform,
     }
 }
 

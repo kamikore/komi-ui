@@ -15,7 +15,7 @@ import {ref} from "vue"
 import type { CSSProperties } from 'vue'
 import {useNamespace} from '@komi-ui/hooks'
 import { scrollbarProps } from './scrollbar';
-
+import { addUnit } from "@komi-ui/utils"
 
 defineOptions({
     name: 'KiScrollbar'
@@ -27,7 +27,7 @@ const props = defineProps(scrollbarProps)
 
 
 const scrollbarStyle = ref({
-    height: props.height
+    height: addUnit(props.height)
 } as CSSProperties)
 
 

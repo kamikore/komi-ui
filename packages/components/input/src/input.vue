@@ -1,9 +1,12 @@
 <template>
     <div :class="[ 
-        ns.b(),
-        ns.is('focused', focused)
+        type === 'textarea'? nsTextarea.b() : ns.b(),
+        ns.is('focused', focused),
+        type === 'textarea'? '' : ns.m(size),
+        disabled?'is-disabled':''
     ]">
         <input 
+            v-if="type !== 'textarea'"
             :class="ns.e('inner')"
 			ref="input"
             v-bind="$attrs"
@@ -16,15 +19,54 @@
             @change="handleChange"
             @keydown="handleKeydown"
         >
+
+        <div 
+            v-else-if="type === 'textarea' && autoResize"
+            :class="nsTextarea.e('autoResizeWrap')"
+        >
+            <textarea
+                ref="textarea"
+                :class="nsTextarea.e('inner')"
+                v-bind="$attrs"
+                :disabled="disabled"
+                :placeholder="placeholder"
+                @input="handleInput"
+                @focus="handleFocus"
+                @blur="handleBlur"
+                @change="handleChange"
+                @keydown="handleKeydown"
+            ></textarea>
+
+            <pre>
+                {{ modelValue }}
+            </pre>
+        </div>
+
+        
+        <textarea
+            v-else
+            ref="textarea"
+            :class="nsTextarea.e('inner')"
+            v-bind="$attrs"
+			:disabled="disabled"
+            :placeholder="placeholder"
+            @input="handleInput"
+            @focus="handleFocus"
+            @blur="handleBlur"
+            @change="handleChange"
+            @keydown="handleKeydown"
+        ></textarea>
+
+
         
         <!-- suffix slot -->
         <span
-            :class="ns.e('suffix-inner')"
+            :class="type === 'textarea'? nsTextarea.e('suffix-inner') : ns.e('suffix-inner')"
             v-if="clearable || showPassword"
             v-show="modelValue"
         >
             <i 
-				:class="ns.e('clear')" 
+				:class="type === 'textarea'? nsTextarea.e('clear') : ns.e('clear')" 
 				v-show="showClear" 
 				@click="handleClearClick"
 			>
@@ -32,13 +74,12 @@
             </i>
             <i 
 				:class="ns.e('password')" 
-				v-show="showPwdVisible" 
+				v-show="showPwdVisible && type !== 'textarea'" 
 				@click="handlePasswordClick"
 			>
                 <span>👀</span>
             </i>
         </span>
-
     </div>
     
 </template>
@@ -48,12 +89,13 @@ import {
 	nextTick,
 	shallowRef,
 	ref,
+    watch,
 	computed,
 	onMounted,
 } from 'vue'
 import {inputProps, inputEmits} from './input'
 import {useNamespace} from '@komi-ui/hooks'
-import {isString, isNil} from '@komi-ui/utils'
+import {isNil} from '@komi-ui/utils'
 
 defineOptions({
     name: 'KiInput'
@@ -64,18 +106,19 @@ const emit = defineEmits(inputEmits)
 const props = defineProps(inputProps)
 
 const ns = useNamespace('input')
+const nsTextarea = useNamespace('textarea')
 
 
-
-const input = shallowRef<HTMLInputElement>(null)
+const input = shallowRef<HTMLInputElement>()
+const textarea = shallowRef<HTMLTextAreaElement>()
 // 组件引用 ref
-const _ref = computed(() => input.value)
+const _ref = computed(() => input.value || textarea.value)
 
 
 const focused = ref(false)
 // input.value的值，如果未提供v-model则一直为''
 const nativeInputValue = computed(() =>
-  !props.modelValue ? '' : String(props.modelValue)
+  isNil(props.modelValue) ? '' : String(props.modelValue)
 )
 
 const setNativeInputValue = () => { 
@@ -84,6 +127,9 @@ const setNativeInputValue = () => {
 	if (!input || input.value === nativeInputValue.value) return
 	input.value = nativeInputValue.value
 }
+
+// 监听modelValue否则无法绑定统一v-model时更新
+watch(nativeInputValue, () => setNativeInputValue())
 
 
 const showClear = computed(
@@ -112,9 +158,7 @@ const suffixVisible = computed(
 )
 
 
-
-
-const handleInput = async(e) =>  {
+const handleInput = async(e: Event) =>  {
     let { value } = e.target
     if (props.formatter) {
         value = props.parser ? props.parser(value) : value
@@ -129,7 +173,6 @@ const handleInput = async(e) =>  {
 	
 	emit('update:modelValue', value)
 	
-
 	emit('input', value)
 	
 	// 等待 DOM 更新后设置 input.value, 
@@ -140,7 +183,6 @@ const handleInput = async(e) =>  {
 }
 
 const handleChange = (e: Event) => {
-	console.log("change event")
 	// 触发事件钩子
 	emit('change',e.target.value)
 }

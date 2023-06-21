@@ -26,7 +26,7 @@ export const checkboxProps = buildProps({
         default: undefined,
     },
     /**
-     * @description size of the Radio
+     * @description size of the Checkbox
      */
     size: {
       type: String,

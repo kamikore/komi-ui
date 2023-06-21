@@ -3,14 +3,18 @@
         :class="[
             ns.b(),
             ns.is('checked', modelValue === label),
+            ns.is('disabled', disabled),
+            ns.m(size)
         ]"
     >
         <span 
             :class="[
                 ns.e('input'),
                 ns.is('checked', modelValue === label),
+                ns.is('disabled', disabled),
             ]"
         >   
+
             <!-- value值赋值给modelValue -->
             <input 
                 :class="ns.e('original')"
@@ -18,6 +22,8 @@
                 type="radio" 
                 :id="id"
                 :name="name || radioGroup?.name"
+                v-bind="$attrs"
+                :disabled="disabled"
                 v-model="modelValue"
                 :value="label"
                 @change="handleChange"
@@ -52,6 +58,8 @@ const radioGroup = inject(radioGroupKey, undefined)
 const ns = useNamespace('radio')
 const props = defineProps(radioProps)
 const radioRef = ref<HTMLInputElement>()
+
+const disabled = props.disabled || radioGroup?.disabled.value
 
 const modelValue = computed({
     get() {

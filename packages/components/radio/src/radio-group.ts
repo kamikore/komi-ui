@@ -15,4 +15,8 @@ export const radioGroupProps = buildProps({
         type: [String, Number, Boolean],
         default: undefined,
     }, 
+    /**
+     * @description whether Radio is disabled
+     */
+    disabled: Boolean,
 })
