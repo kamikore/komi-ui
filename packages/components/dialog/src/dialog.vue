@@ -1,10 +1,12 @@
 <template>
-    <div>
-
-    </div>
+    <Teleport to="body">
+        <div :class="[ns.b()]">
+            
+        </div>
+    </Teleport>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {useNamespace} from '@komi-ui/hooks'
 
 defineOptions({
@@ -14,7 +16,3 @@ defineOptions({
 const ns = useNamespace('dialog')
 
 </script>
-
-<style lang="scss" scoped>
-
-</style>
