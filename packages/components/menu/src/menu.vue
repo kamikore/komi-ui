@@ -8,19 +8,22 @@
     >
         <template v-for="(item,index) in items" :key="index">
             <ki-menu-item 
-                :selected="tabIndex? tabIndex === index : undefined"
-                @click="onItemSelect($event,item.label,index)" 
-            >{{ item.label }}</ki-menu-item>
+                :selected="selectedIndex? selectedIndex === index : undefined"
+                @click="onItemSelect($event,item.value,index)" 
+            >{{ item.label || item.value || '' }}</ki-menu-item>
         </template>
+        <li v-if="!items" :class="ns.e('noResult')">
+            No results
+        </li>
     </ul>
 </template>
 
 <script lang="ts" setup>
-import KiMenuItem from './menu-item.vue'
-import {ref} from 'vue'
-import {menuProps} from './menu'
+import {menuProps, MENUITEM} from './menu'
 import {useNamespace} from '@komi-ui/hooks'
 import { addUnit } from '@komi-ui/utils'
+import {KiMenuItem} from '@komi-ui/components/menu'
+import {ref} from 'vue'
 
 defineOptions({
     name: 'KiMenu'
@@ -30,15 +33,19 @@ const ns = useNamespace('menu')
 
 const props = defineProps(menuProps)
 
+const selectedIndex = ref(
+    props.items.findIndex((item: MENUITEM) => 
+        props.modelValue === item.value
+    )
+)
+
 
 function onItemSelect(
     ev: MouseEvent, 
-    label: String, 
+    value: MENUITEM['value'], 
     index: Number
 ) {
-
-    props.tabIndex ? props.tabIndex = index:''
-    props.onItemSelect && props.onItemSelect(label,index)
+    props.onItemSelect && props.onItemSelect(ev, value, index)
 }
 
 </script>

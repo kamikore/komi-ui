@@ -3,13 +3,13 @@
         <slot/>
     </ki-only-child>
     <!-- 确保定位相对于body，避免过多的组件嵌套，存在严重副作用 -->
-    <teleport to='body'>
+    <Teleport to='body'>
         <!-- 初次渲染时应用过渡 -->
        <Transition :name="ns.b(transition)" appear>
             <!-- 兼容样式 -->
             <div 
                 :class="[ns.b(),ns.m(size)]" 
-                :style="Object.assign(popoverStyle, $attrs?.style)"
+                :style="Object.assign(popoverStyle,$attrs?.style)"
                 ref="popoverRef"
                 v-show="isShow"
                 v-clickoutside:[triggerRef?.$el]="trigger === 'click'?handleClickOutside:''"
@@ -22,12 +22,13 @@
                 ></span>
             </div>
        </Transition>
-    </teleport>    
+    </Teleport>    
 </template>
 
 <script lang="ts" setup>
 import {
     ref, 
+    computed,
     onMounted,
     onUnmounted,
 } from 'vue'
@@ -71,7 +72,7 @@ onMounted(() => {
     const documentElm = document.documentElement
 
     // 缓存popover offsetWidth, offsetHeight
-    const {offsetWidth, offsetHeight} = popoverRef.value as HTMLElement
+    let {offsetWidth, offsetHeight} = popoverRef.value as HTMLElement
 
      // 获取宽高后，隐藏元素
      isShow.value = false
@@ -124,14 +125,13 @@ function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number
         popWidth,
         popHeight,
         pop_placement.value,
-        props.showArrow
+        props.showArrow,
+        props.minWidthOnTrigger
     )
 }
 
 function handleClickOutside() {
-    if(isShow.value) {
-        isShow.value = false
-    }
+    isShow.value &&= false
 }
 
 </script>

@@ -27,5 +27,12 @@ export const popoverProps = buildProps({
     transition: {
         type: String,
         default: 'fade'
+    },
+    /**
+     * @description min-width is based on trigger elements or default
+     */
+    minWidthOnTrigger: {
+        type: Boolean,
+        default: false
     }
 })

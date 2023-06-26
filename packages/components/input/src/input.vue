@@ -70,14 +70,14 @@
 				v-show="showClear" 
 				@click="handleClearClick"
 			>
-                <span>×</span>
+                <span><CircleCloseFilled/></span>
             </i>
             <i 
 				:class="ns.e('password')" 
 				v-show="showPwdVisible && type !== 'textarea'" 
 				@click="handlePasswordClick"
 			>
-                <span>👀</span>
+                <component :is="passwordVisible? Hide : View" />
             </i>
         </span>
     </div>
@@ -96,6 +96,7 @@ import {
 import {inputProps, inputEmits} from './input'
 import {useNamespace} from '@komi-ui/hooks'
 import {isNil} from '@komi-ui/utils'
+import {CircleCloseFilled, View, Hide} from '@element-plus/icons-vue'
 
 defineOptions({
     name: 'KiInput'

@@ -20,7 +20,7 @@ export function getPopStyle(
 ): PopStyle {
     // 需要保证根据整体文档的偏移，而不是某个父级
     const { scrollLeft ,scrollTop} = document.documentElement
-    const {x, y, width} = triggerElm.getBoundingClientRect()
+    const {x, y} = triggerElm.getBoundingClientRect()
 
     // 相对于body的x轴，y轴
     const offsetLeft = x + scrollLeft
@@ -29,7 +29,7 @@ export function getPopStyle(
     // 触发元素宽高
     let {offsetWidth, offsetHeight} = triggerElm
     // 如果 minWidthOnTrigger 为true，minWidth 采用的是triggerElm 的宽
-    if(minWidthOnTrigger) offsetWidth = width
+    if(minWidthOnTrigger) popWidth = offsetWidth
     
     // bottom-start, bottom-end
     const [pos, subPos] = placement.split('-')

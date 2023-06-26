@@ -1,6 +1,6 @@
 {
   "name": "komi-ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Component Library for Vue 3, 基于Vue3的组件库",
   "homepage": "",
   "main": "lib/index.js",
@@ -37,7 +37,11 @@
   ],
   "author": "kamikore",
   "license": "MIT",
+  "peerDependencies": {
+    "vue": "^3.3.4"
+  },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
     "vue": "^3.3.4"
   }
 }

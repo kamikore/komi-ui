@@ -23,6 +23,8 @@ import {ref,useSlots} from 'vue'
 import {useNamespace} from '@komi-ui/hooks'
 import {dropdownProps} from './dropdown'
 import { addUnit } from '@komi-ui/utils'
+import KiScrollbar from '@komi-ui/components/scrollbar'
+import KiPopover from '@komi-ui/components/popover'
 
 defineOptions({
     name: 'KiDropdown'

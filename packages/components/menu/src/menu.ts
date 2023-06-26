@@ -1,29 +1,23 @@
 import { buildProps, COMPONENTSIZES } from "@komi-ui/utils"
 
-interface menuItem {
-    label: String
+export interface MENUITEM {
+    label?: String
+    value?: [String, Number, Boolean, Object]
 }
 
 export const menuProps = buildProps({
     /**
      * @description Array of items in the menu.
      */
-    items: {
-        type: Array<menuItem>,
-        required: true
-    },
+    items: Array<MENUITEM>,
     /**
-     * @description size of the Menu
+     * @description Size of the Menu
      */
     size: {
         type: String,
         values:  COMPONENTSIZES,
         default: 'default'
     },
-    /**
-     * @description Index of menu item is selected.
-     */
-    tabIndex: Number,
     /**
      * @description Callback executed on menu item clicks.
      */
