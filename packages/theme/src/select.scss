@@ -1,0 +1,60 @@
+
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+
+@include b(select) {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    border-radius: getCssVar('border-radius','large');
+    background-color: #eeeeee;
+    color: #797979;
+    padding: getCssVar('padding') 16px;
+
+
+    cursor: pointer;
+
+    @include when(disabled) {
+        cursor: not-allowed;
+        // background-color: #f6f6f6;
+        background-color: getCssVar('disabled','bg-color');
+        color: getCssVar('disabled','text-color');
+    }
+
+    @include when(selected) {
+        @include e(icon) {
+            transform: rotateZ(90deg);
+        }
+    }
+
+    @include e(label) {
+        line-height: getCssVar('common-component-size');
+
+        @include when(selected) {
+            color: #000;
+        }
+    }
+
+    @include e(icon) {
+        transition: all 0.5 ease;
+        transform: none;
+    }
+    
+
+    @each $size in(large, small) {
+        @include m($size) {
+            padding: getCssVar('padding', $size) 16px;
+
+            @include e(label) {
+                line-height: getCssVar('common-component-size', $size);
+            }
+
+        }
+    }
+
+
+
+}
+

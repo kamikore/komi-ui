@@ -174,8 +174,9 @@ $border-color-hover: getCssVar('text-color', 'disabled') !default;
 $border-radius: () !default;
 $border-radius: map.merge(
   (
-    'base': 4px,
     'small': 2px,
+    'base': 4px,
+    'large': 8px,
     'round': 20px,
     'circle': 100%,
   ),
@@ -587,3 +588,16 @@ $checkbox-toggle-radius: map.merge(
 );
 
 
+
+
+// menu-item
+// css3 var in packages/theme/src/menu-item.scss
+$menu-item-font-size: () !default;
+$menu-item-font-size: map.merge(
+  (
+      'large': 16px,
+      'default': 14px,
+      'small': 12px
+  ),
+  $menu-item-font-size
+);

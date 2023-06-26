@@ -41,6 +41,7 @@
     z-index: 200;
     background-color: getCssVar('color','white');
     border-radius: getCssVar('border-radius','base');
+    border: 1px solid getCssVar('border-color','light');
     color: getCssVar('color','black');
     min-width: 32px;
     line-height: 20px;
@@ -48,6 +49,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
     word-wrap: break-word;
     font-size: map.get($popover-font-size, 'default');
+
 
     // .ki-popover .ki-popover__arrow
     @include e((arrow)) {

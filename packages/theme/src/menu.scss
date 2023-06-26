@@ -1,10 +1,42 @@
-@use 'mixins/mixins.scss' as *;
-@use 'mixins/function.scss' as *;
+@use 'sass:map';
+
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
 
 
 @include b(menu) {
+    position: relative;
+    box-sizing: border-box;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+    background-color: #fff;
+    color: getCssVar('color','gray');
+    font-size: map.get($menu-item-font-size,'default');
+    line-height: getCssVar('common-component-size', 'default');
 
-    height: 100%;
-    overflow: auto;    
-    border-radius: getCssVar('border-radius','base');
+    overflow: auto;     
+
+    @include e(noResult) {
+        text-align: center;
+        padding: 24px;
+        cursor: not-allowed;
+        color: #cbcbcb;
+    }
+
+
+    @each $size in(large, small) {
+        @include m($size) {
+            font-size: map.get($menu-item-font-size, $size);
+            padding: getCssVar('padding', $size) 16px;
+            line-height: getCssVar('common-component-size', $size);
+
+        }
+    }
+    
+
+
 }

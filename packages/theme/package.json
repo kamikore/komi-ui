@@ -1,13 +1,12 @@
 {
   "name": "@komi-ui/theme",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "komi-ui component theme ",
   "main": "dist/index.css",
   "style": "dist/index.css",
   "scripts": {
     "build": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts",
-    "watch": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts watchBuild",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts watchBuild"
   },
   "keywords": [
     "vue-components",

@@ -10,9 +10,9 @@ const sass = gulpSass(dartSass);
 
 export const copyStyle = async () => {
     await copyFile(
-        resolve(kiOutput, 'theme/index.css'),
-        resolve(kiOutput, 'dist/index.css')
-    )
+        resolve(themeOutput,'index.css'),
+        resolve(kiOutput,'dist','index.css')
+      )
 }
 
 // 编译sass
