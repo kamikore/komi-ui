@@ -20,10 +20,11 @@ features:
   - icon: 
       src: /vue.svg
     title: Vue 3 Composition API
-    details: With Vue 3 Composition API, custom Vue Directives
-  - icon: 🛠️
-    title: Feature B...
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: With Vue 3 Composition API, custom Vue Directives.
+  - icon: 
+      src: https://baseweb.design/safari-pinned-tab.svg
+    title: BaseUi style
+    details: KomiUi is a Component Library for Vue 3 that follows the design style of BaseUi.
   - icon: 🛠️
     title: Feature C...
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

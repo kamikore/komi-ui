@@ -7,6 +7,20 @@ lang: zh-CN
 Komi Ui导入了Element Plus官方的图标集合 [@element-plus/icons-vue](https://github.com/element-plus/element-plus-icons)，若想查看所有可用的 SVG 图标或是更为详细地可以参考Element Plus官方文档中对icon的说明：[Icon 图标 | Element Plus](https://element-plus.gitee.io/zh-CN/component/icon.html)，当前文档仅对icon的使用作简单说明。
 
 
+### 安装
+
+```bash
+# 选择一个你喜欢的包管理器
+
+# NPM
+$ npm install @element-plus/icons-vue
+# Yarn
+$ yarn add @element-plus/icons-vue
+# pnpm
+$ pnpm install @element-plus/icons-vue
+```
+
+
 ### 注册所有图标
 可以从 @element-plus/icons-vue 中导入所有图标并进行全局注册，这样能够避免在使用时，需要单独导入操作。
 ```ts
