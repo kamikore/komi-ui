@@ -11,8 +11,9 @@ interface BOUNDING {
  * @returns {BOUNDING} 元素距离视口的top,bottom,left,right
  */
 export function getBounding(elm:Element):BOUNDING{
-    const viewportWidth = document.documentElement.offsetWidth
-    const viewportHeight = document.documentElement.offsetHeight
+    // 可视区窗口的宽高
+    const viewportWidth = document.documentElement.clientWidth
+    const viewportHeight = document.documentElement.clientHeight
     
     const rect:DOMRect = elm.getBoundingClientRect()
 
@@ -21,6 +22,7 @@ export function getBounding(elm:Element):BOUNDING{
     
     const bottom = viewportHeight - rect.bottom
     const right = viewportWidth - rect.right
+
     return {
         top,
         bottom,

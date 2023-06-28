@@ -14,3 +14,4 @@ export const PLACEMENT = [
     'right-start',
     'right-end'
 ]
+export const NOOP = () => {}

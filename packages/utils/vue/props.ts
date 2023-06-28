@@ -76,3 +76,6 @@ export const buildProp = <T>( key: string, prop: KiProp<T>) => {
 
     return compProp
 }   
+
+// props:type 不仅支持以变量使用
+export const definePropType = <T>(val: any): PropType<T> => val
