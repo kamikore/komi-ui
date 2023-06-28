@@ -1,7 +1,7 @@
 import { dest, src, watch, series } from 'gulp'
 import { themeRoot,themeOutput, kiOutput } from '@komi-ui/build-utils';
 import {resolve} from 'node:path'
-import {copyFile} from 'node:fs/promises'
+import {copyFile, mkdir} from 'node:fs/promises'
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 // 选择编译器
@@ -9,6 +9,8 @@ const sass = gulpSass(dartSass);
 
 
 export const copyStyle = async () => {
+    await mkdir(resolve(kiOutput,'dist'), {recursive: true})
+
     await copyFile(
         resolve(themeOutput,'index.css'),
         resolve(kiOutput,'dist','index.css')

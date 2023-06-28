@@ -7,6 +7,8 @@
 @include b(select) {
     box-sizing: border-box;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     border-radius: getCssVar('border-radius','large');
     background-color: #eeeeee;
@@ -23,12 +25,6 @@
         color: getCssVar('disabled','text-color');
     }
 
-    @include when(selected) {
-        @include e(icon) {
-            transform: rotateZ(90deg);
-        }
-    }
-
     @include e(label) {
         line-height: getCssVar('common-component-size');
 
@@ -37,9 +33,16 @@
         }
     }
 
-    @include e(icon) {
-        transition: all 0.5 ease;
+    @include e(icon-arrow) {
+        transition: all 0.5s ease;
         transform: none;
+        z-index: 1;
+    }
+
+    @include when(unfold) {
+        @include e(icon-arrow) {
+            transform: rotateZ(90deg);
+        }
     }
     
 

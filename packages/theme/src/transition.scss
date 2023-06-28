@@ -1,0 +1,36 @@
+@use './mixins/config' as *;
+
+/* transition config */
+.#{$namespace}-fade {
+    &-enter-active,
+    &-leave-active {
+        transition: opacity 0.5s ease;
+    }
+  
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+    }
+  }
+  
+
+.#{$namespace}-zoom-in-top {
+    &-enter-active,
+    &-leave-active {
+        opacity: 1;
+        transform: scaleY(1);
+        transition: all 0.25s ease;
+        transform-origin: center top;
+
+        // 属性选择器
+        &[placement^='top'] {
+          transform-origin: center bottom;
+        }
+    }
+
+    &-enter-from,
+    &-leave-active {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+}

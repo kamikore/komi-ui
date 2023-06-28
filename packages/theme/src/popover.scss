@@ -4,37 +4,6 @@
 @use 'mixins/var' as *;
 @use 'common/var' as *;
 
-/* transition config */
-.#{$namespace}-popover-fade {
-  &-enter-active,
-  &-leave-active {
-    transition: opacity 0.5s ease;
-  }
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
-  }
-}
-
-
-.#{$namespace}-popover-zoom-in-top {
-  &-enter-active,
-  &-leave-active {
-    opacity: 1;
-    transform: scaleY(1);
-    transition: all 0.25s ease-in-out;
-    transform-origin: center top;
-  }
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-
-}
-
 
 @include b(popover) {
     position: absolute;
