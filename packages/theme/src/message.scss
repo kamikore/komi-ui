@@ -5,18 +5,6 @@
 @use 'common/var' as *;
 
 
-/* transition config */
-.#{$namespace}-message-fade {
-    &-enter-active,
-    &-leave-active {
-      transition: opacity 0.5s ease;
-    }
-  
-    &-enter-from,
-    &-leave-to {
-      opacity: 0;
-    }
-}
 
 
 @include b(message) {
@@ -24,14 +12,47 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    border-radius: getCssVar('border-radius','base');
+    padding: 12px 16px;
+    overflow: hidden;
+    gap: 8px;
+
+    line-height: getCssVar('font-size','base');
+    font-size: getCssVar('font-size','base');
+    color: getCssVar('text-color','regular');
+    border: 1px solid getCssVar('border-color','light');
+    background-color: getCssVar('color', 'info', 'light-9');
+
+    // 需要给初始值否则应用过渡
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-
+    transition: opacity 0.8s, transform 0.4s, top 0.4s;
     z-index: 99;
+
+    @include e(icon) {
+        font-size: getCssVar('font-size','base');
+    }
+
+    @include e(icon-close) {
+        font-size: getCssVar('font-size','base');
+        color: getCssVar('color', 'info', 'light-3');
+        cursor: pointer;
+    }
 
     @include e(content) {
 
     }
 
 }
+
+
+// transition config
+.#{$namespace}-message-fade {
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+        transform: translate(-50%, -100%);
+    }
+}
+
