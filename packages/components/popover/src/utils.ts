@@ -17,7 +17,7 @@ export function getPopStyle(
     placement:string, 
     showArrow:boolean,
     minWidthOnTrigger:boolean
-): PopStyle {
+): PopStyle {   
     // 需要保证根据整体文档的偏移，而不是某个父级
     const { scrollLeft ,scrollTop} = document.documentElement
     const {x, y} = triggerElm.getBoundingClientRect()
@@ -60,7 +60,7 @@ export function getPopStyle(
     return {
         position: 'absolute',
         inset: `${top}px auto auto ${left}px`,
-        minWidth: `${triggerElm.offsetWidth}px`
+        minWidth: minWidthOnTrigger?`${triggerElm.offsetWidth}px`:undefined
     }
 }
 
@@ -97,7 +97,7 @@ export function togglePlacement(placement:string):string {
         ['right', 'left'],
     ]);
     const [pos, subPos] = placement.split('-')
-    if(toggleMap.has(pos)) return subPos?`${toggleMap.get(pos)}-${subPos}`:toggleMap.get(placement)
+    if(toggleMap.has(pos)) return subPos?`${toggleMap.get(pos)}-${subPos}`:toggleMap.get(placement)!
     return placement
 }
 

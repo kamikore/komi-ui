@@ -1,6 +1,6 @@
 <template>
     <Transition
-        :name="`${ns.namespace}-fade`"
+        :name="ns.b('fade')"
         @before-leave="$emit('close')"
         @after-leave="$emit('destroy')"
     >
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import {ref, computed, onMounted, onUnmounted} from 'vue'
-import { useNamespace, useTimeoutFn } from '@komi-ui/hooks'
+import { useNamespace, useTimeoutFn, useResizeObserver } from '@komi-ui/hooks'
 import {messageProps} from './message'
 import {getOffsetOrGap, getLastOffset} from './instance'
 import KiIcon from '@komi-ui/components/icon'
@@ -51,11 +51,13 @@ const ns = useNamespace('message')
 const props = defineProps(messageProps)
 const emit = defineEmits(['close','destroy'])
 
-console.log('props',props)
-
-const messageRef = ref<Element>()
+const messageRef = ref<HTMLDivElement>()
 const visible = ref(false)
 const height = ref(0)
+
+const {stop:stopObserver} = useResizeObserver(messageRef, () => {
+    height.value = messageRef.value!.getBoundingClientRect().height
+})
 
 const lastOffset = computed(() => getLastOffset(props.id))
 const offset = computed(() => {
@@ -63,7 +65,6 @@ const offset = computed(() => {
 })
 
 const bottom = computed((): number => {
-    console.log(height.value , offset.value)
     return height.value + offset.value
 })
 
@@ -97,13 +98,12 @@ function close() {
 
 onMounted(() => {
     visible.value = true
-    console.log(messageRef.value!.getBoundingClientRect())
-    height.value = messageRef.value!.getBoundingClientRect().height
     startTimer()
 })
 
 onUnmounted(() => {
     stopTimer()
+    stopObserver()
 })
 
 defineExpose({

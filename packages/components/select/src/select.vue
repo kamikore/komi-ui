@@ -1,35 +1,50 @@
 <template>
     <ki-popover
+        ref="popoverRef"
         trigger="click"
         :style="{
             padding: 0,
             boxShadow: 'none',
         }"
         :minWidthOnTrigger="true"
+        :visible="visible"
         transition="zoom-in-top"
     >
         <div 
-            ref="triggerRef"
             :class="[
                 ns.b(),
-                ns.is('disabled',disabled)
+                ns.is('disabled',disabled),
+                ns.is('selected', menuRef?.selectedIndex != -1),
+                ns.is('unfold', visible),
             ]" 
+            @click="toggle"
         >
             <span 
                 :class="[
                     ns.e('label'),
-                    ns.is('selected', modelValue)
                 ]"
             > 
                 {{ modelValue || placeholder }}
             </span>
-            <ki-icon :class="ns.e('icon')">
-                <CircleCloseFilled v-if="modelValue" @click="handleClear"/>
-                <CaretBottom />
-            </ki-icon>
+            <span>                      
+                <ki-icon 
+                    :class="ns.e('icon-close')"
+                    :size="16"
+                >
+                    <CircleCloseFilled v-if="modelValue" @click.stop="handleClear"/>
+                </ki-icon>
+                <ki-icon 
+                    :class="ns.e('icon-arrow')"
+                    :size="16"
+                >
+                    <CaretBottom />
+                </ki-icon>
+            </span>
         </div>
         <template #content>
             <ki-menu
+                ref="menuRef"
+                :value="modelValue"
                 :items="options"
                 :placeholder="placeholder"
                 :onItemSelect="onItemSelect"
@@ -46,31 +61,36 @@ import {selectProps,OPTION} from './select'
 import KiPopover from '@komi-ui/components/popover'
 import KiMenu from '@komi-ui/components/menu'
 import {CaretBottom, CircleCloseFilled} from '@element-plus/icons-vue'
-import { ref ,onMounted, computed} from 'vue'
+import { ref} from 'vue'
 
 defineOptions({
     name: 'KiSelect'
 })
 
+const emit = defineEmits(['update:modelValue'])
+
 const ns = useNamespace('select')
 const props = defineProps(selectProps)
 
-const emit = defineEmits(['update:modelValue'])
+const popoverRef = ref()
+const menuRef = ref()
 
-const triggerRef = ref<HTMLElement>()
+const visible = ref(false)
 
-const minWidth = computed(() => 
-    `${triggerRef.value?.offsetWidth}px`
-)
+
+function toggle() {
+    if(props.disabled) return
+    visible.value = !visible.value
+} 
 
 
 function handleClear() {
-    props.modelValue ? props.modelValue = undefined : ''
+    emit && emit('update:modelValue', undefined)
 }
 
 function onItemSelect(ev: MouseEvent, value:OPTION, index: Number) {
     emit && emit('update:modelValue', value)
+    visible.value = false
 }
-
 
 </script>

@@ -5,14 +5,15 @@
     <!-- 确保定位相对于body，避免过多的组件嵌套，存在严重副作用 -->
     <Teleport to='body'>
         <!-- 初次渲染时应用过渡 -->
-       <Transition :name="ns.b(transition)" appear>
+       <Transition :name="`${ns.namespace}-${transition}`" appear>
             <!-- 兼容样式 -->
             <div 
                 :class="[ns.b(),ns.m(size)]" 
                 :style="Object.assign(popoverStyle,$attrs?.style)"
                 ref="popoverRef"
-                v-show="isShow"
-                v-clickoutside:[triggerRef?.$el]="trigger === 'click'?handleClickOutside:''"
+                :placement="pop_placement"
+                v-show="visible === undefined ? isShow : visible"
+                v-clickoutside:[triggerRef?.$el]="trigger === 'click'? close : undefined"
             >
                 <slot name="content"/>
                 <span 
@@ -32,16 +33,20 @@ import {
     onMounted,
     onUnmounted,
 } from 'vue'
+import KiOnlyChild from '@komi-ui/components/slots'
 import {popoverProps} from './popover'
-import {useNamespace} from '@komi-ui/hooks'
+import {useNamespace, useResizeObserver} from '@komi-ui/hooks'
 import { vClickoutside } from '@komi-ui/directives'
-import {debounce} from '@komi-ui/utils'
+import {debounce, isElement} from '@komi-ui/utils'
 import { 
     popIsOverflow, 
     togglePlacement, 
     arrowTransform, 
     getPopStyle
 } from "./utils"
+import type {ComponentPublicInstance} from 'vue'
+
+
 
 defineOptions({
     name: 'KiPopover',
@@ -51,42 +56,39 @@ defineOptions({
 
 const props = defineProps(popoverProps)
 const ns = useNamespace('popover')
-const triggerRef = ref<HTMLElement | null>(null)
-const popoverRef = ref<HTMLElement | null>(null)
+const triggerRef = ref<HTMLElement | ComponentPublicInstance>()
+const popoverRef = ref<HTMLDivElement>()
+
+const popHeight = ref(0)
+const popWidth = ref(0)
 
 // 缩放监听
-let resizeObserver:ResizeObserver
 let updatePopoverDebounce:Function
 
 const popoverStyle = ref<any>({})
 const arrowStyle = ref<any>({})
-
-const pop_placement = ref(props.placement)
 const isShow = ref(true)
 
 
-onMounted(() => {
+const pop_placement = ref(props.placement)
 
+onMounted(() => {
     // vueInstance.ctx.$el 
-    const triggerElm = triggerRef.value?.$el
-    const documentElm = document.documentElement
+    const triggerElm = isElement(triggerRef.value) ? triggerRef.value : triggerRef.value?.$el
 
     // 缓存popover offsetWidth, offsetHeight
-    let {offsetWidth, offsetHeight} = popoverRef.value as HTMLElement
+    let {offsetWidth, offsetHeight} = popoverRef.value!
 
      // 获取宽高后，隐藏元素
      isShow.value = false
 
-     updatePopoverDebounce = 
+    updatePopoverDebounce = 
         debounce(() => {
             updatePopover(triggerElm,offsetWidth,offsetHeight)
-        })
+        },50)
 
-    resizeObserver = new ResizeObserver(updatePopoverDebounce as ResizeObserverCallback)
-    // 监听视窗缩放，body存在问题
-    resizeObserver.observe(documentElm)
-
-    // 监听视窗滚动
+    updatePopoverDebounce()
+    window.addEventListener("resize", updatePopoverDebounce)
     window.addEventListener('scroll', updatePopoverDebounce)
    
     if(props.trigger === 'hover') {
@@ -98,12 +100,12 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-    resizeObserver.disconnect()
+    // resizeObserver.disconnect()
+    window.removeEventListener('resize',updatePopoverDebounce)
     window.removeEventListener('scroll',updatePopoverDebounce)
 })
 
 function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number) {
-    
     // 判断是否溢出
     if(popIsOverflow(triggerElm,popWidth,popHeight,props.placement,props.showArrow)) {
         // 如果溢出了判断切换位置后，是否仍是溢出,仍溢出则保持
@@ -130,8 +132,14 @@ function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number
     )
 }
 
-function handleClickOutside() {
+function close() {
     isShow.value &&= false
 }
+
+
+defineExpose({
+    close,
+    visible: props.visible || isShow
+})
 
 </script>

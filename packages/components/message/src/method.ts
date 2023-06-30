@@ -29,13 +29,11 @@ const createMessage = (options: String | MessageProps) => {
         
         id,
         onClose: () => {
-            console.log("删除instance")
             // 删除instances中的实例
             closeMessage(instance)
         },
         // clean message element preventing mem leak
         onDestroy: () => {
-            console.log("卸载vnode")
             // 卸载vnode
             render(null, container)
         },

@@ -34,5 +34,4 @@ const props = defineProps(dropdownProps)
 const ns = useNamespace('dropdown')
 
 
-
 </script>

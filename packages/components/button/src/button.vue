@@ -1,6 +1,5 @@
 <template>
-    <!-- 支持自定义标签，按钮不一定是button标签 -->
-   <component 
+    <component 
         :is="tag" 
         v-bind="$props"
         :class= "[
@@ -13,23 +12,24 @@
         ]"
         @click="handleClick"
     >
-    <!-- 按钮icon -->
-    
-    <!-- 按钮文本，如果传入了内容，插槽默认为default -->
-    <span :class="ns.e('text')" v-if="$slots.default">     
-        <slot/>
-    </span>
+        <!-- 按钮icon -->
+        
+        <!-- 按钮文本，如果传入了内容，插槽默认为default -->
+        <span :class="ns.e('text')" v-if="$slots.default">     
+            <slot/>
+        </span>
 
-    <ki-icon v-else-if="icon || $slots.icon">
-        <component :is="icon" v-if="icon" />
-        <slot v-else name="icon" />   
-    </ki-icon>
-   </component>
+        <ki-icon v-else-if="icon || $slots.icon">
+            <component :is="icon" v-if="icon" />
+            <slot v-else name="icon" />   
+        </ki-icon>
+    </component>
 </template>
 
 <script lang="ts" setup>
 import {buttonProps} from './button'
 import { useNamespace } from '@komi-ui/hooks'
+import KiIcon from '@komi-ui/components/icon'
 
 
 defineOptions({

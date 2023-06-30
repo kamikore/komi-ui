@@ -14,7 +14,7 @@ export function getBounding(elm:Element):BOUNDING{
     // 可视区窗口的宽高
     const viewportWidth = document.documentElement.clientWidth
     const viewportHeight = document.documentElement.clientHeight
-    
+
     const rect:DOMRect = elm.getBoundingClientRect()
 
     const top = rect.top 

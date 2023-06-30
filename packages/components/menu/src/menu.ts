@@ -10,6 +10,10 @@ export const menuProps = buildProps({
      * @description Array of items in the menu.
      */
     items: Array<MENUITEM>,
+     /**
+     * @description selected value
+     */
+    value: [String, Number, Boolean, Object],
     /**
      * @description Size of the Menu
      */

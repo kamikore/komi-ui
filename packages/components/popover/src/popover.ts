@@ -19,6 +19,13 @@ export const popoverProps = buildProps({
         type: Boolean,
         default: false
     },
+    /**
+     * @description Whether popover visible.
+     */
+    visible: {
+        type: Boolean,
+        default: undefined
+    },
     placement: {
         type: String,
         values: PLACEMENT,

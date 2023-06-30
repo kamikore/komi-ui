@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import {ref, computed, inject, nextTick} from 'vue'
 import {radioProps} from './radio'
-import { useNamespace } from '@komi-ui/hooks';
+import { useNamespace } from '@komi-ui/hooks'
 import {radioGroupKey} from './constants'
 
 defineOptions({
@@ -59,7 +59,9 @@ const ns = useNamespace('radio')
 const props = defineProps(radioProps)
 const radioRef = ref<HTMLInputElement>()
 
-const disabled = props.disabled || radioGroup?.disabled.value
+const disabled = computed(() => 
+    props.disabled || radioGroup?.disabled
+)
 
 const modelValue = computed({
     get() {
@@ -81,9 +83,9 @@ function handleChange() {
 }
 
 function labelClick() {
+    if(disabled.value) return
     modelValue.value = props.label
     nextTick(() => emit('change', modelValue.value))
 }
-
 
 </script>
