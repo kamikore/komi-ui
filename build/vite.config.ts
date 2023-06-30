@@ -9,7 +9,9 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       // 忽略vue.js
-      external: ['vue'],
+      external: [
+        'vue',
+      ],
       input: [resolve(kiRoot,'index.ts')],
       output: [
         {

@@ -12,6 +12,11 @@ node_modules
 # Bundle
 dist
 
+iconfont.js
+
+# playground
+playground
+
 
 # local env files
 *.local

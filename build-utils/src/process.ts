@@ -3,8 +3,11 @@ import { projRoot } from './paths'
 
 
 // 执行命令线程
-export const run = (cmd: string,cwd:string = projRoot) => 
+export const run = (cmd: string, cwd:string = projRoot) => 
     new Promise((resolve,reject) => {
+        console.log("run:", cmd)
+        console.log("cwd:", cwd)
+
         const childProcess = spawn(cmd,{
             cwd,
             shell: process.platform === 'win32',

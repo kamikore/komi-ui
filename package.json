@@ -7,26 +7,28 @@
     "playground"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm -C playground dev",
     "build": "pnpm -C build build",
+    "build:watch": "pnpm -C build watch",
     "build:theme": "pnpm -C packages/theme build",
     "clean:dist": "rimraf dist",
     "theme:watch": "pnpm -C packages/theme watch",
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
-    "docs:serve": "pnpm run -C docs serve"
+    "docs:preview": "pnpm run -C docs preview"
   },
   "dependencies": {
-    "@komi-ui/components": "workspace:^0.0.0",
+    "@element-plus/icons-vue": "^2.1.0",
+    "@komi-ui/components": "workspace:^0.0.1",
     "@komi-ui/directives": "workspace:^0.0.0",
     "@komi-ui/hooks": "workspace:^0.0.0",
-    "@komi-ui/theme": "workspace:^0.0.0",
-    "@komi-ui/utils": "workspace:^0.0.0",
+    "@komi-ui/theme": "workspace:^0.0.1",
+    "@komi-ui/utils": "workspace:^0.0.1",
     "vue": "^3.3.4"
   },
   "devDependencies": {
     "@esbuild-kit/cjs-loader": "^2.4.2",
+    "@kamikore/iconfont-builder": "^0.2.0",
     "@komi-ui/build": "workspace:^0.0.0",
     "@komi-ui/build-utils": "workspace:^0.0.0",
     "@types/gulp": "^4.0.10",

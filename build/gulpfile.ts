@@ -1,10 +1,10 @@
-import { dest, parallel, series, src } from 'gulp'
+import { watch,series } from 'gulp'
 import {resolve} from 'node:path'
-import {copyFile} from 'node:fs/promises'
+import {copyFile, mkdir} from 'node:fs/promises'
 import {
   projRoot,
   buildRoot,
-  pkgRoot,
+  themeRoot,
   kiOutput,
   kiPackage,
   themeOutput,
@@ -14,6 +14,7 @@ import {
 export const copyFiles = () =>
   // 返回promise
   Promise.all([
+
     copyFile(kiPackage, resolve(kiOutput, 'package.json')),
     copyFile(
       resolve(projRoot, 'README.md'),
@@ -21,11 +22,18 @@ export const copyFiles = () =>
     ),
     
     // 样式入口
-    copyFile(
-      resolve(themeOutput,'index.css'),
-      resolve(kiOutput,'dist','index.css')
-    )
+    // copyFile(
+    //   resolve(themeOutput,'index.css'),
+    //   resolve(kiOutput,'dist','index.css')
+    // )
   ])
+
+export const watchBuild = () => {
+  watch('../packages/components/**/src/*.vue', () => {
+      series(build)
+  });
+}
+
 
 export const build = series(
   // clean dist
@@ -33,7 +41,7 @@ export const build = series(
   // bundle packages
   runTask('vite build',buildRoot),
   // bundle theme
-  runTask('pnpm run build',resolve(pkgRoot,'theme')),
+  runTask('pnpm build',resolve(themeRoot)),
   copyFiles
 )
 
