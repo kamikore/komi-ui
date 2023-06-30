@@ -37,6 +37,7 @@ export const getInstance = (id: string) => {
 export const getLastOffset = (id: string): number => {
     const { prev } = getInstance(id)
     if (!prev) return 0
+    console.log("bottom", prev.vm.exposed!.bottom.value)
     return prev.vm.exposed!.bottom.value
 }
 
@@ -48,6 +49,7 @@ export const getLastOffset = (id: string): number => {
  * @returns 返回message之间的默认间隔，或是message offset
  */
 export const getOffsetOrGap = (id: string, offset: number):number => {
-    const idx = instances.findIndex((instance) => instance.id === id)
-    return idx > 0 ? 20 : offset
+    const index = instances.findIndex((instance) => instance.id === id)
+    // 判断是否还有其他instance 
+    return index > 0 ? 20 : offset
 }

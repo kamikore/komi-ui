@@ -1,20 +1,42 @@
 import {createVNode, render, isVNode} from 'vue'
 import KiMessage from './message.vue'
 import { instances } from './instance'
-import { isFunction } from '@komi-ui/utils'
-import type {MessageContext} from './instance'
+import { isString, isFunction } from '@komi-ui/utils'
+import type { MessageContext } from './instance'
+import type { MessageProps } from './message'
 
 let seed = 1
 
-const createMessage = (options) => {
+const closeMessage = (instance: MessageContext) => {
+    const index = instances.indexOf(instance)
+    if (index === -1) return
+  
+    instances.splice(index, 1)
+    const { handler } = instance
+    handler.close()
+}
+
+const createMessage = (options: String | MessageProps) => {
 
     const container = document.createElement('div')
 
-    const props = {
+    isString(options) ? options = {message: options} : ''  
+
+    const id = `message_${seed++}`
+
+    const props:MessageProps = {
         ...options,
-      
+        
+        id,
+        onClose: () => {
+            console.log("删除instance")
+            // 删除instances中的实例
+            closeMessage(instance)
+        },
         // clean message element preventing mem leak
         onDestroy: () => {
+            console.log("卸载vnode")
+            // 卸载vnode
             render(null, container)
         },
     }
@@ -35,8 +57,7 @@ const createMessage = (options) => {
 
     document.body.appendChild(container.firstElementChild!)
 
-
-    const id = `message_${seed++}`
+    
     const vm = vnode.component!
 
     const handler = {
@@ -50,7 +71,7 @@ const createMessage = (options) => {
     const instance: MessageContext = {
         id,
         vnode,
-        props,
+        props: vm.props,
         vm,
         handler
     }

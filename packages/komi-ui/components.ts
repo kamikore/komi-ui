@@ -13,6 +13,7 @@ import {
     KiTransition,
     KiOnlyChild,
     KiIcon,
+    KiMessage,
 } from '@komi-ui/components'
 import type { Plugin } from 'vue'
 
@@ -32,4 +33,5 @@ export default [
     KiTransition,
     KiOnlyChild,
     KiIcon,
+    KiMessage,
 ] as Plugin[]

@@ -1,8 +1,19 @@
 import { buildProps,definePropType } from "@komi-ui/utils"
-import type { VNode, ExtractPropTypes } from 'vue'
+import type { VNode, Component , ExtractPropTypes } from 'vue'
 
 
 export const messageProps = buildProps({
+    id: {
+        type: String,
+        default: ''
+    },
+    /**
+     * @description Display duration, millisecond. If set to 0, it will not turn off automatically.
+     */
+    duration: {
+        type: Number,
+        default: 3000
+    },
     /**
      * @description set the distance to the top of viewport
      */
@@ -21,6 +32,20 @@ export const messageProps = buildProps({
         Function,
         ]),
         default: '',
+    },
+    /**
+     * @description whether to show a close button
+     */
+    closable: {
+        type: Boolean,
+        default: false
+    },
+    /**
+     * @description message prefix icon
+     */
+    icon: {
+        type: definePropType<string | Component>([String, Object]),
+        default: undefined
     },
     /**
      * @description
