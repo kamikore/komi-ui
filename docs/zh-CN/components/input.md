@@ -25,7 +25,7 @@ input/sizes
 :::
 
 ### 禁用状态
-通过 disabled 属性指定是否禁用 input 组件。
+使用 `disabled` 属性来控制输入框是否为禁用状态。该属性接受一个 `Boolean` 类型的值
 ::: demo
 input/disabled
 :::

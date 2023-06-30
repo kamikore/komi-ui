@@ -7,15 +7,15 @@
 
 <script lang="ts" setup>
 const items = [
-    { label: "Item One" },
-    { label: "Item Two" },
-    { label: "Item Three" },
-    { label: "Item Four" },
-    { label: "Item Five" },
-    { label: "Item Six" },
-    { label: "Item Seven" },
-    { label: "Item Eight" },
-    { label: "Item Nine" },
-    { label: "Item Ten" },
+    { label: "Item One" , value: "Item One"},
+    { label: "Item Two" , value: "Item Two"},
+    { label: "Item Three" , value: "Item Three"},
+    { label: "Item Four", value: "Item Four"},
+    { label: "Item Five", value: "Item Five" },
+    { label: "Item Six", value: "Item Six" },
+    { label: "Item Seven",value: "Item Seven" },
+    { label: "Item Eight",value: "Item Eight" },
+    { label: "Item Nine" , value: "Item Nine"},
+    { label: "Item Ten" , value: "Item Ten"},
 ]
 </script>

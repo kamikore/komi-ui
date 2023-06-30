@@ -27,7 +27,7 @@ checkbox/sizes
 :::
 
 ### Disabled
-Use disabled attribute to determine whether a Checkbox is disabled. It accepts a Boolean value.
+Use `disabled` attribute to determine whether a Checkbox is disabled. It accepts a Boolean value.
 ::: demo
 checkbox/disabled
 :::

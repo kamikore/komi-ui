@@ -1,10 +1,24 @@
 ---
-title: Icon 图标
+title: Icon
 lang: en-US
 ---
 
-# Icon 图标
+# Icon
 Komi Ui import the set of common icons of Element Plus: [@element-plus/icons-vue](https://github.com/element-plus/element-plus-icons). If you want to view all available SVG icons or for more detailed information, you can refer to the description of icons in the official document of Element Plus: [Icon | Element Plus](https://element-plus.gitee.io/zh-CN/component/icon.html). The current page only provides a brief explanation of the usage of icon.
+
+
+### Installation
+
+```bash
+# Choose a package manager you like.
+
+# NPM
+$ npm install @element-plus/icons-vue
+# Yarn
+$ yarn add @element-plus/icons-vue
+# pnpm
+$ pnpm install @element-plus/icons-vue
+```
 
 
 ### Register All Icons

@@ -4,9 +4,9 @@
 
 <script lang="ts" setup>
 const items = [
-    { label: "Item One" },
-    { label: "Item Two" },
-    { label: "Item Three" },
-    { label: "Item Four" }
+{ label: "Item One" , value: "Item One"},
+    { label: "Item Two" , value: "Item Two"},
+    { label: "Item Three" , value: "Item Three"},
+    { label: "Item Four", value: "Item Four"}
 ]
 </script>

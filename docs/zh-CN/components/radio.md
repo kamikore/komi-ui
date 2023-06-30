@@ -29,7 +29,7 @@ radio/sizes
 
 
 ### 禁用状态
-通过 disabled 属性指定是否禁用 radio 组件。
+使用 `disabled` 属性来控制单选按钮是否为禁用状态。该属性接受一个 `Boolean` 类型的值
 ::: demo
 radio/disabled
 :::

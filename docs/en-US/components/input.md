@@ -26,7 +26,7 @@ input/sizes
 
 
 ### Disabled
-Disable the Input with the `disabled` attribute.
+Use `disabled` attribute to determine whether a Input is disabled. It accepts a Boolean value.
 ::: demo
 input/disabled
 :::

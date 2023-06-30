@@ -1,7 +1,12 @@
 <template>
     <div class="v-props_wrap" v-if="configs && name">
         <template 
-            v-for="({value = undefined,type,options,description}, key) in configs" 
+            v-for="({
+                placeholder,
+                type,
+                options,
+                description
+            }, key) in configs" 
             :key="key"
         >
             <!-- prop label -->
@@ -12,20 +17,19 @@
             </div>
             <div v-else-if="type === 'Enum'">
                 <PropsLabel :title="key" :type="type" :description="description"/>
-                <ki-radio-group v-model="compProps[key]">
-                    <ki-radio
-                        v-for="option of options" 
-                        :key="option" 
-                        :label="option" 
-                    />
-                </ki-radio-group>
+                <ki-select 
+                    :options="options && formatOptions(options)"
+                    v-model="compProps[key]"
+                    :placeholder="placeholder"
+                >
+                </ki-select>
             </div>
             <div v-else-if="String(type).includes('Function')">
                 <PropsLabel :title="key" :type="type" :description="description"/>
                 <ki-input 
                     type="textarea" 
                     :id="key" 
-                    :placeholder="value"
+                    :placeholder="placeholder"
                     v-model="compProps[key]"
                     autoResize
                 />
@@ -35,7 +39,7 @@
                 <ki-input 
                     type="textarea" 
                     :id="key" 
-                    :placeholder="value"
+                    :placeholder="placeholder"
                     v-model="compProps[key]"
                     autoResize
                 />
@@ -47,11 +51,13 @@
 <script setup lang="ts">
 import PropsLabel from '../panel/vp-props-label.vue'
 import {reactive, watch, watchEffect, inject} from 'vue'
-import { Store,defaultMainFile } from './store'
+import { Store, defaultMainFile } from './store'
+import {isArray} from '@komi-ui/utils'
 import type { PropType } from "vue"
 
 interface Prop<T = any> {
     value: String | undefined,
+    placeholder: String | undefined,
     options?: Array<string>,
     type: PropType<T> | String,
     description: String
@@ -81,6 +87,22 @@ watch(
   },
   { deep: true, immediate: true}
 )
+
+/**
+ * @description 格式化Enum类型的prop可选值数组
+ * @param options prop 可选值数组
+ */
+function formatOptions(options: Array<string>) {
+    if(!isArray(options)) return options
+
+    return options.map(option => (
+        { 
+            label:option, 
+            value:option
+        }
+    ))
+}
+
 
 /**
  * @description 根据组件props格式化代码

@@ -13,6 +13,8 @@ menu/basic
 :::
 
 ### 基本使用
+Menu提供了一个执行操作的列表。
+通过传递`onItemSelect` 回调函数完成交互操作，该回调提供 `event`事件对象、`value`选中的菜单项值以及`index`选中的菜单项索引。
 ::: demo
 menu/basic
 :::

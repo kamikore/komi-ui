@@ -1,17 +1,28 @@
 <template>
-    <div class="vp-message_wrap">
-        <pre> {{formatMessage(err)}} </pre>
+    <div class="vp-message_wrap" v-show="store.state.errors.length">
+        <ki-icon 
+            class="closeIcon" 
+            :size="20" 
+            color="#fff"
+            @click="handleClose"
+        >
+            <CircleCloseFilled/>
+        </ki-icon>
+        <pre> {{formatMessage(store.state.errors[0])}} </pre>
     </div>
 </template>
 
 <script setup lang="ts">
+import {CircleCloseFilled} from '@element-plus/icons-vue'
+import { inject } from 'vue'
 import type { CompilerError } from 'vue/compiler-sfc'
+import type { Store } from './store'
 
-const props = defineProps<{
-  err?: string | CompilerError
-}>()
 
-function formatMessage(err) {
+// 注入store
+const store = inject('store') as Store
+
+function formatMessage(err: string | CompilerError) {
     if(!err) return
     if (typeof err === 'string') {
         return err
@@ -26,10 +37,16 @@ function formatMessage(err) {
     }
 }
 
+function handleClose() {
+    store.state.errors.length = 0
+}
+
 </script>
 
 <style lang="scss" scoped>
     .vp-message_wrap {
+        box-sizing: border-box;
+        position: relative;
         width: 100%;
         border-radius: 6px;
         white-space: pre;
@@ -40,5 +57,17 @@ function formatMessage(err) {
         overflow-x: scroll;
         padding: 16px;
         margin: 12px 0;
+
+        .closeIcon {
+            position: sticky;
+            top: 0;
+            left: 95%;
+            cursor: pointer;
+        }
+
+        pre {
+            margin: 0;
+        }
+
     }
 </style>

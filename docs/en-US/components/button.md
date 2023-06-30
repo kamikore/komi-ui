@@ -25,7 +25,7 @@ button/sizes
 :::
 
 ### Disabled Button
-Use disabled attribute to determine whether a Button is disabled. It accepts a Boolean value.
+Use `disabled` attribute to determine whether a Button is disabled. It accepts a Boolean value.
 ::: demo
 button/disabled
 :::

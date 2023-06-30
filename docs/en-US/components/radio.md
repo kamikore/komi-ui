@@ -30,7 +30,7 @@ radio/sizes
 
 
 ### Disabled
-Use disabled attribute to determine whether a radio is disabled. It accepts a Boolean value.
+Use `disabled` attribute to determine whether a Radio is disabled. It accepts a Boolean value.
 ::: demo
 radio/disabled
 :::

@@ -3,8 +3,10 @@ import { compileSFC } from './compileSFC'
 import {
   SFCScriptCompileOptions,
   SFCAsyncStyleCompileOptions,
-  SFCTemplateCompileOptions
+  SFCTemplateCompileOptions,
+  CompilerError 
 } from 'vue/compiler-sfc'
+
 
 export const defaultMainFile = 'App.vue'
 
@@ -40,7 +42,7 @@ export class File {
 export interface StoreState {
   mainFile: File
   files: Record<string, File>
-  errors: (string | Error)[]
+  errors: (string | CompilerError)[]
   vueRuntimeURL: string
   uiLibURL?: string
   compProps: Record<string, any>

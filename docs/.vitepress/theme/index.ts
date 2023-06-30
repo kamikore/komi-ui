@@ -1,4 +1,5 @@
-import KomiUi from 'komi-ui'
+// import KomiUi from 'komi-ui'
+import KomiUi from '../../../packages/komi-ui/index'
 // import 'komi-ui/dist/index.css'
 import '../../../dist/komi-ui/dist/index.css'
 import DefaultTheme from 'vitepress/theme'
@@ -11,11 +12,16 @@ import {inBrowser} from '../utils'
 
 export default {
     extends: DefaultTheme,
-    enhanceApp({ app, router, siteData }) {
-        globalComps.map(([name, comp]) => {
-            app.component(name, comp)
-        })
-        app.use(KomiUi)
+    async enhanceApp({ app, router, siteData }) {
+        if (!import.meta.env.SSR) {
+            // const KomiUi = await import('komi-ui')
+            app.use(KomiUi)
+
+            globalComps.map(([name, comp]) => {
+                app.component(name, comp)
+            })
+        }
+
     },
     setup() {
         const supportedLangs = [

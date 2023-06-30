@@ -8,14 +8,14 @@
         ></textarea>
         <pre v-html="hlCode"></pre>
     </div>
-    <Message v-show="store.state.errors.length" :err="store.state.errors[0]"></Message>
+    <Message></Message>
 
 </template>
 
 <script setup lang="ts">
-import Message from './vp-message.vue'
 import {ref, computed, inject, onMounted} from 'vue'
 import { highlight, debounce } from '../../.vitepress/utils'
+import Message from './vp-message.vue'
 import type { Store } from './store'
 
 

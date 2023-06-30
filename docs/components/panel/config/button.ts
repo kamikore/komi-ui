@@ -6,7 +6,7 @@ export const buttonPanelConfig = {
     example: 'button/panel-example',
     props: {
         click: {
-          value: "() => {}",
+          placeholder:  "() => {}",
           type: Function,
           description: 'Function called when button is clicked.',
         },

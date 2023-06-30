@@ -13,7 +13,8 @@
                 "items": [
                     {"text": "Input", "link": "/en-US/components/input"},
                     {"text": "Radio", "link": "/en-US/components/radio"},
-                    {"text": "Checkbox", "link": "/en-US/components/checkbox"}
+                    {"text": "Checkbox", "link": "/en-US/components/checkbox"},
+                    {"text": "Select", "link": "/en-US/components/select"}
                 ]
             },
             {
@@ -26,6 +27,7 @@
             {
                 "text": "Feedback",
                 "items": [
+                    {"text": "Message", "link": "/en-US/components/message"},
                     {"text": "Popover", "link": "/en-US/components/popover"}
                 ]
             }
@@ -45,7 +47,8 @@
                 "items": [
                     {"text": "Input 输入框", "link": "/zh-CN/components/input"},
                     {"text": "Radio 单选按钮", "link": "/zh-CN/components/radio"},
-                    {"text": "Checkbox 多选框", "link": "/zh-CN/components/checkbox"}
+                    {"text": "Checkbox 多选框", "link": "/zh-CN/components/checkbox"},
+                    {"text": "Select 选择器", "link": "/zh-CN/components/select"}
                 ]
             },
             {
@@ -58,6 +61,7 @@
             {
                 "text": "Feedback 反馈组件",
                 "items": [
+                    {"text": "Message 消息提示", "link": "/zh-CN/components/message"},
                     {"text": "Popover 弹出框", "link": "/zh-CN/components/popover"}
                 ]
             }
