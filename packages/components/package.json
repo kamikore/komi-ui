@@ -5,5 +5,8 @@
   "main": "index.ts",
   "peerDependencies": {
     "vue": "^3.3.4"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0"
   }
 }

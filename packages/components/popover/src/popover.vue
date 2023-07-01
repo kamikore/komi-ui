@@ -14,6 +14,8 @@
                 :placement="pop_placement"
                 v-show="visible === undefined ? isShow : visible"
                 v-clickoutside:[triggerRef?.$el]="trigger === 'click'? close : undefined"
+                @mouseenter="open"
+                @mouseleave="delayClose"
             >
                 <slot name="content"/>
                 <span 
@@ -29,13 +31,13 @@
 <script lang="ts" setup>
 import {
     ref, 
-    computed,
+    unref,
     onMounted,
     onUnmounted,
 } from 'vue'
 import KiOnlyChild from '@komi-ui/components/slots'
 import {popoverProps} from './popover'
-import {useNamespace, useResizeObserver} from '@komi-ui/hooks'
+import {useNamespace, useTimeoutFn} from '@komi-ui/hooks'
 import { vClickoutside } from '@komi-ui/directives'
 import {debounce, isElement} from '@komi-ui/utils'
 import { 
@@ -45,7 +47,6 @@ import {
     getPopStyle
 } from "./utils"
 import type {ComponentPublicInstance} from 'vue'
-
 
 
 defineOptions({
@@ -59,8 +60,6 @@ const ns = useNamespace('popover')
 const triggerRef = ref<HTMLElement | ComponentPublicInstance>()
 const popoverRef = ref<HTMLDivElement>()
 
-const popHeight = ref(0)
-const popWidth = ref(0)
 
 // 缩放监听
 let updatePopoverDebounce:Function
@@ -72,38 +71,12 @@ const isShow = ref(true)
 
 const pop_placement = ref(props.placement)
 
-onMounted(() => {
-    // vueInstance.ctx.$el 
-    const triggerElm = isElement(triggerRef.value) ? triggerRef.value : triggerRef.value?.$el
 
-    // 缓存popover offsetWidth, offsetHeight
-    let {offsetWidth, offsetHeight} = popoverRef.value!
-
-     // 获取宽高后，隐藏元素
-     isShow.value = false
-
-    updatePopoverDebounce = 
-        debounce(() => {
-            updatePopover(triggerElm,offsetWidth,offsetHeight)
-        },50)
-
-    updatePopoverDebounce()
-    window.addEventListener("resize", updatePopoverDebounce)
-    window.addEventListener('scroll', updatePopoverDebounce)
-   
-    if(props.trigger === 'hover') {
-        triggerElm.addEventListener('mouseenter', () => isShow.value = true)
-        triggerElm.addEventListener('mouseleave', () => isShow.value = false)
-    } else {
-        triggerElm.addEventListener('click', () => isShow.value = !isShow.value)
-    }
-})
-
-onUnmounted(() => {
-    // resizeObserver.disconnect()
-    window.removeEventListener('resize',updatePopoverDebounce)
-    window.removeEventListener('scroll',updatePopoverDebounce)
-})
+const { start: delayClose, stop: clearTimer } = useTimeoutFn(
+  () => props.trigger === 'hover'? close() : '', 
+  500, 
+  {immediate: false}
+)
 
 function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number) {
     // 判断是否溢出
@@ -132,9 +105,52 @@ function updatePopover(triggerElm:HTMLElement, popWidth:number, popHeight:number
     )
 }
 
+function open() {
+    // 防止快速打开关闭带来的抖动
+    clearTimer()
+    isShow.value = true
+}
+
+
 function close() {
     isShow.value &&= false
 }
+
+
+onMounted(() => {
+    // vueInstance.ctx.$el 
+    const triggerElm = isElement(triggerRef.value) ? triggerRef.value : triggerRef.value?.$el
+    const popElm = unref(popoverRef.value)
+
+    // 缓存popover offsetWidth, offsetHeight
+    let {offsetWidth, offsetHeight} = popoverRef.value!
+
+     // 获取宽高后，隐藏元素
+     isShow.value = false
+
+    updatePopoverDebounce = 
+        debounce(() => {
+            updatePopover(triggerElm,offsetWidth,offsetHeight)
+        },50)
+
+    updatePopoverDebounce()
+    window.addEventListener("resize", updatePopoverDebounce)
+    window.addEventListener('scroll', updatePopoverDebounce)
+   
+    if(props.trigger === 'hover') {
+        triggerElm.addEventListener('mouseenter', () => open())
+        triggerElm.addEventListener('mouseleave', () => close())
+    } else {
+        triggerElm.addEventListener('click', () => isShow.value = !isShow.value)
+    }
+})
+
+
+onUnmounted(() => {
+    // resizeObserver.disconnect()
+    window.removeEventListener('resize',updatePopoverDebounce)
+    window.removeEventListener('scroll',updatePopoverDebounce)
+})
 
 
 defineExpose({

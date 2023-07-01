@@ -14,7 +14,7 @@ export const dropdownProps = buildProps({
     },
     showArrow: {
         type: Boolean,
-        default: false
+        default: true
     }
 
 })

@@ -1,6 +1,7 @@
 export * from './vue'
 export * from './DOM'
 export * from './debounce'
+export * from './throttle'
 export * from './types'
 export * from './env'
 export * from './constants'
