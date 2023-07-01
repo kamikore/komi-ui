@@ -33,10 +33,16 @@ popover/placement
 :::
 
 
-### trigger
+### Trigger
 Click the triggering element or hover on it.
 
 Use the attribute `trigger`. By default, it is hover.
 ::: demo
 popover/trigger
+:::
+
+
+### ShowArrow
+::: demo
+popover/showArrow
 :::

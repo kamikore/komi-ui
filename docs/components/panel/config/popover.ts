@@ -20,6 +20,15 @@ export const popoverPanelConfig = {
             options: PLACEMENT,
             type: 'Enum',
             description: 'Controls how to position the popover relative to the target.'
+        },
+        visible: {
+            type: Boolean,
+            description: 'Whether popover is visible.'
+        },
+        minWidthOnTrigger: {
+            value: false,
+            type: Boolean,
+            description: 'Defines the min-width is based on trigger element or default.'
         }
     }
 }

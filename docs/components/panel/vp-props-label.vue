@@ -10,6 +10,10 @@
 
 <script setup lang="ts">
 
+defineOptions({
+    name: 'PropsLabel'
+})
+
 const props = defineProps<{
     title: String,
     description: String,

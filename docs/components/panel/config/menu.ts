@@ -6,9 +6,13 @@ export const menuPanelConfig = {
     example: 'menu/basic',
     props: {
         onItemSelect: {
-            value: '() => {}',
+            placeholder: '() => {}',
             type: Function,
             description: 'Callback executed on menu item clicks.'
+        },
+        modelValue: {
+            type: [String, Number, Boolean, Object],
+            description: 'Binding value.',
         },
         size: {
             value: 'default',
@@ -28,7 +32,7 @@ export const menuPanelConfig = {
         },
         maxHeight: {
             type: [String, Number],
-            description: 'Max height of menu.'
+            description: 'Defines the max height of the menu.'
         }
     },
 }

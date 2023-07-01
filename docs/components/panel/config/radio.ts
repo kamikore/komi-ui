@@ -6,17 +6,17 @@ export const radioPanelConfig = {
     example: 'radio/basic',
     props: {
         modelValue: {
-            value: 'option',
             type: String,
             description: 'Binding value.',
         },
         name: {
             type: String,
-            description: 'Native input name.'
+            description: "Native 'name' attribute of radio."
         },
         disabled: {
+            value: false,
             type: Boolean,
-            description: 'Whether Radio is disabled.'
+            description: 'Whether radio is disabled.'
         }
     },
 }

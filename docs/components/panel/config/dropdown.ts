@@ -5,8 +5,8 @@ export const dropdownPanelConfig = {
     example: 'dropdown/basic',
     props: {
         maxHeight: {
-            type: String,
-            description: ''
+            type: [String, Number],
+            description: 'Defines the max height of the menu.'
         },
         trigger: {
             value: 'hover',

@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import PropsLabel from '../panel/vp-props-label.vue'
+import PropsLabel from './vp-props-label.vue'
 import {reactive, watch, watchEffect, inject} from 'vue'
 import { Store, defaultMainFile } from './store'
 import {isArray} from '@komi-ui/utils'
@@ -80,7 +80,7 @@ const props = defineProps<{
 const compProps = reactive<Record<string,any>>({})
 // 初始化
 for(let key in props.configs) {
-    compProps[key] = props.configs[key].value
+    compProps[key] = props.configs[key]?.value
 }
 
 // 注入store
@@ -90,7 +90,7 @@ store.state.compProps[defaultMainFile] = compProps
 
 watch(
   () => store.state.compProps[defaultMainFile],
-  (newValue, oldValue) => {
+  (newValue) => {
         store.state.mainFile.code = formatCode(newValue)
   },
   { deep: true, immediate: true}
@@ -120,14 +120,14 @@ function formatSelectOptions(options: Array<string>) {
 function formatCode(compProps: Record<string,any>) {
     let propsStr = ''
     for(let key in compProps) {
-        if(!compProps[key]) continue
+        if(!compProps[key] || compProps[key]?.value) continue
 
         if(key === 'children') continue
         if(key === 'modelValue') {
             propsStr += `\n\tv-model="${compProps[key]}"`
             continue
         }
-        switch(props?.configs[key].type) {
+        switch(props.configs && props.configs[key].type) {
             case String: 
             case 'Enum':
                 propsStr += `\n\t${key}="${compProps[key]}"`
@@ -146,14 +146,11 @@ function formatCode(compProps: Record<string,any>) {
     const scriptReg = new RegExp('<script.*?>(.*)<\/script>','s')
     const styleReg = new RegExp('<style.*?>(.*)<\/style>','s')
 
-    console.log(props.configs)
-console.log(props.configs?.children.value)
-
 return  `
 <template>
     <${props.name}${propsStr}
     > 
-        ${ props.configs?.children.value || templateReg.exec(store.state.mainFile.code)?.[0].trim() || ''}
+        ${ compProps?.children || templateReg.exec(store.state.mainFile.code)?.[0].trim() || ''}
     </${props.name}>
 </template>
 

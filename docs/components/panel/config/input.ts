@@ -12,7 +12,7 @@ export const inputPanelConfig = {
             description: 'Defines the size of the input.',
         },
         modelValue: {
-            value: 'message',
+            value: '',
             type: String,
             description: 'Binding value.',
         },
@@ -31,14 +31,19 @@ export const inputPanelConfig = {
             default: false,
             description: 'Show a clear value icon button.'
         },
-        'show-password': {
+        'showPassword': {
             value: false,	
             type: Boolean,
             description: 'Show a toggleable password icon button.'
         },
-        id: {
-            type: String,
-            description: 'Native input id.'
+        // id: {
+        //     type: String,
+        //     description: 'Native input id.'
+        // },
+        autoResize: {
+            value: false,
+            type: Boolean,
+            description: "Whether textarea has an adaptive height, only works when type is 'textarea'."
         },
         readonly: {
             value: false,
