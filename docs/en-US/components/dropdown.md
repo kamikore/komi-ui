@@ -21,6 +21,13 @@ The triggering element is rendered by the default slot, and the dropdown part is
 dropdown/basic
 :::
 
+### Max height
+By default, Dropdown will adapt height based on the content.
+Use `maxHeight` to show scrollbar only when the element height exceeds the max height.
+::: demo
+dropdown/maxHeight
+:::
+
 
 ### Trigger
 Click the triggering element or hover on it.

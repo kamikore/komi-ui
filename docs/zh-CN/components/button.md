@@ -32,3 +32,10 @@ button/sizes
 ::: demo
 button/disabled
 :::
+
+
+### 加载状态
+通过设置 loading 属性为 true 来显示加载中状态。
+::: demo
+button/loading
+:::

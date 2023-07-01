@@ -39,3 +39,9 @@ popover/placement
 ::: demo
 popover/trigger
 :::
+
+
+### 显示箭头
+::: demo
+popover/showArrow
+:::

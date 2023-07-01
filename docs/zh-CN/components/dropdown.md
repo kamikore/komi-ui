@@ -20,6 +20,12 @@ dropdown/basic
 dropdown/basic
 :::
 
+### 最大高度
+默认情况下Dropdown会根据内容自适应高度，设置 `maxHeight` 能够在内容超出指定最大高度时，显示滚动条。
+::: demo
+dropdown/maxHeight
+:::
+
 ### 触发方式
 通过 `trigger` 属性可以配置悬停激活或者点击激活。设置为 click 即为点击激活， 默认为 hover。
 ::: demo

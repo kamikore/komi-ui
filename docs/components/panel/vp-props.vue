@@ -15,14 +15,22 @@
                     <PropsLabel :title="key" :type="type" :description="description"/>
                 </ki-checkbox>
             </div>
-            <div v-else-if="type === 'Enum'">
+            <div v-else-if="type === 'Enum' && isArray(options)">
                 <PropsLabel :title="key" :type="type" :description="description"/>
                 <ki-select 
-                    :options="options && formatOptions(options)"
+                    v-if="options?.length > 4"
+                    :options="options && formatSelectOptions(options)"
                     v-model="compProps[key]"
                     :placeholder="placeholder"
                 >
                 </ki-select>
+                <ki-radio-group v-else v-model="compProps[key]">
+                    <ki-radio
+                        v-for="option of options" 
+                        :key="option" 
+                        :label="option" 
+                    />
+                </ki-radio-group>
             </div>
             <div v-else-if="String(type).includes('Function')">
                 <PropsLabel :title="key" :type="type" :description="description"/>
@@ -92,7 +100,7 @@ watch(
  * @description 格式化Enum类型的prop可选值数组
  * @param options prop 可选值数组
  */
-function formatOptions(options: Array<string>) {
+function formatSelectOptions(options: Array<string>) {
     if(!isArray(options)) return options
 
     return options.map(option => (
@@ -138,11 +146,14 @@ function formatCode(compProps: Record<string,any>) {
     const scriptReg = new RegExp('<script.*?>(.*)<\/script>','s')
     const styleReg = new RegExp('<style.*?>(.*)<\/style>','s')
 
+    console.log(props.configs)
+console.log(props.configs?.children.value)
+
 return  `
 <template>
     <${props.name}${propsStr}
     > 
-        ${templateReg.exec(store.state.mainFile.code)?.[0].trim() || ''.trim()}
+        ${ props.configs?.children.value || templateReg.exec(store.state.mainFile.code)?.[0].trim() || ''}
     </${props.name}>
 </template>
 

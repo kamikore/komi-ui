@@ -11,7 +11,6 @@ import KiMessage from '@komi-ui/components/message'
 function open() {
     KiMessage({
         message: 'message !',
-        duration: 0,
         closable: true
     })
 }

@@ -21,6 +21,7 @@ menu/basic
 
 
 ### 菜单最大高度
+默认情况下Menu会根据内容自适应高度，设置 maxHeight 能够在内容超出指定最大高度时，显示滚动条。
 ::: demo
 menu/maxHeight
 :::

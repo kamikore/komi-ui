@@ -10,7 +10,7 @@ export const dropdownPanelConfig = {
         },
         trigger: {
             value: 'hover',
-            type: String,
+            type: 'Enum',
             options: ['hover','click'],
             description: 'Controls how to position the popover relative to the target.'
         },

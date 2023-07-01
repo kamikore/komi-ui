@@ -10,11 +10,6 @@ export const buttonPanelConfig = {
           type: Function,
           description: 'Function called when button is clicked.',
         },
-        disabled: {
-          value: false,
-          type: Boolean,
-          description: 'Indicates that the button is disabled.',
-        },
         type: {
           value: 'default',
           options: TYPE,
@@ -26,6 +21,21 @@ export const buttonPanelConfig = {
           options: COMPONENTSIZES,
           type: 'Enum',
           description: 'Defines the size of the button.',
+        },
+        loading: {
+          value: false,
+          type: Boolean,
+          description: 'Indicates that the button is loading.',
+        },
+        disabled: {
+          value: false,
+          type: Boolean,
+          description: 'Indicates that the button is disabled.',
+        },
+        round: {
+          value: false,
+          type: Boolean,
+          description: 'Indicates that the button is round.',
         },
         circle: {
           value: false,

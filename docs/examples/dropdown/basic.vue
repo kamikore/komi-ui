@@ -1,8 +1,5 @@
 <template>
-    <ki-dropdown 
-        :showArrow="true"
-        maxHeight="100px"
-    >
+    <ki-dropdown>
         <ki-button>Hover me !</ki-button>
         <template #dropdown>
             <ki-menu :items="items"></ki-menu>

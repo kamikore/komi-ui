@@ -29,3 +29,10 @@ Use `disabled` attribute to determine whether a Button is disabled. It accepts a
 ::: demo
 button/disabled
 :::
+
+
+### Loading
+Set `loading` attribute to true to display loading state.
+::: demo
+button/loading
+:::
