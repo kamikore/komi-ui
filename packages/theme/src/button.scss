@@ -17,6 +17,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   line-height: 1;
   height: getCssVar('component-size','default');
   white-space: nowrap;
@@ -50,10 +51,9 @@
   }
 
   @include when(circle) {
-    height:  getCssVar('component-size');
-    width:  getCssVar('component-size');
+    // height:  getCssVar('component-size');
     border-radius: 50%;
-    padding: 0;
+    padding: getCssVar('padding');
   }
 
 
@@ -97,13 +97,12 @@
 
   @each $size in(small,large) {
       @include m($size) {
-          height: getCssVar('component-size',$size);
+          // height: getCssVar('component-size',$size);
           font-size: getCssVar('font-size',$size);
           padding: getCssVar('padding', $size) 16px;
 
           @include when(circle) {
-            height: getCssVar('component-size',$size);
-            width:  getCssVar('component-size',$size);
+            // height: getCssVar('component-size',$size);
             border-radius: 50%;
           }
       }

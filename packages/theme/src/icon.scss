@@ -16,4 +16,19 @@
     color: inherit;
     line-height: 1em;
     font-size: inherit;
+
+
+    
+  @include when(loading) {
+    animation: rotating 2s linear infinite;
+  }
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
 }

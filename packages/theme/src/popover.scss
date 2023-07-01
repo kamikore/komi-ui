@@ -28,14 +28,18 @@
 
         // 方便定位不采用三角形,而是正方形四个角都能用
         &::before {
-          content: ' ';
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          // 注意转换顺序
-          transform: translate(-50%,-50%) rotate(45deg) ;
-          background: getCssVar('color','white');
-          box-sizing: border-box;
+            content: ' ';
+            display: block;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            // 注意转换顺序
+            transform: translate(-50%,-50%) rotate(45deg) ;
+            background: getCssVar('color','white');
+            box-sizing: border-box;
+            border-top: 1px solid getCssVar('border-color','light');
+            border-left: 1px solid getCssVar('border-color','light');
+            z-index: getCssVar('index','bottom');
         }
     }
 

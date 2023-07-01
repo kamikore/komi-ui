@@ -32,9 +32,10 @@
     }
 
     &-thumb {
-      border-radius: 5px;
+      border-radius: 10px;
       width: 6px;
       background: $scrollbar-thumb-background;
+      transition: all 0.2 ease-in-out;
 
       &:hover {
         opacity: 0.5;
