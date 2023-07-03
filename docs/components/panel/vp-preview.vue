@@ -3,7 +3,7 @@
 </template>
 
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {
   ref, 
   computed, 
@@ -72,11 +72,25 @@ function createSandbox() {
     importMap.imports.vue = store.state.vueRuntimeURL
   }
 
-  // 插入 importmap
-  const sandboxSrc = srcdoc.replace(
+  // 信任域名
+  const targetOrigin = import.meta.env.MODE === 'development' 
+      	? ['http://localhost:4173','http://localhost:5173']
+      	: ['https://komi-ui.netlify.app']
+
+
+  // 插入importmap
+  let sandboxSrc = srcdoc.replace(
     /<!--IMPORT_MAP-->/,
     JSON.stringify(importMap)
   )
+
+  // 插入环境配置
+  sandboxSrc = sandboxSrc.replace(
+    /\/\* ENV_VAR \*\//,
+    `const targetOrigin = ${JSON.stringify(targetOrigin)}`
+  )
+
+
   sandbox.srcdoc = sandboxSrc
   container.value.appendChild(sandbox)
 

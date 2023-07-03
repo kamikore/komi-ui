@@ -26,15 +26,19 @@
 		<link rel="stylesheet" href="//unpkg.com/komi-ui/dist/index.css" />
 		
 		<style id="__sfc-styles"></style>
+
 		<script>
 			(() => {
+				// 环境配置变量
+				/* ENV_VAR */
+
 				let scriptEls = []
 
 				// 用于挂载模块
 				window.__modules__ = {}
 
 				async function handle_message(ev) {
-					if (event.origin !== 'http://localhost:5173' && event.origin !== 'http://localhost:4173')
+					if ( !targetOrigin.includes(event.origin) )
 						return
 
 					let { action, cmd_id } = ev.data;
