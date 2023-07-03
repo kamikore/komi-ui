@@ -4,12 +4,22 @@ import {
     compileScript, 
     rewriteDefault,
 } from 'vue/compiler-sfc'
+import { transform } from 'sucrase'
 import type { Store, File } from './store';
+import type { CompilerOptions} from 'vue/compiler-sfc'
+
 
 
 export const COMP_IDENTIFIER = '__sfc__'
 
-export function compileSFC(store: Store, mainFile: File) {
+
+async function transformTS(code: String) {
+  return transform(code, {
+    transforms: ['typescript'],
+  }).code
+}
+
+export async function compileSFC(store: Store, mainFile: File) {
     
     store.state.errors.length = 0
     const {filename, code , compiled} = mainFile
@@ -51,6 +61,7 @@ export function compileSFC(store: Store, mainFile: File) {
 
 
     try {
+
         if(descriptor.template) {
             const template = compileTemplate({
                 source: descriptor.template?.content,
@@ -71,20 +82,49 @@ export function compileSFC(store: Store, mainFile: File) {
 
         }
 
+        const scriptLang =
+            (descriptor.script && descriptor.script.lang) ||
+            (descriptor.scriptSetup && descriptor.scriptSetup.lang)
+        
+        const isTS = scriptLang === 'ts'
+        if (scriptLang && !isTS) {
+            return [`Only lang="ts" is supported for <script> blocks.`]
+        }
+
         if(descriptor.script || descriptor.scriptSetup) {
+
+            const expressionPlugins: CompilerOptions['expressionPlugins'] = isTS
+                ? ['typescript']
+                : undefined
+            
             const script = compileScript(
                 descriptor, 
                 { 
                     // 是否编译模板并直接在setup()里面内联生成的渲染函数
                     inlineTemplate: true,
-                    id: scopeId
+                    id: scopeId,
+                    templateOptions: {
+                        compilerOptions: {
+                          expressionPlugins,
+                        },
+                  },
                 }
             )
-        
+            
+
             // 如果存在script则覆盖掉template编译结果
             // 将默认导出转变为变量 export default -> const __sfc__
-            reCode = rewriteDefault(script.content,COMP_IDENTIFIER)
-                
+            reCode = rewriteDefault(
+                script.content,
+                COMP_IDENTIFIER,
+                expressionPlugins
+            )
+
+
+            // 如果是lang="ts"编辑后的内容仍是ts语法的，需要babel
+            if (isTS) {
+                reCode = await transformTS(reCode)
+            }
         }
 
         // <style> 可以有多个
