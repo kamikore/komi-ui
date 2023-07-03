@@ -40,6 +40,7 @@
             
             @include e(inner) {
                 // check button
+                box-sizing: border-box;
                 background-color: getCssVar('checkbox-checked-bg-color');
                 border-color: getCssVar('checkbox-checked-input-border-color');
 
