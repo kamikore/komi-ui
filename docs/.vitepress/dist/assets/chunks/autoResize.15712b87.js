@@ -1,1 +1,0 @@
-import{d as l,h as n,D as r,o as s,A as p}from"./framework.fad14ccc.js";const d=l({__name:"autoResize",setup(u){const e=n("");return(m,o)=>{const a=r("ki-input");return s(),p(a,{type:"textarea",placeholder:"Hello World!",modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),clearable:"",autoResize:""},null,8,["modelValue"])}}});export{d as default};

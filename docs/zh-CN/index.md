@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /markdown-examples
+      link: /zh-CN/guide/setup
     - theme: alt
       text: 在GitHub上查看
       link: https://github.com/kamikore/komi-ui

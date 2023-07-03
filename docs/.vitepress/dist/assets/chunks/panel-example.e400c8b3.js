@@ -1,1 +1,0 @@
-import{h as l,D as r,o as n,A as s,B as p,a as u}from"./framework.fad14ccc.js";const c={__name:"panel-example",setup(d){const e=l("");return(m,a)=>{const o=r("ki-radio");return n(),s(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=t=>e.value=t)},{default:p(()=>[u("radio")]),_:1},8,["modelValue"])}}};export{c as default};

@@ -1,1 +1,0 @@
-import{d as o,h as a,D as n,o as s,A as l,B as r,a as c,t as p}from"./framework.fad14ccc.js";const d=o({__name:"panel-example",setup(_){const e=a("Hello world!");return(m,u)=>{const t=n("ki-button");return s(),l(t,null,{default:r(()=>[c(p(e.value),1)]),_:1})}}});export{d as default};

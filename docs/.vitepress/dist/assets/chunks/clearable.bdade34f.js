@@ -1,1 +1,0 @@
-import{h as t,D as n,o as r,A as s}from"./framework.fad14ccc.js";const m={__name:"clearable",setup(p){const e=t("");return(u,l)=>{const o=n("ki-input");return r(),s(o,{type:"text",placeholder:"Hello World!",modelValue:e.value,"onUpdate:modelValue":l[0]||(l[0]=a=>e.value=a),clearable:""},null,8,["modelValue"])}}};export{m as default};

@@ -13,7 +13,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /markdown-examples
+      link: /en-US/guide/quickStart
     - theme: alt
       text: View on GitHub
       link: https://github.com/kamikore/komi-ui

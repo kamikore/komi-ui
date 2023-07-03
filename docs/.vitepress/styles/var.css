@@ -2,9 +2,12 @@
 :root {
     --vp-c-white: #ffffff;
     --vp-c-black: #000000;
-
     --vp-c-black-light: #202020;
     --vp-c-black-lighter: #333333;
+
+    --vp-c-gray: #808080;
+    --vp-c-gray-light: #a1a1a1;
+    --vp-c-gray-lighter: #b9b9b9;
 
     --vp-c-text-light-1: #484852;
     --vp-c-text-light-2: #3c3c43bf;
@@ -54,12 +57,16 @@
     --vp-button-brand-border: none;
     --vp-button-brand-text: var(--vp-c-white);
     --vp-button-brand-bg: var(--vp-c-black);
+    
 
     --vp-button-brand-hover-border: none;
     --vp-button-brand-hover-text: var(--vp-c-white);
     --vp-button-brand-hover-bg:  var(--vp-c-black-light);
 
-    --vp-button-alt-bg: var();
+
+    --vp-button-brand-active-border: var(--vp-c-gray-lighter);
+    --vp-button-brand-active-text: var(--vp-c-white);
+    --vp-button-brand-active-bg: var(--vp-c-gray-light);
     
 }
 

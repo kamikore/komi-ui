@@ -1,1 +1,0 @@
-import{d as o,D as a,o as n,A as m}from"./framework.fad14ccc.js";const u=o({__name:"basic",setup(l){const e=[{label:"Item One",value:"Item One"},{label:"Item Two",value:"Item Two"},{label:"Item Three",value:"Item Three"},{label:"Item Four",value:"Item Four"}];return(r,s)=>{const t=a("ki-menu");return n(),m(t,{items:e})}}});export{u as default};

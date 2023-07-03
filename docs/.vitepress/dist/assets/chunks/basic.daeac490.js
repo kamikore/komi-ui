@@ -1,1 +1,0 @@
-import{e}from"../app.61e7a66b.js";import{d as o,o as t,A as a,b as r}from"./framework.fad14ccc.js";import"./theme.b064d44b.js";const f=o({__name:"basic",setup(s){return(n,c)=>(t(),a(r(e)))}});export{f as default};

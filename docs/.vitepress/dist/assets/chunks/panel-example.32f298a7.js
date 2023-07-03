@@ -1,1 +1,0 @@
-import{d as l,h as n,D as c,o as s,A as p,B as r,a as m}from"./framework.fad14ccc.js";const k=l({__name:"panel-example",setup(u){const e=n(!1);return(_,a)=>{const o=c("ki-checkbox");return s(),p(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=t=>e.value=t),label:"check"},{default:r(()=>[m("check")]),_:1},8,["modelValue"])}}});export{k as default};

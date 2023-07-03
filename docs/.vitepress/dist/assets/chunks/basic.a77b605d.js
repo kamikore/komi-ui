@@ -1,1 +1,0 @@
-import{h as s,D as t,o as n,A as p}from"./framework.fad14ccc.js";const u={__name:"basic",setup(r){return s(""),(e,o)=>{const l=t("ki-input");return n(),p(l,{type:"text",placeholder:"Hello World!",modelValue:e.message,"onUpdate:modelValue":o[0]||(o[0]=a=>e.message=a)},null,8,["modelValue"])}}};export{u as default};
