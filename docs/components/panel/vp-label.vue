@@ -29,7 +29,9 @@ function formatType(
         [String,'String'],
         [Number,'Number'],
         [HTMLElement,'HTMLElement'],
+        ['HTMLElement','HTMLElement'],
         [Element,'Element'],
+        ['Element','Element'],
         [Function,'Function'],
         [Array,'Array'],
         ['Enum','Enum']

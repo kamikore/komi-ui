@@ -1,14 +1,11 @@
 import { defineConfig } from 'vitepress'
 import {sidebar, locales, head, mdPlugin} from './configs'
-import {buildOutput} from '@komi-ui/build-utils'
-import {resolve} from 'node:path'
 
 export default defineConfig({
 	lang: 'zh-CN',
 	title: 'Komi Ui',
 	description: "A Component Library for Vue 3",
 	head,
-	outDir: resolve(buildOutput,'docs'),
 	locales,
 	themeConfig: {
 		siteTitle: '',

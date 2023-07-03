@@ -1,0 +1,1 @@
+import{_ as n,D as r,o as s,c,G as t,B as a,a as o}from"./framework.fad14ccc.js";const d={};function l(_,i){const e=r("ki-button");return s(),c("div",null,[t(e,{type:"default",disabled:""},{default:a(()=>[o("Default")]),_:1}),t(e,{type:"primary",disabled:""},{default:a(()=>[o("Primary")]),_:1})])}const u=n(d,[["render",l]]);export{u as default};

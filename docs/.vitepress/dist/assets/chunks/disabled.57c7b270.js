@@ -1,0 +1,1 @@
+import{h as a,D as n,o as s,A as p}from"./framework.fad14ccc.js";const m={__name:"disabled",setup(r){const e=a("");return(u,o)=>{const l=n("ki-input");return s(),p(l,{type:"text",placeholder:"Hello World!",modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),disabled:""},null,8,["modelValue"])}}};export{m as default};

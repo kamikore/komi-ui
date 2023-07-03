@@ -6,7 +6,8 @@ export const buttonPanelConfig = {
     example: 'button/panel-example',
     props: {
         children: {
-            type: Element,
+            placeholder: '<span>Hello world</span>',
+            type: 'HTMLElement',
             description: 'The Element displayed next to the button.'
         },
         click: {

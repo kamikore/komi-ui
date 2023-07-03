@@ -1,6 +1,7 @@
 import prism from 'prismjs'
 // vite-plugin-require-transform 不会对包内的require转换，同样会报错
-const loadLanguages = require('prismjs/components/index.js')
+//const loadLanguages = require('prismjs/components/index.js')
+import loadLanguages from 'prismjs/components'
 
 
 /**
