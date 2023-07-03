@@ -2,7 +2,7 @@ import { buildProps } from '@komi-ui/utils'
 
 export const radioGroupProps = buildProps({
      /**
-     * @description native `name` attribute
+     * @description native 'name' attribute
      */
     name: {
         type: String,

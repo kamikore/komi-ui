@@ -1,7 +1,6 @@
 import {
     PLACEMENT, 
     COMPONENTSIZES, 
-    NAMESPACE, 
     buildProps
 } from '@komi-ui/utils'
 

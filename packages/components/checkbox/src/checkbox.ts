@@ -7,7 +7,7 @@ export const checkboxProps = buildProps({
     /**
      * @description input id
      */
-      id: {
+    id: {
         type: String,
         default: undefined,
     },

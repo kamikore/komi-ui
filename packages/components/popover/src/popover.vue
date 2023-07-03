@@ -74,7 +74,7 @@ const pop_placement = ref(props.placement)
 
 const { start: delayClose, stop: clearTimer } = useTimeoutFn(
   () => props.trigger === 'hover'? close() : '', 
-  500, 
+  50, 
   {immediate: false}
 )
 
@@ -139,7 +139,7 @@ onMounted(() => {
    
     if(props.trigger === 'hover') {
         triggerElm.addEventListener('mouseenter', () => open())
-        triggerElm.addEventListener('mouseleave', () => close())
+        triggerElm.addEventListener('mouseleave', () => delayClose())
     } else {
         triggerElm.addEventListener('click', () => isShow.value = !isShow.value)
     }

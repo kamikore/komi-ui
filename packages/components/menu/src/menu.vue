@@ -37,11 +37,12 @@ const ns = useNamespace('menu')
 
 const props = defineProps(menuProps)
 
-const selectedIndex = computed(() => 
+const selectedIndex = computed(() => {
+    if(!isArray(props.items)) return -1
     props.items.findIndex((item: MENUITEM) => 
         props.value === item.value
     )
-)
+})
 
 function itemSelect(
     ev: MouseEvent, 

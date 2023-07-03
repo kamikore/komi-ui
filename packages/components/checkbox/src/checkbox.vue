@@ -92,6 +92,7 @@ function handleChange() {
 }
 
 function labelClick() {
+    if(props.disabled) return
     checkboxGroup ?  
         checkboxGroup!.changeEvent(props.label)
         : emit && emit('update:modelValue', !modelValue.value)

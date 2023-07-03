@@ -11,6 +11,7 @@
         transition="zoom-in-top"
     >
         <div 
+            ref="triggerRef"
             :class="[
                 ns.b(),
                 ns.is('disabled',disabled),
@@ -49,6 +50,7 @@
                 :placeholder="placeholder"
                 :onItemSelect="onItemSelect"
                 :maxHeight="maxHeight"
+                v-clickoutside:[triggerRef]="() => visible &&= false"
             >
             </ki-menu>
         </template>
@@ -62,6 +64,7 @@ import KiPopover from '@komi-ui/components/popover'
 import KiMenu from '@komi-ui/components/menu'
 import {CaretBottom, CircleCloseFilled} from '@element-plus/icons-vue'
 import { ref} from 'vue'
+import { vClickoutside } from '@komi-ui/directives'
 
 defineOptions({
     name: 'KiSelect'
@@ -72,6 +75,7 @@ const emit = defineEmits(['update:modelValue'])
 const ns = useNamespace('select')
 const props = defineProps(selectProps)
 
+const triggerRef = ref()
 const popoverRef = ref()
 const menuRef = ref()
 
@@ -85,6 +89,7 @@ function toggle() {
 
 
 function handleClear() {
+    if(props.disabled) return
     emit && emit('update:modelValue', undefined)
 }
 
