@@ -15,7 +15,7 @@ export const menuPanelConfig = {
             description: 'Binding value.',
         },
         size: {
-            value: 'default',
+            default: 'default',
             options: COMPONENTSIZES,
             type: 'Enum',
             description: 'Defines the size of the menu.',

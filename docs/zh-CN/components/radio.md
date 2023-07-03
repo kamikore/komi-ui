@@ -9,7 +9,7 @@ import {radioPanelConfig} from '../../components/panel/config'
 
 # Radio 单选按钮
 ::: panel radioPanelConfig
-radio/basic
+radio/panel-example
 :::
 
 

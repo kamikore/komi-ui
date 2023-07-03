@@ -9,5 +9,5 @@
 <script setup>
 import {ref} from 'vue'
 
-const message = ref('')
+const msg = ref('')
 </script>

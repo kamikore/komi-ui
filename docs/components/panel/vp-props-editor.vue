@@ -1,55 +1,60 @@
 <template>
     <div class="editor-wrap">
         <textarea 
-            class="editor-textarea" 
-            :value ="store.state.mainFile.code"
+            :class="[
+                'editor-textarea',
+                !isFocus && !modelValue ? 'showText' : ''
+            ]" 
+            :value ="modelValue"
+            :placeholder="placeholder"
             wrap="hard"
             @input="onInput"
+            @focus="isFocus = true"
+            @blur="isFocus = false"
         ></textarea>
         <pre v-html="hlCode"></pre>
     </div>
-    <VPMessage></VPMessage>
-
 </template>
 
 <script setup lang="ts">
-import {ref, computed, inject} from 'vue'
+import {ref, computed} from 'vue'
 import { highlight } from '../../.vitepress/utils'
-import {debounce} from '@komi-ui/utils'
-import VPMessage from './vp-message.vue'
-import type { Store } from './store'
-
+import { debounce } from '@komi-ui/utils'
 
 defineOptions({
-    name: 'VPEditor'
+    name: 'VPPropsEditor'
 })
 
+
 const props = defineProps({
+    modelValue: {
+        type: String,
+        default: ''
+    },
+    placeholder: {
+        type: String,
+        default: ''
+    },
     source: {
         type: String,
         default: ''
+    },
+    lang: {
+        type: String,
+        default: 'vue'
     }
 })
 
-// 注入store
-const store = inject('store') as Store
+const emit = defineEmits(['update:modelValue'])
+
+const isFocus = ref(false)
 
 // 修改code的同时，修改hlCode，撑大容器
 const onInput = debounce((e: any) => {
-    store.state.mainFile.code = e.target.value
+    emit && emit('update:modelValue',e.target.value)
 }, 50) 
 
-const hlCode = computed(() => highlight(store.state.mainFile.code, 'vue')) 
-
-
-// 处理iframe消息
-window.addEventListener('message', handle_repl_message)
-
-function handle_repl_message(e: any) {
-    // 编译code是否报错 
-    // if (e.source !== this.iframe.contentWindow) return
-
-}
+const hlCode = computed(() => highlight(props.modelValue, props.lang)) 
 
 
 </script>
@@ -61,11 +66,16 @@ function handle_repl_message(e: any) {
     text-align: left;
     color: #333333;
     font-family: var(--vp-font-family-mono);
-    padding: 12px;
+    padding: 8px 12px;
     background-color: #eeeeee;
     border-radius: 12px;
+    line-height: 24px;
 
     textarea {
+        &.showText {
+            -webkit-text-fill-color: inherit;
+        }
+
         position: absolute;
         top: 0;
         left: 0;
@@ -81,12 +91,14 @@ function handle_repl_message(e: any) {
         background: none;
         cursor: text;
         padding: inherit;
+        line-height: inherit;
 
         // 无法将整个单词放置时换行
         overflow-wrap: break-word;
     }
 
     pre {
+        min-height: 24px;
         height: 100%;
         width: 100%;
         font-size: inherit;
@@ -94,6 +106,7 @@ function handle_repl_message(e: any) {
         font-family: inherit;
         margin: 0;
         padding: 0;
+        line-height: inherit;
 
         overflow-wrap: break-word;
 

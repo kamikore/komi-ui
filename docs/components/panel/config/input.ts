@@ -6,57 +6,53 @@ export const inputPanelConfig = {
     example: 'input/basic',
     props: {
         size: {
-            value: 'default',
+            default: 'default',
             options: COMPONENTSIZES,
             type: 'Enum',
             description: 'Defines the size of the input.',
         },
         modelValue: {
-            value: '',
+            default: 'msg',
             type: String,
             description: 'Binding value.',
         },
         type: {
-            value: 'text',
+            default: 'text',
             type: String,
             description: 'Type of input.',
         },
         placeholder: {
-            value: 'Hello World!',
+            default: 'Hello World!',
             type: String,
             description: 'Native input placeholder.'
         },
         clearable: {
-            type: Boolean,
             default: false,
+            type: Boolean,
             description: 'Show a clear value icon button.'
         },
         'showPassword': {
-            value: false,	
+            default: false,	
             type: Boolean,
             description: 'Show a toggleable password icon button.'
         },
-        // id: {
-        //     type: String,
-        //     description: 'Native input id.'
-        // },
         autoResize: {
-            value: false,
+            default: false,
             type: Boolean,
             description: "Whether textarea has an adaptive height, only works when type is 'textarea'."
         },
         readonly: {
-            value: false,
+            default: false,
             type: Boolean,
             description: 'Native input readonly.'
         },
         disabled: {
-            value: false,
+            default: false,
             type: Boolean,
             description: 'Native input disabled.'
         },
         autofocus: {
-            value: false,
+            default: false,
             type: Boolean,
             description: 'Native input autofocus.'
         },

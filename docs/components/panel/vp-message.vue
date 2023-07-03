@@ -12,12 +12,15 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {CircleCloseFilled} from '@element-plus/icons-vue'
 import { inject } from 'vue'
 import type { CompilerError } from 'vue/compiler-sfc'
 import type { Store } from './store'
 
+defineOptions({
+    name: 'VPMessage'
+})
 
 // 注入store
 const store = inject('store') as Store

@@ -1,4 +1,4 @@
-import KomiUi from 'komi-ui'
+//import KomiUi from 'komi-ui'
 // import KomiUi from '../../../packages/komi-ui/index'
 import 'komi-ui/dist/index.css'
 // import '../../../dist/komi-ui/dist/index.css'
@@ -14,7 +14,7 @@ export default {
     extends: DefaultTheme,
     async enhanceApp({ app, router, siteData }) {
         if (!import.meta.env.SSR) {
-            // const KomiUi = await import('komi-ui')
+            const KomiUi = await import('komi-ui')
             app.use(KomiUi)
 
             globalComps.map(([name, comp]) => {

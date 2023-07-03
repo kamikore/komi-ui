@@ -13,7 +13,7 @@
                 :initCode="decodeURIComponent(source)"
                 :initProps="configs.props"
             ></EditorExtend>
-            <Editor></Editor>
+            <VPEditor></VPEditor>
         </div>
     </div>
 </template>
@@ -22,7 +22,7 @@
 import { provide } from 'vue'
 import Preview from './panel/vp-preview.vue'
 import Props from './panel/vp-props.vue'
-import Editor from './panel/vp-editor.vue'
+import VPEditor from './panel/vp-editor.vue'
 import EditorExtend from './panel/vp-editor-extend.vue'
 
 // const fs = require('browserify-fs');

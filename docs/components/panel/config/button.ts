@@ -5,40 +5,44 @@ export const buttonPanelConfig = {
     name: 'ki-button',
     example: 'button/panel-example',
     props: {
+        children: {
+            type: Element,
+            description: 'The Element displayed next to the button.'
+        },
         click: {
           placeholder:  "() => {}",
           type: Function,
           description: 'Function called when button is clicked.',
         },
         type: {
-          value: 'default',
+          default: 'default',
           options: TYPE,
           type: 'Enum',
           description: 'Defines the kind of a button.',
         },
         size: {
-          value: 'default',
+          default: 'default',
           options: COMPONENTSIZES,
           type: 'Enum',
           description: 'Defines the size of the button.',
         },
         loading: {
-          value: false,
+          default: false,
           type: Boolean,
           description: 'Indicates that the button is loading.',
         },
         disabled: {
-          value: false,
+          default: false,
           type: Boolean,
           description: 'Indicates that the button is disabled.',
         },
         round: {
-          value: false,
+          default: false,
           type: Boolean,
           description: 'Indicates that the button is round.',
         },
         circle: {
-          value: false,
+          default: false,
           type: Boolean,
           description: 'Indicates that the button is circle.',
         }

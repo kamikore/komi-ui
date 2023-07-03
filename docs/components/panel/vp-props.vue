@@ -12,11 +12,11 @@
             <!-- prop label -->
             <div v-if="type === Boolean">
                 <ki-checkbox :label="key" v-model="compProps[key]">
-                    <PropsLabel :title="key" :type="type" :description="description"/>
+                    <VPLabel :title="key" :type="type" :description="description"/>
                 </ki-checkbox>
             </div>
             <div v-else-if="type === 'Enum' && isArray(options)">
-                <PropsLabel :title="key" :type="type" :description="description"/>
+                <VPLabel :title="key" :type="type" :description="description"/>
                 <ki-select 
                     v-if="options?.length > 4"
                     :options="options && formatSelectOptions(options)"
@@ -32,39 +32,28 @@
                     />
                 </ki-radio-group>
             </div>
-            <div v-else-if="String(type).includes('Function')">
-                <PropsLabel :title="key" :type="type" :description="description"/>
-                <ki-input 
-                    type="textarea" 
-                    :id="key" 
-                    :placeholder="placeholder"
-                    v-model="compProps[key]"
-                    autoResize
-                />
-            </div>
             <div v-else>
-                <PropsLabel :title="key" :type="type" :description="description"/>
-                <ki-input 
-                    type="textarea" 
-                    :id="key" 
+                <VPLabel :title="key" :type="type" :description="description"/>
+                <VPPropsEditor 
+                    v-model="compProps[key]" 
                     :placeholder="placeholder"
-                    v-model="compProps[key]"
-                    autoResize
-                />
+                    lang="js"
+                ></VPPropsEditor>
             </div>
         </template>
     </div>
 </template>
 
 <script setup lang="ts">
-import PropsLabel from './vp-props-label.vue'
-import {reactive, watch, watchEffect, inject} from 'vue'
+import VPLabel from './vp-label.vue'
+import VPPropsEditor from './vp-props-editor.vue'
+import {reactive, watch, inject} from 'vue'
 import { Store, defaultMainFile } from './store'
 import {isArray} from '@komi-ui/utils'
 import type { PropType } from "vue"
 
 interface Prop<T = any> {
-    value: String | undefined,
+    default: String | Number | Object | Function | undefined,
     placeholder: String | undefined,
     options?: Array<string>,
     type: PropType<T> | String,
@@ -80,7 +69,7 @@ const props = defineProps<{
 const compProps = reactive<Record<string,any>>({})
 // 初始化
 for(let key in props.configs) {
-    compProps[key] = props.configs[key]?.value
+    compProps[key] = props.configs[key]?.default
 }
 
 // 注入store
@@ -120,7 +109,7 @@ function formatSelectOptions(options: Array<string>) {
 function formatCode(compProps: Record<string,any>) {
     let propsStr = ''
     for(let key in compProps) {
-        if(!compProps[key] || compProps[key]?.value) continue
+        if(!compProps[key] || compProps[key]?.default) continue
 
         if(key === 'children') continue
         if(key === 'modelValue') {
@@ -170,6 +159,7 @@ ${styleReg.exec(store.state.mainFile.code)?.[0].trim() || ''}
     flex-direction: column;
     gap: 12px;
     padding: 16px;
+    line-height: 20px;
 }
 
 </style>

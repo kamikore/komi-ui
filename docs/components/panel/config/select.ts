@@ -6,15 +6,18 @@ export const selectPanelConfig = {
     example: 'select/basic',
     props: {
         placeholder: {
-            value: 'Please select',
+            default: 'Please select',
             type: String,
             description: 'Placeholder of the select.'
         },
         options: {
+            placeholder: '[]',
+            default: 'options',
             type: Array<OPTION>,
             description: 'Array of options in the menu.'
         },
         modelValue: {
+            default: 'value',
             type: [String, Number, Boolean, Object],
             description: 'Binding value.'
         },
@@ -23,7 +26,7 @@ export const selectPanelConfig = {
             description: 'Max height of menu.'
         },
         disabled: {
-            value: false,
+            default: false,
             type: Boolean,
             description: 'Whether radio is disabled.'
         }

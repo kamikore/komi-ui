@@ -3,6 +3,7 @@
         v-model="value"
         :options="options"
         placeholder="Please Select"
+        maxHeight="200"
     >
     </ki-select>
 </template>
@@ -10,7 +11,7 @@
 <script setup lang="ts">
 import { ref , watchEffect} from 'vue'
 
-const value = ref('Option1')
+const value = ref('')
 
 const options = [
   {
@@ -29,6 +30,22 @@ const options = [
     value: 'Option4',
     label: 'Option4',
   },
+    {
+    value: 'Option5',
+    label: 'Option5',
+  },
+  {
+    value: 'Option6',
+    label: 'Option6',
+  },
+  {
+    value: 'Option7',
+    label: 'Option7',
+  },
+  {
+    value: 'Option8',
+    label: 'Option8',
+  }
 ]
 
 </script>

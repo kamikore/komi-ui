@@ -9,19 +9,19 @@ export const dropdownPanelConfig = {
             description: 'Defines the max height of the menu.'
         },
         trigger: {
-            value: 'hover',
+            default: 'hover',
             type: 'Enum',
             options: ['hover','click'],
             description: 'Controls how to position the popover relative to the target.'
         },
         placement: {
-            value: 'bottom',
+            default: 'bottom',
             options: ['bottom','bottom-start','bottom-end'],
             type: 'Enum',
             description: 'Controls how to position the popover relative to the target.'
         },
         showArrow: {
-            value: true,
+            default: true,
             type: Boolean,
             description: 'If true, an arrow will be shown pointing from the popover to the trigger element.'
         }

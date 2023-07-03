@@ -1,9 +1,9 @@
 <template>
-    <ki-checkbox v-model="option" label="check">check</ki-checkbox>
+    <ki-checkbox v-model="value" label="check">check</ki-checkbox>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref} from 'vue'
 
-const option = ref(false)
+const value = ref(false)
 </script>

@@ -5,18 +5,18 @@ export const popoverPanelConfig = {
     example: 'popover/basic',
     props: {
         trigger: {
-            value: 'hover',
+            default: 'hover',
             type: 'Enum',
             options: ['hover','click'],
             description: 'Controls how to position the popover relative to the target.',
         },
         showArrow: {
-            value: false,
+            default: false,
             type: Boolean,
             description: 'If true, an arrow will be shown pointing from the popover to the trigger element.'
         },
         placement: {
-            value: 'bottom',
+            default: 'bottom',
             options: PLACEMENT,
             type: 'Enum',
             description: 'Controls how to position the popover relative to the target.'
@@ -26,7 +26,7 @@ export const popoverPanelConfig = {
             description: 'Whether popover is visible.'
         },
         minWidthOnTrigger: {
-            value: false,
+            default: false,
             type: Boolean,
             description: 'Defines the min-width is based on trigger element or default.'
         }

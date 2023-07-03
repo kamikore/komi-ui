@@ -1,6 +1,7 @@
-import { debounce } from '@komi-ui/utils'
 import prism from 'prismjs'
-import  loadLanguages from 'prismjs/components/'
+// vite-plugin-require-transform 不会对包内的require转换，同样会报错
+const loadLanguages = require('prismjs/components/index.js')
+
 
 /**
  * @description 判断是否处于浏览器环境
@@ -8,7 +9,7 @@ import  loadLanguages from 'prismjs/components/'
 export const inBrowser = () => typeof window !== 'undefined'
 
 export const highlight = (source: string, lang: string) => {
-    if (!lang) {
+    if (!lang || !source) {
         return source
       }
       lang = lang.toLowerCase()
@@ -21,6 +22,9 @@ export const highlight = (source: string, lang: string) => {
       if (lang === 'ts') {
         lang = 'typescript'
       }
+      // prismjs will load the default languages: markup, 
+      // css, clike and javascript. You can load more languages 
+      // with the loadLanguages() utility, which will automatically handle any required dependencies.
       if (!prism.languages[lang]) {
         try {
           loadLanguages([lang])
@@ -28,20 +32,10 @@ export const highlight = (source: string, lang: string) => {
           console.warn(`[vitepress] Syntax highlight for language "${lang}" is not supported.`)
         }
       }
+
       if (prism.languages[lang]) {
         const code = prism.highlight(source, prism.languages[lang], lang)
         return code
       }
       return source
-}
-
-
-export function debounce(callback:Function, timeout:number = 100) {
-    let timer:NodeJS.Timeout 
-    return function(...args:any[]) {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            callback.apply(this, args);       
-        },timeout)
-    }
 }

@@ -27,3 +27,11 @@ Use `disabled` attribute to determine whether a Select is disabled. It accepts a
 select/disabled
 :::
 
+
+### Max height
+By default,Menu will adapt height based on the content.
+Use `maxHeight` to show scrollbar only when the element height exceeds the max height.
+::: demo
+select/maxHeight
+:::
+

@@ -11,17 +11,17 @@
 <script setup lang="ts">
 
 defineOptions({
-    name: 'PropsLabel'
+    name: 'VPLabel'
 })
 
 const props = defineProps<{
     title: String,
     description: String,
-    type: Function | Array<Function> | String,
+    type:  Array<any> | String,
 }>()
 
 function formatType(
-    type: Function | Array<Function> | String
+    type: any
 ):String {
  
     const typeMap = new Map([
@@ -29,6 +29,7 @@ function formatType(
         [String,'String'],
         [Number,'Number'],
         [HTMLElement,'HTMLElement'],
+        [Element,'Element'],
         [Function,'Function'],
         [Array,'Array'],
         ['Enum','Enum']
@@ -37,9 +38,9 @@ function formatType(
 
     let str = ''
     if(Array.isArray(type)) {
-        for(let item of type) {
-            str += typeMap.get(item)
-        }
+        type.forEach((value, index) => {
+            str += typeMap.get(value) + (index === type.length-1 ? '': ' | ')
+        })
     } else {
         str += typeMap.get(type)
     }
