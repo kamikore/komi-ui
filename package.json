@@ -24,6 +24,7 @@
     "@komi-ui/hooks": "workspace:^0.0.0",
     "@komi-ui/theme": "workspace:^0.0.1",
     "@komi-ui/utils": "workspace:^0.0.1",
+    "typescript": "^5.1.6",
     "vue": "^3.3.4"
   },
   "devDependencies": {

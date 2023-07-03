@@ -14,6 +14,6 @@
         "@vitejs/plugin-vue": "^4.1.0",
         "gulp-typescript": "6.0.0-alpha.1",
         "rollup": "^3.25.0",
-        "vite": "^4.2.0"
+        "vite": "4.2.1"
     }
 }

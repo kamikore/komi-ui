@@ -1,13 +1,12 @@
 import { watch,series } from 'gulp'
 import {resolve} from 'node:path'
-import {copyFile, mkdir} from 'node:fs/promises'
+import {copyFile} from 'node:fs/promises'
 import {
   projRoot,
   buildRoot,
   themeRoot,
   kiOutput,
   kiPackage,
-  themeOutput,
   runTask
 } from '@komi-ui/build-utils'
 
@@ -20,12 +19,6 @@ export const copyFiles = () =>
       resolve(projRoot, 'README.md'),
       resolve(kiOutput, 'README.md')
     ),
-    
-    // 样式入口
-    // copyFile(
-    //   resolve(themeOutput,'index.css'),
-    //   resolve(kiOutput,'dist','index.css')
-    // )
   ])
 
 export const watchBuild = () => {
@@ -39,7 +32,7 @@ export const build = series(
   // clean dist
   runTask('pnpm run clean:dist'),
   // bundle packages
-  runTask('vite build',buildRoot),
+  runTask('vite build', buildRoot),
   // bundle theme
   runTask('pnpm build',resolve(themeRoot)),
   copyFiles
