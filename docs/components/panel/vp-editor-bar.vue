@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import {inject} from 'vue'
 import { Store, defaultMainFile } from './store'
-import {KiMessage} from 'komi-ui'
+import KiMessage from '@komi-ui/components/message'
 
 defineOptions({
     name: 'VPEditorBar'
@@ -34,7 +34,7 @@ const props = defineProps({
 
 const store = inject('store') as Store
 // 剪贴板对象
-const clipboardObj = navigator.clipboard
+const clipboardObj = navigator && navigator.clipboard
 
 // 初始化 props
 let compProps:Record<string,any> = {}

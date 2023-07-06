@@ -46,7 +46,7 @@ import { useData } from 'vitepress'
 import Example from './demo/vp-example.vue'
 import SourceCode from './demo/vp-source-code.vue'
 import {highlight} from '../.vitepress/utils'
-import {KiMessage} from 'komi-ui'
+import KiMessage from '@komi-ui/components/message'
 
 defineOptions({
   name: 'VPDemo'
@@ -82,7 +82,7 @@ const extendOps = {
   },
 }
 
-const clipboardObj = navigator.clipboard
+const clipboardObj = navigator && navigator.clipboard
 const isExtend = ref(false)
 
 

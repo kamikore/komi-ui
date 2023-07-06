@@ -5,6 +5,12 @@
 </template>
 
 <script setup lang="ts">
+
+defineOptions({
+  name: 'VPExample'
+})
+
+
 const props = defineProps({
   // 组件实例
   demo: {

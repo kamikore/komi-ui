@@ -8,6 +8,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+defineOptions({
+  name: 'VPSourceCode'
+})
+
+
 const props = defineProps({
   source: {
     type: String,
