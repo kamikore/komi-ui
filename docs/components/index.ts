@@ -5,6 +5,6 @@ import VPPanel from './vp-panel.vue'
 
 
 export const globalComps: [string, Component][] = [
-    ['Demo', VPDemo],
-    ['Panel',VPPanel],
+    ['VPDemo', VPDemo],
+    ['VPPanel',VPPanel],
 ]

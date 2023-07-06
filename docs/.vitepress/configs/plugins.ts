@@ -40,9 +40,9 @@ export const mdPlugin = (md:MarkdownIt) => {
 
               // 注意格式问题，字符source=" "<>" "，否则拼接的标签出错
               // return `<Demo :path="${filePath}" source="${sourceCode}">`
-              return `<Suspense><Demo path="${sourceFile}" source="${encodeURIComponent(sourceCode)}">`
+              return `<Suspense><VPDemo path="${sourceFile}" source="${encodeURIComponent(sourceCode)}">`
           } else {
-              return '</Demo></Suspense>'
+              return '</VPDemo></Suspense>'
           }
       },
     } as ContainerOpts)
@@ -70,12 +70,12 @@ export const mdPlugin = (md:MarkdownIt) => {
 
               return `
                 <Suspense>
-                  <Panel 
+                  <VPPanel 
                     :configs="${configFile}"  
                     source="${encodeURIComponent(sourceCode)}"
                   >`
           } else {
-              return '</Panel></Suspense>'
+              return '</VPPanel></Suspense>'
           }
       },
     } as ContainerOpts)

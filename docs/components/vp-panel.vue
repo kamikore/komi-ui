@@ -1,18 +1,18 @@
 <template>
     <div class="vp-panel_wrap">
         <div class="example_wrap">
-            <Preview></Preview>
+            <VPPreview></VPPreview>
         </div>
         <hr color="#e2e2e2" size="4px"/>
         <!-- 选项排序顺序根据传入config -->
         <div class="props-wrap">
-            <Props :name="configs.name" :configs="configs.props"></Props>
+            <VPProps :name="configs.name" :configs="configs.props"></VPProps>
         </div>    
         <div class="sourceCode_wrap">
-            <EditorExtend 
+            <VPEditorBar 
                 :initCode="decodeURIComponent(source)"
                 :initProps="configs.props"
-            ></EditorExtend>
+            ></VPEditorBar>
             <VPEditor></VPEditor>
         </div>
     </div>
@@ -20,13 +20,16 @@
 
 <script setup lang="ts">
 import { provide } from 'vue'
-import Preview from './panel/vp-preview.vue'
-import Props from './panel/vp-props.vue'
+import VPPreview from './panel/vp-preview.vue'
+import VPProps from './panel/vp-props.vue'
 import VPEditor from './panel/vp-editor.vue'
-import EditorExtend from './panel/vp-editor-extend.vue'
+import VPEditorBar from './panel/vp-editor-bar.vue'
 
-// const fs = require('browserify-fs');
 import {ReplStore,Store } from './panel/store'
+
+defineOptions({
+    name: 'VPPanel'
+})
 
 const props = defineProps({
     configs: {

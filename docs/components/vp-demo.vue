@@ -46,6 +46,11 @@ import { useData } from 'vitepress'
 import Example from './demo/vp-example.vue'
 import SourceCode from './demo/vp-source-code.vue'
 import {highlight} from '../.vitepress/utils'
+import {KiMessage} from 'komi-ui'
+
+defineOptions({
+  name: 'VPDemo'
+})
 
 const props = defineProps<{
   path: string,
@@ -87,8 +92,8 @@ function extendClick(op: String) {
       isExtend.value = !isExtend.value
       break
     case 'Copy':
-      window.alert('已复制')
-      clipboardObj.writeText(props.source)
+      clipboardObj && clipboardObj.writeText(props.source)
+      KiMessage('Copied')
       break
     case 'Github':
       break

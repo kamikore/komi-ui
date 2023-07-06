@@ -38,8 +38,10 @@
 				window.__modules__ = {}
 
 				async function handle_message(ev) {
-					if ( !targetOrigin.includes(event.origin) )
+					if ( !targetOrigin.includes(ev.origin) ) {
+						console.warn('The origin is not allow to access')
 						return
+					}
 
 					let { action, cmd_id } = ev.data;
 					const send_reply = (payload) => parent.postMessage( { ...payload }, ev.origin);

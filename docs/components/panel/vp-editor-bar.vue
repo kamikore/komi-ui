@@ -14,6 +14,12 @@
 <script setup lang="ts">
 import {inject} from 'vue'
 import { Store, defaultMainFile } from './store'
+import {KiMessage} from 'komi-ui'
+
+defineOptions({
+    name: 'VPEditorBar'
+})
+
 
 const props = defineProps({
     initCode: {
@@ -31,20 +37,20 @@ const store = inject('store') as Store
 const clipboardObj = navigator.clipboard
 
 // 初始化 props
-let compProps = {}
+let compProps:Record<string,any> = {}
 for(let key in props.initProps) {
-    compProps[key] = props.initProps[key].value
+    compProps[key] = props.initProps[key]?.default
 }
 
 function onCopy() {
-    window.alert('已复制')
-    clipboardObj.writeText(store.state.mainFile.code)
+    clipboardObj && clipboardObj.writeText(store.state.mainFile.code)
+    KiMessage('Copied')
 }
 
 function onReset() {
     Object.assign(store.state.compProps[defaultMainFile],compProps)
     store.state.mainFile.code = props.initCode
-    window.alert('已重置')
+    KiMessage('Reset')
 }
 
 

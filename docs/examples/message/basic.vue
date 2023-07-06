@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import KiMessage from '@komi-ui/components/message'
+import {KiMessage} from 'komi-ui'
 import {h} from 'vue'
 
 function open() {

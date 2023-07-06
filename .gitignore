@@ -22,3 +22,6 @@ playground
 *.local
 
 *.txt
+
+# env
+.env

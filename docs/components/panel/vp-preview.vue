@@ -19,6 +19,10 @@ import type { Store } from './store'
 import srcdoc from './srcdoc.html?raw'
 
 
+defineOptions({
+  name: 'VPPreview'
+})
+
 const props = defineProps({
     source: {
         type: String,

@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import {sidebar, locales, head, mdPlugin} from './configs'
+import {sidebar, search, locales, head, mdPlugin} from './configs'
 
 export default defineConfig({
 	lang: 'zh-CN',
@@ -14,6 +14,7 @@ export default defineConfig({
 		socialLinks: [
 			{ icon: 'github', link: 'https://github.com/kamikore/komi-ui' }
 		],
+		search,
 		footer: {
 			message: 'Released under the MIT License.',
 			copyright: 'Copyright © 2023-present Kamikore'

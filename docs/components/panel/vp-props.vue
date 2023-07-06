@@ -60,6 +60,10 @@ interface Prop<T = any> {
     description: String
 }
 
+defineOptions({
+    name: 'VPProps'
+})
+
 
 const props = defineProps<{
     name?: String

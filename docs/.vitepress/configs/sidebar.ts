@@ -1,5 +1,6 @@
 import guideSidebar from '../i18n/pages/guide.json'
 import componentsSidebar from '../i18n/pages/components.json'
+import type { DefaultTheme } from 'vitepress'
 
 // 构建时
 function getGuideSidebar() {
@@ -26,4 +27,4 @@ function getComponentsSideBar() {
 }
 
 
-export const sidebar = Object.assign(getGuideSidebar(), getComponentsSideBar())
+export const sidebar: DefaultTheme.Config['sidebar'] = Object.assign(getGuideSidebar(), getComponentsSideBar())
