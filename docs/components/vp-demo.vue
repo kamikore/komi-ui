@@ -93,7 +93,7 @@ function extendClick(op: String) {
       break
     case 'Copy':
       clipboardObj && clipboardObj.writeText(props.source)
-      KiMessage('Copied')
+      KiMessage('Copied!')
       break
     case 'Github':
       break

@@ -44,13 +44,13 @@ for(let key in props.initProps) {
 
 function onCopy() {
     clipboardObj && clipboardObj.writeText(store.state.mainFile.code)
-    KiMessage('Copied')
+    KiMessage('Copied!')
 }
 
 function onReset() {
     Object.assign(store.state.compProps[defaultMainFile],compProps)
     store.state.mainFile.code = props.initCode
-    KiMessage('Reset')
+    KiMessage('Reset!')
 }
 
 
