@@ -19,13 +19,13 @@ hero:
 features:
   - icon: 
       src: /vue.svg
-    title: Vue 3 Composition API
-    details: With Vue 3 Composition API, custom Vue Directives.
+    title: Vue 3组合式API
+    details: 组件库采用了Vue 3的组合式API进行编写，以及自定义的Vue指令。
   - icon: 
       src: https://baseweb.design/safari-pinned-tab.svg
-    title: BaseUi style
-    details: KomiUi is a Component Library for Vue 3 that follows the design style of BaseUi.
+    title: 设计风格
+    details: KomiUi一个基于Vue 3的组件库，它遵循了BaseWeb的UI设计风格。
   - icon: 🛠️
     title: Feature C...
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: ...
 ---

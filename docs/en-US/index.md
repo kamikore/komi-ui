@@ -24,10 +24,10 @@ features:
     details: With Vue 3 Composition API, custom Vue Directives
   - icon: 
       src: https://baseweb.design/safari-pinned-tab.svg
-    title: BaseUi style
-    details: KomiUi is a Component Library for Vue 3 that follows the design style of BaseUi.
+    title: BaseUi Style
+    details: KomiUi is a Component Library for Vue 3 that follows the design style of BaseWeb.
   - icon: 🛠️
     title: Feature C...
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: ...
 ---
 

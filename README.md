@@ -10,7 +10,7 @@
 * Vue 3 Composition API
 * Written in TypeScript
 
-KomiUi is a Component Library for Vue 3 that follows the design style of BaseUi, which is a design system comprised of modern, responsive, living components for React. For more details, please refer to [BaseUi](https://baseweb.design).
+KomiUi is a Component Library for Vue 3 that follows the design style of BaseWeb, which is a design system comprised of modern, responsive, living components for React. For more details, please refer to [BaseWeb](https://baseweb.design).
 
 
 
