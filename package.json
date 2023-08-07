@@ -7,6 +7,7 @@
     "playground"
   ],
   "scripts": {
+    "test": "vitest",
     "dev": "pnpm -C playground dev",
     "build": "pnpm -C build build",
     "build:watch": "pnpm -C build watch",
@@ -35,9 +36,13 @@
     "@types/gulp": "^4.0.10",
     "@types/gulp-sass": "^5.0.0",
     "@vitejs/plugin-vue": "^4.1.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue-macros/volar": "^0.9.5",
+    "@vue/test-utils": "^2.4.1",
     "gulp": "^4.0.2",
     "gulp-typescript": "6.0.0-alpha.1",
-    "sass": "^1.62.0"
+    "jsdom": "^22.1.0",
+    "sass": "^1.62.0",
+    "vitest": "^0.34.1"
   }
 }
