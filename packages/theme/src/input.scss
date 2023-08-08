@@ -49,6 +49,15 @@
 
         @include scroll-bar;
 
+        /*清除text文本输入框的清除图标*/
+        &::-ms-clear{
+            display: none;
+        } 
+        /*清除password密码输入框的明文图标*/
+        &::-ms-reveal{
+            display: none;
+        } 
+
         &:focus {
             outline: none;
         }
