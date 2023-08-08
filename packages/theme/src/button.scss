@@ -75,6 +75,25 @@
       border-color: getCssVar('button', 'disabled', 'border-color');
     }
   }
+
+  @include when(loading) {
+    position: relative;
+    pointer-events: none;   // 无法触发点击
+
+    &:before {
+      // mask the button 按钮遮盖层
+      z-index: 1;
+      pointer-events: none;
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      border-radius: inherit;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
   
 
   // 设置不同场景下的button的color var

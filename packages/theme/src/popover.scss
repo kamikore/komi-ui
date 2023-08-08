@@ -15,7 +15,7 @@
     min-width: 32px;
     line-height: 20px;
     padding: map.get($popover-padding, 'default');
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 12px;
     word-wrap: break-word;
     font-size: map.get($popover-font-size, 'default');
 
@@ -37,8 +37,10 @@
             transform: translate(-50%,-50%) rotate(45deg) ;
             background: getCssVar('color','white');
             box-sizing: border-box;
-            border-top: 1px solid getCssVar('border-color','light');
-            border-left: 1px solid getCssVar('border-color','light');
+            // border-top: 1px solid getCssVar('border-color','light');
+            // border-left: 1px solid getCssVar('border-color','light');
+            border: 1px solid getCssVar('border-color','light');
+            
             z-index: getCssVar('index','bottom');
         }
     }
