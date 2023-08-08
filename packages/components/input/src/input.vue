@@ -56,8 +56,6 @@
             @change="handleChange"
             @keydown="handleKeydown"
         ></textarea>
-
-
         
         <!-- suffix slot -->
         <span
@@ -65,12 +63,13 @@
             v-if="clearable || showPassword"
             v-show="modelValue"
         >
+
             <i 
 				:class="type === 'textarea'? nsTextarea.e('clear') : ns.e('clear')" 
 				v-show="showClear" 
 				@click="handleClearClick"
 			>
-                <span><CircleCloseFilled/></span>
+                <CircleCloseFilled/>
             </i>
             <i 
 				:class="ns.e('password')" 

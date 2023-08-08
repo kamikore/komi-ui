@@ -2,7 +2,7 @@
     <ki-input 
         type="text" 
         placeholder="Hello World!"
-        v-model="message"
+        v-model="msg"
     />
 </template>
 

@@ -2,7 +2,7 @@
     <ki-input 
         type="text" 
         placeholder="Hello World!"
-        v-model="message"
+        v-model="msg"
         clearable
     />
 </template>
@@ -10,5 +10,5 @@
 <script setup>
 import {ref} from 'vue'
 
-const message = ref('')
+const msg = ref('')
 </script>

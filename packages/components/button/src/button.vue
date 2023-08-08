@@ -20,7 +20,7 @@
         >
             <component v-if="icon" :is="icon" />
             <!-- :is="icon?icon:Loading" 不起作用 -->
-            <component v-else-if="loading" :is="Loading" />
+            <component v-else-if="loading" :is="loadingIcon" />
             <slot v-else name="icon" />   
         </ki-icon>
         
@@ -36,7 +36,6 @@
 import {buttonProps} from './button'
 import { useNamespace } from '@komi-ui/hooks'
 import KiIcon from '@komi-ui/components/icon'
-import { Loading } from '@element-plus/icons-vue'
 
 
 defineOptions({
@@ -50,6 +49,7 @@ const ns = useNamespace('button')
 
 
 function handleClick(ev: MouseEvent) {
+    if(props.loading) return
     emit && emit('click', ev)
 }
 

@@ -2,7 +2,7 @@
     <ki-input 
         type="textarea" 
         placeholder="Hello World!"
-        v-model="textarea" 
+        v-model="msg" 
         clearable
         autoResize
     />
@@ -11,5 +11,5 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 
-const textarea = ref('')
+const msg = ref('')
 </script>
