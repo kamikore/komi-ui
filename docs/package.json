@@ -21,6 +21,6 @@
     "@element-plus/icons-vue": "^2.1.0",
     "markdown-it": "^13.0.1",
     "markdown-it-container": "^3.0.0",
-    "komi-ui": "^0.0.2"
+    "komi-ui": "^0.0.4"
   }
 }
