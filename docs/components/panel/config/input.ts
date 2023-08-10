@@ -41,7 +41,7 @@ export const inputPanelConfig = {
             type: Boolean,
             description: "Whether textarea has an adaptive height, only works when type is 'textarea'."
         },
-        readonly: {
+        readOnly: {
             default: false,
             type: Boolean,
             description: 'Native input readonly.'
