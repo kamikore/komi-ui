@@ -94,6 +94,7 @@ export const inputEmits = {
     input: (value: string) => isString(value),
     change: (value: string) => isString(value),
     focus: (e: FocusEvent) => e instanceof FocusEvent,
-    blur: (evt: FocusEvent) => evt instanceof FocusEvent,
-    keydown: (evt: KeyboardEvent | Event) => evt instanceof Event,
+    blur: (e: FocusEvent) => e instanceof FocusEvent,
+    keydown: (e: KeyboardEvent | Event) => e instanceof Event,
+    clear: () => true,
 }

@@ -3,11 +3,14 @@
         type === 'textarea'? nsTextarea.b() : ns.b(),
         ns.is('focused', focused),
         type === 'textarea'? '' : ns.m(size),
-        disabled?'is-disabled':''
+        ns.is('disabled',disabled)
     ]">
         <input 
             v-if="type !== 'textarea'"
-            :class="ns.e('inner')"
+            :class="[
+                ns.e('inner'),
+                ns.is('disabled',disabled)
+            ]"
 			ref="input"
             v-bind="$attrs"
 			:disabled="disabled"
@@ -206,6 +209,10 @@ const handleKeydown = (evt: KeyboardEvent) => {
 
 const handleClearClick = () => {
     emit('update:modelValue','')
+    // 触发事件
+    emit('change', '')
+    emit('clear')
+    emit('input', '')
 }
 
 
