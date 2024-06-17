@@ -1,6 +1,6 @@
 <p align="center">
   <a href="">
-    <img width="250px" src="https://kamikore.top/image/upload/10731096/komi-logo.svg">
+    <img width="250px" src="https://komi-ui.netlify.app/logo.svg">
   </a>
 </p>
 
