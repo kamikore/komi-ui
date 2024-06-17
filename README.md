@@ -1,6 +1,6 @@
 <p align="center">
   <a href="">
-    <img width="250px" src="https://komi-ui.netlify.app/logo.svg">
+    <img width="200px" src="https://komi-ui.netlify.app/logo.svg">
   </a>
 </p>
 
